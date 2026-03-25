@@ -930,13 +930,21 @@
       );
       layer.style.height = docH + 'px';
 
-      var totalPaws = Math.min(Math.floor(docH / stepDistance), 80);
+      var bottomLimit = isMobile ? 0.98 : 0.93;
+      var topOffset   = isMobile ? 0.01 : 0.03;
+      var maxPaws     = isMobile ? 120 : 80;
+
+      var totalPaws = Math.min(
+        Math.floor(docH / stepDistance),
+        Math.floor((docH * bottomLimit - docH * topOffset) / stepDistance),
+        maxPaws
+      );
 
       // First pass — base positions: uniform Y steps, sine-wave X
       var basePos = [];
       for (var i = 0; i < totalPaws; i++) {
         var progress = i / (totalPaws - 1);
-        var baseY = docH * 0.03 + i * stepDistance;
+        var baseY = docH * topOffset + i * stepDistance;
         var baseX = (Math.sin(progress * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
 
         if (baseY < 80) baseY = 80;
