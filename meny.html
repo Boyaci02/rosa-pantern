@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meny – Rosa Pantern Uppsala</title>
-  <meta name="description" content="Meny för Rosa Pantern — pizza, kebab, burgare och falafel i Uppsala." />
+  <meta name="description" content="Hela menyn för Rosa Pantern — pizza, kebab, burgare, falafel och mer i Uppsala." />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -35,9 +36,6 @@
       color: var(--cream);
       line-height: 1.7;
       overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
     body::after {
@@ -104,7 +102,7 @@
       gap: 10px;
       flex-shrink: 0;
     }
-    .navbar-logo img { height: 38px; width: auto; display: none; }
+    .navbar-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; display: none; }
     .navbar-links {
       display: flex;
       align-items: center;
@@ -173,58 +171,461 @@
       .hamburger { display: flex; }
     }
 
-    /* ── MAIN CONTENT ── */
-    main {
-      flex: 1;
+    /* ── MENY HERO ── */
+    .meny-hero {
+      background: linear-gradient(160deg, #1a0a14 0%, #2a0a1a 40%, #1A1A2E 100%);
+      padding: 130px clamp(16px,4vw,48px) 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .meny-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(233,30,140,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 30%, rgba(181,16,106,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .meny-hero-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      background: rgba(233,30,140,0.12);
+      border: 1px solid rgba(233,30,140,0.28);
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .meny-hero h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .meny-hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── CATEGORY NAV ── */
+    .cat-nav {
+      position: sticky;
+      top: 70px;
+      z-index: 90;
+      background: rgba(22,22,46,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(233,30,140,0.15);
+      padding: 0 clamp(16px,4vw,48px);
+    }
+    .cat-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+    .cat-nav-inner::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      flex-shrink: 0;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .cat-pill:hover { color: var(--cream); background: rgba(233,30,140,0.1); }
+    .cat-pill.active {
+      color: var(--pink);
+      background: rgba(233,30,140,0.14);
+      border-color: rgba(233,30,140,0.35);
+    }
+
+    /* ── MENU MAIN ── */
+    .meny-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(16px,4vw,48px) 80px;
+    }
+
+    /* ── SECTION ── */
+    .menu-section {
+      padding-top: 64px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--pink);
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    /* ── SUBSECTION ── */
+    .subsection-label {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      color: var(--cream);
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 32px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,248,240,0.07);
+    }
+
+    /* ── ITEM LIST ── */
+    .item-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .item-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(22,33,62,0.5);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring);
+    }
+    .item-row:hover {
+      background: rgba(233,30,140,0.07);
+      border-color: rgba(233,30,140,0.22);
+      transform: translateX(4px);
+    }
+
+    .item-left { flex: 1; min-width: 0; }
+
+    .item-name {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .item-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    .item-right { flex-shrink: 0; text-align: right; }
+
+    .item-price {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      color: var(--cream);
+      white-space: nowrap;
+    }
+
+    .price-variants {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .price-variant {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .price-variant .size-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .price-variant .price-val {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+    .badge-fav {
+      background: rgba(255,215,0,0.14);
+      color: #FFD700;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+    .badge-hot {
+      background: rgba(255,80,30,0.14);
+      color: #FF7550;
+      border: 1px solid rgba(255,80,30,0.3);
+    }
+    .badge-new {
+      background: rgba(100,220,180,0.14);
+      color: #60DDB0;
+      border: 1px solid rgba(100,220,180,0.3);
+    }
+    .badge-vegan {
+      background: rgba(100,200,80,0.14);
+      color: #80CC60;
+      border: 1px solid rgba(100,200,80,0.3);
+    }
+
+    /* ── EXTRAS CARD ── */
+    .extras-card {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      padding: 16px 18px;
+      background: rgba(22,33,62,0.35);
+      border: 1px solid rgba(255,248,240,0.06);
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+    .extras-title {
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+    .extras-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .extra-pill {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255,248,240,0.05);
+      border: 1px solid rgba(255,248,240,0.1);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* ── BOX CARDS ── */
+    .box-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .box-card {
+      background: linear-gradient(135deg, rgba(233,30,140,0.12) 0%, rgba(22,33,62,0.8) 100%);
+      border: 1px solid rgba(233,30,140,0.3);
+      border-radius: 16px;
+      padding: 22px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    }
+    .box-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(233,30,140,0.18);
+    }
+    .box-card-name {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .box-card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .box-card-price {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      color: var(--pink);
+      flex-shrink: 0;
+    }
+
+    /* ── SAUCE SECTION ── */
+    .sauce-group {
+      margin-top: 24px;
+    }
+    .sauce-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .sauce-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .sauce-price-tag {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--pink);
+      flex-shrink: 0;
+    }
+    .sauce-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .sauce-pill {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,248,240,0.7);
+      background: rgba(255,248,240,0.05);
+      border: 1px solid rgba(255,248,240,0.1);
+      padding: 5px 14px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .sauce-pill:hover {
+      color: var(--pink-light);
+      background: rgba(233,30,140,0.1);
+      border-color: rgba(233,30,140,0.3);
+    }
+
+    /* ── SIGNATUR RULLAR ── */
+    .signature-banner {
+      margin-top: 32px;
+      padding: 6px 0 16px;
+      border-top: 1px solid rgba(233,30,140,0.2);
+    }
+    .signature-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .signature-title {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      color: var(--cream);
+    }
+
+    /* ── PIZZA GRID ── */
+    .pizza-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+    }
+
+    .pizza-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      background: rgba(22,33,62,0.4);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .pizza-item:hover {
+      background: rgba(233,30,140,0.07);
+      border-color: rgba(233,30,140,0.2);
+    }
+    .pizza-name {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pizza-price {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--cream);
+      flex-shrink: 0;
+    }
+
+    .pizza-note {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(233,30,140,0.1);
+      border: 1px solid rgba(233,30,140,0.25);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink-light);
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .paw-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px clamp(16px,4vw,48px) 80px;
+      gap: 12px;
+      padding: 36px 0 0;
+      opacity: 0.3;
     }
+    .paw-divider svg { width: 18px; height: 18px; }
 
-    .coming-soon {
+    /* ── ORDER CTA ── */
+    .meny-cta {
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(233,30,140,0.15) 0%, transparent 70%),
+                  linear-gradient(180deg, #1a0a14, var(--charcoal));
+      padding: 80px clamp(16px,4vw,48px);
       text-align: center;
-      max-width: 560px;
     }
-
-    .coming-soon-paws {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 28px;
-      opacity: 0.45;
+    .meny-cta h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--cream);
+      margin-bottom: 12px;
     }
-
-    .coming-soon h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      color: var(--pink);
-      margin-bottom: 16px;
-    }
-
-    .coming-soon p {
-      font-size: 1.15rem;
+    .meny-cta p {
       color: var(--muted);
       margin-bottom: 36px;
-      line-height: 1.7;
-    }
-
-    .coming-soon-emoji {
-      font-size: 3.5rem;
-      display: block;
-      margin-bottom: 20px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-10px); }
+      font-size: 1.05rem;
     }
 
     /* ── FOOTER ── */
     footer {
       background: #0D0D1A;
       padding: 40px clamp(16px,4vw,48px) 28px;
-      margin-top: auto;
     }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-top {
@@ -275,6 +676,25 @@
       color: rgba(160,160,184,0.5);
       text-align: center;
     }
+
+    /* ── SCROLL ANIMATION ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      .pizza-grid { grid-template-columns: 1fr; }
+      .box-grid { grid-template-columns: 1fr; }
+      .item-row { flex-direction: column; gap: 8px; }
+      .item-right { text-align: left; }
+      .price-variants { align-items: flex-start; }
+      .pizza-item { padding: 12px 14px; }
+      .meny-hero { padding: 120px 16px 48px; }
+    }
   </style>
 </head>
 <body>
@@ -283,7 +703,7 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-logo" id="navbar-logo">
-      <img src="assets/logo.png" alt="Rosa Pantern" id="logo-img" />
+      <img src="assets/logo.webp" alt="Rosa Pantern" id="logo-img" />
       <span id="logo-text">Rosa Pantern</span>
     </a>
     <ul class="navbar-links">
@@ -292,6 +712,7 @@
       <li><a href="index.html#oppettider">Öppettider</a></li>
       <li><a href="index.html#bestall">Beställ</a></li>
       <li><a href="index.html#oppettider">Hitta oss</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
@@ -307,23 +728,882 @@
   <a href="index.html#oppettider" class="mob-link">Öppettider</a>
   <a href="index.html#bestall" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
+  <a href="kontakt.html" class="mob-link">Kontakt</a>
   <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
 </div>
 
-<!-- ── MAIN ── -->
-<main>
-  <div class="coming-soon">
-    <div class="coming-soon-paws">
-      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
-      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
-      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
-    </div>
-    <span class="coming-soon-emoji">🍕</span>
-    <h1>Menyn kommer snart</h1>
-    <p>Vi jobbar på att lägga upp hela menyn digitalt.<br/>Håll utkik — det dröjer inte länge!</p>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink">Beställ ändå 🍕</a>
+<!-- ── HERO ── -->
+<header class="meny-hero">
+  <div class="meny-hero-inner">
+    <span class="eyebrow">🍕 Uppsala Centrum</span>
+    <h1>Vår Meny</h1>
+    <p>Pizza, kebab, burgare, falafel &amp; mer — alltid fräscht, alltid gott.</p>
   </div>
+</header>
+
+<!-- ── CATEGORY NAV ── -->
+<nav class="cat-nav" id="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#burgare" class="cat-pill active">🍔 Burgare &amp; Snacks</a>
+    <a href="#falafel" class="cat-pill">🧆 Falafel &amp; Halloumi</a>
+    <a href="#vegansk" class="cat-pill">🌱 Vegansk Kebab</a>
+    <a href="#kebab" class="cat-pill">🥙 Kebab</a>
+    <a href="#kyckling" class="cat-pill">🍗 Kyckling &amp; Gyros</a>
+    <a href="#pizzor" class="cat-pill">🍕 Pizzor</a>
+  </div>
+</nav>
+
+<!-- ── MENY MAIN ── -->
+<main class="meny-main">
+
+  <!-- ════════════════════════════════════
+       BURGARE & SNACKS
+  ════════════════════════════════════ -->
+  <section id="burgare" class="menu-section fade-up">
+    <h2 class="section-title">🍔 Burgare &amp; Snacks</h2>
+    <p class="section-subtitle">Saftiga burgare och krispiga snacks — serveras med pommes</p>
+
+    <div class="subsection-label">Burgare</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Panterns Burgarmeny
+            <span class="badge badge-fav">⭐ Favorit</span>
+          </div>
+          <div class="item-desc">Serveras med pommes &amp; dryck</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">90g</span>
+              <span class="price-val">110:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">150g</span>
+              <span class="price-val">130:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Hamburgare</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">90g</span>
+              <span class="price-val">89:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">150g</span>
+              <span class="price-val">109:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Kycklingburgare
+            <span class="badge badge-hot">🔥 Populär</span>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">139:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Gunsons Special
+            <span class="badge badge-fav">⭐ Favorit</span>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Chicken Nuggets</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">6 st</span>
+              <span class="price-val">110:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">9 st</span>
+              <span class="price-val">130:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">12 st</span>
+              <span class="price-val">140:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Halloumiburgare</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">139:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Fish &amp; Chips</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">135:-</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Burgare extras -->
+    <div class="extras-card">
+      <span class="extras-title">Tillval</span>
+      <div class="extras-pills">
+        <span class="extra-pill">Ost +12:-</span>
+        <span class="extra-pill">Bacon +15:-</span>
+        <span class="extra-pill">Kött +25:-</span>
+      </div>
+    </div>
+
+    <div class="subsection-label">Snacks</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Pommestallrik</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">Liten</span>
+              <span class="price-val">60:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">Stor</span>
+              <span class="price-val">85:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Chili Cheese</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">4 st</span>
+              <span class="price-val">35:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">6 st</span>
+              <span class="price-val">45:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Mozzarella Sticks</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">4 st</span>
+              <span class="price-val">35:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">6 st</span>
+              <span class="price-val">45:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Chicken Wings</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">3 st</span>
+              <span class="price-val">39:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">5 st</span>
+              <span class="price-val">49:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Onion Rings</div>
+        </div>
+        <div class="item-right">
+          <div class="price-variants">
+            <div class="price-variant">
+              <span class="size-label">4 st</span>
+              <span class="price-val">35:-</span>
+            </div>
+            <div class="price-variant">
+              <span class="size-label">6 st</span>
+              <span class="price-val">45:-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subsection-label">Boxar</div>
+    <div class="box-grid">
+      <div class="box-card">
+        <div>
+          <div class="box-card-name">Snackbox</div>
+          <div class="box-card-desc">Din mix av snacks — nuggets, wings, sticks &amp; pommes</div>
+        </div>
+        <div class="box-card-price">150:-</div>
+      </div>
+      <div class="box-card">
+        <div>
+          <div class="box-card-name">
+            Cheesebox
+            <span class="badge badge-new" style="font-size:0.7rem;margin-left:4px;">✨ Nyhet</span>
+          </div>
+          <div class="box-card-desc">Allt med extra ost — chili cheese, mozzarella &amp; mer</div>
+        </div>
+        <div class="box-card-price">150:-</div>
+      </div>
+    </div>
+
+    <div class="subsection-label">Såser</div>
+
+    <div class="sauce-group">
+      <div class="sauce-title">Dipsåser</div>
+      <div class="sauce-row">
+        <span class="sauce-price-tag">22:-</span>
+        <div class="sauce-pills">
+          <span class="sauce-pill">Bearnaise</span>
+          <span class="sauce-pill">Vitlök</span>
+          <span class="sauce-pill">Sötsur</span>
+          <span class="sauce-pill">Honungssenap</span>
+          <span class="sauce-pill">Chipotle</span>
+          <span class="sauce-pill">Tzatziki</span>
+          <span class="sauce-pill">Currydip</span>
+          <span class="sauce-pill">BBQ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sauce-group" style="margin-top:16px;">
+      <div class="sauce-title">Kebabsåser</div>
+      <div class="sauce-row">
+        <span class="sauce-price-tag">22:-</span>
+        <div class="sauce-pills">
+          <span class="sauce-pill">Vitlök</span>
+          <span class="sauce-pill">Stark</span>
+          <span class="sauce-pill">Mild</span>
+          <span class="sauce-pill">Blandad</span>
+          <span class="sauce-pill">Yoghurt</span>
+          <span class="sauce-pill">Chilisås</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- divider -->
+  <div class="paw-divider">
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       FALAFEL & HALLOUMI
+  ════════════════════════════════════ -->
+  <section id="falafel" class="menu-section fade-up">
+    <h2 class="section-title">🧆 Falafel &amp; Halloumi</h2>
+    <p class="section-subtitle">Vegetariska favoriter — krispigt stekt &amp; serverat med fräscha tillbehör</p>
+
+    <div class="subsection-label">Falafel</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Falafeltallrik
+            <span class="badge badge-hot">🔥 Populär</span>
+          </div>
+          <div class="item-desc">Serveras med ris, sallad &amp; bröd</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">130:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Falafelrulle
+            <span class="badge badge-fav">⭐ Favorit</span>
+          </div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">130:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Falafel med Bröd</div>
+          <div class="item-desc">Falafel serverad med pitabröd &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">120:-</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subsection-label">Halloumi</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Halloumitallrik</div>
+          <div class="item-desc">Grillad halloumi med ris, sallad &amp; bröd</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">145:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Halloumirulle
+            <span class="badge badge-hot">🔥 Populär</span>
+          </div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">145:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Halloumi med Bröd</div>
+          <div class="item-desc">Halloumi serverad med pitabröd &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">125:-</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="paw-divider">
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       VEGANSK KEBAB
+  ════════════════════════════════════ -->
+  <section id="vegansk" class="menu-section fade-up">
+    <h2 class="section-title">🌱 Vegansk Kebab</h2>
+    <p class="section-subtitle">Växtbaserat kebabkött — full smak, noll kompromiss</p>
+
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Vegansk Kebabtallrik
+            <span class="badge badge-vegan">🌱 Vegansk</span>
+          </div>
+          <div class="item-desc">Med ris, sallad, bröd &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">169:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Vegansk Kebabrulle
+            <span class="badge badge-vegan">🌱 Vegansk</span>
+          </div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">169:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Vegansk Kebab med Bröd
+            <span class="badge badge-vegan">🌱 Vegansk</span>
+          </div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Signatur Rullar -->
+    <div class="signature-banner">
+      <div class="signature-header">
+        <span class="signature-title">Signatur Rullar</span>
+        <span class="badge badge-new">✨ Nyhet</span>
+      </div>
+      <div class="item-list">
+
+        <div class="item-row">
+          <div class="item-left">
+            <div class="item-name">Crunchy Kebab Royale</div>
+            <div class="item-desc">Veganskt kött med krispiga topping &amp; husspecialsås</div>
+          </div>
+          <div class="item-right">
+            <div class="item-price">165:-</div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <div class="item-left">
+            <div class="item-name">Panterns Ferrari Rulle</div>
+            <div class="item-desc">Hetare variant med chili &amp; jalapeños</div>
+          </div>
+          <div class="item-right">
+            <div class="item-price">159:-</div>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <div class="item-left">
+            <div class="item-name">Hawaiian Delight</div>
+            <div class="item-desc">Sötsyrlig twist med ananas &amp; mango</div>
+          </div>
+          <div class="item-right">
+            <div class="item-price">155:-</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="paw-divider">
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       KEBAB
+  ════════════════════════════════════ -->
+  <section id="kebab" class="menu-section fade-up">
+    <h2 class="section-title">🥙 Kebab</h2>
+    <p class="section-subtitle">Klassisk kebab, tillagad på traditionellt vis med nyfärskade ingredienser</p>
+
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Kebabtallrik
+            <span class="badge badge-fav">⭐ Favorit</span>
+          </div>
+          <div class="item-desc">Med ris, sallad, bröd &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">145:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Kebabrulle</div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">145:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Kebab med Bröd
+            <span class="badge badge-hot">🔥 Populär</span>
+          </div>
+          <div class="item-desc">Kebab serverad med pitabröd &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">125:-</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="extras-card" style="margin-top:16px;">
+      <span class="extras-title">Tillval</span>
+      <div class="extras-pills">
+        <span class="extra-pill">Extra kött +29:-</span>
+        <span class="extra-pill">Pommes i rullen +25:-</span>
+        <span class="extra-pill">XL tallrik +39:-</span>
+        <span class="extra-pill">Feta ost +20:-</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="paw-divider">
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       KYCKLING & GYROS
+  ════════════════════════════════════ -->
+  <section id="kyckling" class="menu-section fade-up">
+    <h2 class="section-title">🍗 Kyckling &amp; Gyros</h2>
+    <p class="section-subtitle">Marinerad kyckling och klassisk gyros — kryddat till perfektion</p>
+
+    <div class="subsection-label">Kyckling</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">
+            Kycklingtallrik
+            <span class="badge badge-hot">🔥 Populär</span>
+          </div>
+          <div class="item-desc">Med ris, sallad, bröd &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Kycklingrulle</div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; valfri sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Kyckling med Bröd</div>
+          <div class="item-desc">Kyckling serverad med pitabröd &amp; sås</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">129:-</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="subsection-label">Gyros</div>
+    <div class="item-list">
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Gyrostallrik</div>
+          <div class="item-desc">Med ris, sallad, bröd &amp; tzatziki</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Gyrosrulle</div>
+          <div class="item-desc">I varmt pitabröd med sallad &amp; tzatziki</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">149:-</div>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="item-left">
+          <div class="item-name">Gyros med Bröd</div>
+          <div class="item-desc">Gyros serverad med pitabröd &amp; tzatziki</div>
+        </div>
+        <div class="item-right">
+          <div class="item-price">129:-</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- divider -->
+  <div class="paw-divider">
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    <svg viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  </div>
+
+
+  <!-- ════════════════════════════════════
+       PIZZOR
+  ════════════════════════════════════ -->
+  <section id="pizzor" class="menu-section fade-up">
+    <h2 class="section-title">🍕 Pizzor</h2>
+    <p class="section-subtitle">Handgjord deg, färsk tomatsås &amp; generösa toppings</p>
+
+    <div class="pizza-grid" style="margin-top: 24px;">
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Margherita
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">110:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Vesuvio</span>
+        <span class="pizza-price">110:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Capricciosa</span>
+        <span class="pizza-price">115:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Hawaii</span>
+        <span class="pizza-price">115:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Al Tonno</span>
+        <span class="pizza-price">115:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Funghi
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">115:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Pepperoni</span>
+        <span class="pizza-price">120:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Calzone</span>
+        <span class="pizza-price">120:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Hawaii Special</span>
+        <span class="pizza-price">125:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Spicy Du Chef
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">129:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Veggie Delight
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">129:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Treasures of the Sea</span>
+        <span class="pizza-price">129:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Spicy Tonno
+          <span class="badge badge-new">✨</span>
+        </span>
+        <span class="pizza-price">129:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Quattro Stagioni</span>
+        <span class="pizza-price">135:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Quattro Formaggi
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">135:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Diavola</span>
+        <span class="pizza-price">135:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Smokey BBQ Chicken
+          <span class="badge badge-fav">⭐</span>
+        </span>
+        <span class="pizza-price">135:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Turkish Delight
+          <span class="badge badge-hot">🔥</span>
+        </span>
+        <span class="pizza-price">140:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Bombay</span>
+        <span class="pizza-price">145:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Cinque Formaggi
+          <span class="badge badge-vegan">V</span>
+          <span class="badge badge-new">✨</span>
+        </span>
+        <span class="pizza-price">145:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Diavola 2.0
+          <span class="badge badge-new">✨</span>
+        </span>
+        <span class="pizza-price">145:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Bambino</span>
+        <span class="pizza-price">145:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Greken</span>
+        <span class="pizza-price">149:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Kebabpizza
+          <span class="badge badge-vegan">V</span>
+        </span>
+        <span class="pizza-price">149:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">Ciao Ciao</span>
+        <span class="pizza-price">149:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Royal Shishko
+          <span class="badge badge-fav">⭐</span>
+        </span>
+        <span class="pizza-price">149:-</span>
+      </div>
+
+      <div class="pizza-item">
+        <span class="pizza-name">
+          Beef &amp; Chili
+          <span class="badge badge-fav">⭐</span>
+        </span>
+        <span class="pizza-price">149:-</span>
+      </div>
+
+      <div class="pizza-item" style="border: 1px solid rgba(233,30,140,0.35); background: linear-gradient(135deg, rgba(233,30,140,0.1), rgba(22,33,62,0.8));">
+        <span class="pizza-name">
+          Pantern Kebab Supreme
+          <span class="badge badge-fav">⭐ Favorit</span>
+        </span>
+        <span class="pizza-price" style="color:var(--pink);">159:-</span>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+      <span class="pizza-note">🌾 Glutenfri botten +39:-</span>
+      <span class="pizza-note" style="background:rgba(100,200,80,0.1);border-color:rgba(100,200,80,0.25);color:#80CC60;">
+        <span class="badge badge-vegan" style="font-size:0.72rem;">V</span> Veganskt alternativ finns
+      </span>
+    </div>
+
+  </section>
+
 </main>
+
+<!-- ── ORDER CTA ── -->
+<section class="meny-cta">
+  <h2>Redo att beställa?</h2>
+  <p>Beställ online via Qopla — snabb leverans eller upphämtning</p>
+  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink" style="font-size:1.1rem;padding:16px 36px;">
+    Beställ Nu 🍕
+  </a>
+</section>
 
 <!-- ── FOOTER ── -->
 <footer>
@@ -336,6 +1616,7 @@
         <a href="index.html#oppettider">Öppettider</a>
         <a href="index.html#bestall">Beställ</a>
         <a href="index.html#oppettider">Hitta oss</a>
+        <a href="kontakt.html">Kontakt</a>
       </nav>
       <div class="footer-social">
         <a href="#" aria-label="Instagram">
@@ -378,6 +1659,43 @@
     mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
   });
   document.querySelectorAll('.mob-link').forEach(function(l) { l.addEventListener('click', closeMenu); });
+
+  // Fade-up scroll animation
+  var fadeEls = document.querySelectorAll('.fade-up');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(function(el) { observer.observe(el); });
+
+  // Category nav scrollspy
+  var sections = ['burgare','falafel','vegansk','kebab','kyckling','pizzor'];
+  var pills = document.querySelectorAll('.cat-pill');
+  var catNavHeight = document.getElementById('cat-nav').offsetHeight;
+
+  function updateActivePill() {
+    var scrollY = window.scrollY + 160;
+    var active = sections[0];
+    sections.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) { active = id; }
+    });
+    pills.forEach(function(p) {
+      var href = p.getAttribute('href').replace('#','');
+      p.classList.toggle('active', href === active);
+      // Auto-scroll pill into view
+      if (href === active) {
+        p.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActivePill, { passive: true });
+  updateActivePill();
 </script>
 </body>
 </html>
