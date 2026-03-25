@@ -289,20 +289,6 @@
       position: relative;
       background: rgba(22,33,62,0.55);
     }
-    .hero-emoji { font-size: 5rem; animation: spin 20s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .hero-rating {
-      position: absolute;
-      bottom: 18px;
-      right: -8px;
-      background: var(--gold);
-      color: #1A1A2E;
-      font-family: var(--font-head);
-      font-size: 1rem;
-      padding: 8px 16px;
-      border-radius: 999px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.45);
-    }
     .scroll-indicator {
       position: absolute;
       bottom: 28px;
@@ -324,8 +310,6 @@
       .hero-badge { justify-content: center; }
       .hero-visual { order: -1; }
       .hero-circle { width: 200px; height: 200px; }
-      .hero-emoji { font-size: 3.5rem; }
-      .hero-rating { bottom: 8px; right: -4px; font-size: 0.85rem; padding: 6px 12px; }
     }
 
     /* ── TICKER ── */
@@ -668,8 +652,7 @@
     </div>
     <div class="hero-visual">
       <div class="hero-circle">
-        <span class="hero-emoji">🍕</span>
-        <div class="hero-rating">⭐ 4.8 / 5</div>
+        <img src="assets/logo.webp" alt="Rosa Pantern" style="width:75%;height:75%;object-fit:contain;border-radius:50%;" />
       </div>
     </div>
   </div>
@@ -914,6 +897,64 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+  // ── PAW TRAIL ──
+  (function() {
+    var isMobile = window.innerWidth < 768;
+    var PAW_SIZE = isMobile ? 16 : 22;
+    var INTERVAL = isMobile ? 900 : 600;
+    var LIFE = 2500;
+    var MAX_PAWS = 5;
+    var t = 0;
+    var activePaws = 0;
+
+    function nextPos() {
+      t += 0.07;
+      var rawX = Math.sin(t * 0.9) * 0.35 + 0.5;
+      var rawY = Math.sin(t * 0.6 + 1.2) * 0.35 + 0.5;
+      var x = rawX * window.innerWidth;
+      var minY = 80;
+      var maxY = window.innerHeight - 250;
+      var y = minY + rawY * (maxY - minY);
+      return { x: x, y: y };
+    }
+
+    function spawnPaw() {
+      if (activePaws >= MAX_PAWS) return;
+      var pos = nextPos();
+      var el = document.createElement('div');
+      el.style.cssText = [
+        'position:fixed',
+        'left:' + pos.x + 'px',
+        'top:' + pos.y + 'px',
+        'width:' + PAW_SIZE + 'px',
+        'height:' + PAW_SIZE + 'px',
+        'pointer-events:none',
+        'z-index:48',
+        'opacity:0',
+        'transition:opacity 0.3s ease'
+      ].join(';');
+      el.innerHTML = '<svg viewBox="0 0 20 20" width="' + PAW_SIZE + '" height="' + PAW_SIZE + '" fill="#E91E8C" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>';
+      document.body.appendChild(el);
+      activePaws++;
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { el.style.opacity = '0.45'; });
+      });
+      var holdTime = LIFE - 800 - 300;
+      setTimeout(function() {
+        el.style.transition = 'opacity 0.8s ease';
+        el.style.opacity = '0';
+        setTimeout(function() {
+          if (el.parentNode) el.parentNode.removeChild(el);
+          activePaws--;
+        }, 800);
+      }, 300 + holdTime);
+    }
+
+    setTimeout(function() {
+      setInterval(spawnPaw, INTERVAL);
+    }, 3000);
+  })();
 </script>
 </body>
 </html>
