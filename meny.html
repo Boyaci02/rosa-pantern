@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meny – Rosa Pantern Uppsala</title>
+  <meta name="description" content="Meny för Rosa Pantern — pizza, kebab, burgare och falafel i Uppsala." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #E91E8C;
+      --pink-light: #FF6EC7;
+      --pink-dark: #B5106A;
+      --charcoal: #1A1A2E;
+      --surface: #16213E;
+      --cream: #FFF8F0;
+      --gold: #FFD700;
+      --muted: #A0A0B8;
+      --border: rgba(233,30,140,0.18);
+      --font-head: 'Fredoka One', cursive;
+      --font-body: 'Nunito', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--charcoal);
+      color: var(--cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-head); line-height: 1.1; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-spring), opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px) scale(1.03); }
+    .btn:active { transform: scale(0.97); }
+    .btn-pink {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .btn-pink:hover { box-shadow: 0 0 32px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.5); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px clamp(16px,4vw,48px);
+      background: rgba(26,26,46,0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(233,30,140,0.12);
+    }
+    .navbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .navbar-logo {
+      font-family: var(--font-head);
+      font-size: 1.55rem;
+      color: var(--pink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .navbar-logo img { height: 38px; width: auto; display: none; }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .navbar-links a {
+      color: rgba(255,248,240,0.72);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
+    .navbar-links a.active { color: var(--pink); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .mobile-menu a:hover { color: var(--pink); }
+    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; }
+
+    @media (max-width: 768px) {
+      .navbar-links, .navbar-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px clamp(16px,4vw,48px) 80px;
+    }
+
+    .coming-soon {
+      text-align: center;
+      max-width: 560px;
+    }
+
+    .coming-soon-paws {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      opacity: 0.45;
+    }
+
+    .coming-soon h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--pink);
+      margin-bottom: 16px;
+    }
+
+    .coming-soon p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .coming-soon-emoji {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0D0D1A;
+      padding: 40px clamp(16px,4vw,48px) 28px;
+      margin-top: auto;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(233,30,140,0.12);
+    }
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--pink);
+      text-decoration: none;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .footer-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .footer-nav a:hover { color: var(--cream); background: rgba(255,255,255,0.06); }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(233,30,140,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .footer-social a svg { width: 18px; height: 18px; }
+    .footer-social a:hover { color: var(--pink); background: rgba(233,30,140,0.1); border-color: var(--pink); }
+    .footer-bottom {
+      padding-top: 20px;
+      font-size: 0.82rem;
+      color: rgba(160,160,184,0.5);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo" id="navbar-logo">
+      <img src="assets/logo.png" alt="Rosa Pantern" id="logo-img" />
+      <span id="logo-text">Rosa Pantern</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Hem</a></li>
+      <li><a href="meny.html" class="active">Meny</a></li>
+      <li><a href="index.html#oppettider">Öppettider</a></li>
+      <li><a href="index.html#bestall">Beställ</a></li>
+      <li><a href="index.html#oppettider">Hitta oss</a></li>
+    </ul>
+    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="mob-link">Hem</a>
+  <a href="meny.html" class="mob-link">Meny</a>
+  <a href="index.html#oppettider" class="mob-link">Öppettider</a>
+  <a href="index.html#bestall" class="mob-link">Beställ</a>
+  <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
+  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="coming-soon">
+    <div class="coming-soon-paws">
+      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+      <svg width="22" height="22" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+    </div>
+    <span class="coming-soon-emoji">🍕</span>
+    <h1>Menyn kommer snart</h1>
+    <p>Vi jobbar på att lägga upp hela menyn digitalt.<br/>Håll utkik — det dröjer inte länge!</p>
+    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink">Beställ ändå 🍕</a>
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="index.html" class="footer-logo">Rosa Pantern</a>
+      <nav class="footer-nav">
+        <a href="index.html">Hem</a>
+        <a href="meny.html">Meny</a>
+        <a href="index.html#oppettider">Öppettider</a>
+        <a href="index.html#bestall">Beställ</a>
+        <a href="index.html#oppettider">Hitta oss</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Rosa Pantern · Sysslomansgatan 11, Uppsala · Alla rättigheter förbehållna
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Logo image check
+  (function() {
+    var img = document.getElementById('logo-img');
+    var txt = document.getElementById('logo-text');
+    img.onload = function() { img.style.display = 'block'; txt.style.display = 'none'; };
+    img.onerror = function() { img.style.display = 'none'; txt.style.display = 'block'; };
+  })();
+
+  // Hamburger menu
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.querySelectorAll('.mob-link').forEach(function(l) { l.addEventListener('click', closeMenu); });
+</script>
+</body>
+</html>
