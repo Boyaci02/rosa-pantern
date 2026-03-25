@@ -917,38 +917,34 @@
     function buildPaws() {
       layer.innerHTML = '';
 
-      var isMobile      = window.innerWidth < 768;
-      var PAW_SIZE      = isMobile ? 16 : 22;
-      var stepDistance  = isMobile ? 55 : 70;
-      var footOffsetMax = isMobile ? 7 : 10;
+      var isMobile     = window.innerWidth < 768;
+      var PAW_SIZE     = isMobile ? 16 : 22;
+      var stepDistance = isMobile ? 45 : 55;
+      var footSpacing  = isMobile ? 10 : 14;
 
       var docH = document.body.scrollHeight;
       layer.style.height = docH + 'px';
 
-      // Dynamic paw count: one paw every stepDistance px, capped at 80
       var totalPaws = Math.min(Math.floor(docH / stepDistance), 80);
 
-      // First pass — base positions via sine-wave wander (no foot offset yet)
+      // First pass — base positions: uniform Y steps, sine-wave X
       var basePos = [];
       for (var i = 0; i < totalPaws; i++) {
         var progress = i / (totalPaws - 1);
-        var y = progress * docH * 0.93 + docH * 0.03;
-        var x = (Math.sin(progress * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
+        var baseY = docH * 0.03 + i * stepDistance;
+        var baseX = (Math.sin(progress * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
 
-        // Skip navbar zone
-        if (y < 80) y = 80 + Math.abs(Math.sin(progress * 10)) * 60;
+        if (baseY < 80) baseY = 80;
+        if (baseY > docH - 180 && baseX > window.innerWidth - 180) baseX = window.innerWidth - 220;
 
-        // Avoid panther zone (bottom-right 180px corner)
-        if (y > docH - 180 && x > window.innerWidth - 180) x = window.innerWidth - 220;
-
-        basePos.push({ x: x, y: y });
+        basePos.push({ x: baseX, y: baseY });
       }
 
-      // Animation timing: ~5 paws visible at any moment
+      // Animation timing: ~5 paws visible at once, relaxed pace
       var visibleCount  = 5;
       var holdFraction  = visibleCount / totalPaws;
-      var cycleDuration = totalPaws * 0.18;
-      var stagger       = cycleDuration / totalPaws; // = 0.18s
+      var cycleDuration = totalPaws * 0.35;   // was 0.18 — slower walk
+      var stagger       = cycleDuration / totalPaws; // = 0.35s
 
       var fadeInEnd  = 3;
       var holdEnd    = fadeInEnd + holdFraction * 100;
@@ -967,26 +963,25 @@
         fadeOutEnd.toFixed(1)+ '%{opacity:0}' +
         '100%{opacity:0}}';
 
-      // Second pass — compute angle, apply foot offset, place SVGs
+      // Second pass — travel angle, true perpendicular foot offset, SVG placement
       for (var j = 0; j < totalPaws; j++) {
-        var pos = basePos[j];
-        var angle;
+        var bx = basePos[j].x;
+        var by = basePos[j].y;
 
-        if (j < totalPaws - 1) {
-          var dx = basePos[j + 1].x - pos.x;
-          var dy = basePos[j + 1].y - pos.y;
-          angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
-        } else {
-          var pdx = pos.x - basePos[j - 1].x;
-          var pdy = pos.y - basePos[j - 1].y;
-          angle = Math.atan2(pdy, pdx) * 180 / Math.PI + 90;
-        }
+        // Travel direction: x delta to next step, y always = stepDistance
+        var dx = j < totalPaws - 1 ? basePos[j + 1].x - bx : 0;
+        var dy = stepDistance;
+        var travelAngle = Math.atan2(dy, dx);
 
-        // Alternate left/right feet perpendicular to travel direction
-        var footOffset = (j % 2 === 0) ? -footOffsetMax : footOffsetMax;
-        var perpAngle  = (angle - 90) * Math.PI / 180;
-        var finalX = pos.x + Math.cos(perpAngle) * footOffset;
-        var finalY = pos.y + Math.sin(perpAngle) * footOffset;
+        // Perpendicular unit vector (rotate travel -90°)
+        var perpX = Math.cos(travelAngle - Math.PI / 2);
+        var perpY = Math.sin(travelAngle - Math.PI / 2);
+        var side  = (j % 2 === 0) ? 1 : -1;
+        var finalX = bx + perpX * footSpacing * side;
+        var finalY = by + perpY * footSpacing * side;
+
+        // Rotation aligned to travel direction
+        var rotDeg = travelAngle * 180 / Math.PI + 90;
 
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', '0 0 20 20');
@@ -997,9 +992,9 @@
 
         svg.style.cssText = [
           'position:absolute',
-          'left:'      + (finalX - PAW_SIZE / 2).toFixed(1) + 'px',
-          'top:'       + (finalY - PAW_SIZE / 2).toFixed(1) + 'px',
-          'transform:rotate(' + angle.toFixed(1) + 'deg)',
+          'left:'  + (finalX - PAW_SIZE / 2).toFixed(1) + 'px',
+          'top:'   + (finalY - PAW_SIZE / 2).toFixed(1) + 'px',
+          'transform:rotate(' + rotDeg.toFixed(1) + 'deg)',
           'opacity:0',
           'animation:pawCycle ' + cycleDuration.toFixed(2) + 's ' + (j * stagger).toFixed(2) + 's linear infinite'
         ].join(';');
