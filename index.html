@@ -36,6 +36,16 @@
       color: var(--cream);
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    #paw-layer {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
     }
 
     body::after {
@@ -900,60 +910,97 @@
 
   // ── PAW TRAIL ──
   (function() {
-    var isMobile = window.innerWidth < 768;
-    var PAW_SIZE = isMobile ? 16 : 22;
-    var INTERVAL = isMobile ? 900 : 600;
-    var LIFE = 2500;
-    var MAX_PAWS = 5;
-    var t = 0;
-    var activePaws = 0;
+    var layer = document.createElement('div');
+    layer.id = 'paw-layer';
+    document.body.appendChild(layer);
 
-    function nextPos() {
-      t += 0.07;
-      var rawX = Math.sin(t * 0.9) * 0.35 + 0.5;
-      var rawY = Math.sin(t * 0.6 + 1.2) * 0.35 + 0.5;
-      var x = rawX * window.innerWidth;
-      var minY = 80;
-      var maxY = window.innerHeight - 250;
-      var y = minY + rawY * (maxY - minY);
-      return { x: x, y: y };
+    function buildPaws() {
+      layer.innerHTML = '';
+
+      var isMobile = window.innerWidth < 768;
+      var PAW_COUNT = isMobile ? 12 : 20;
+      var PAW_SIZE  = isMobile ? 16 : 22;
+      var CYCLE     = 20; // seconds for full animation loop
+      var stagger   = CYCLE / PAW_COUNT;
+
+      var docH = document.body.scrollHeight;
+      layer.style.height = docH + 'px';
+
+      // Compute positions spread top→bottom with sine-wave wander
+      var positions = [];
+      for (var i = 0; i < PAW_COUNT; i++) {
+        var progress = i / (PAW_COUNT - 1);
+        var y = progress * docH * 0.93 + docH * 0.03;
+        var x = (Math.sin(progress * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
+
+        // Skip navbar zone
+        if (y < 80) y = 80 + Math.abs(Math.sin(progress * 10)) * 60;
+
+        // Avoid panther zone (bottom-right 180px corner)
+        if (y > docH - 180 && x > window.innerWidth - 180) x = window.innerWidth - 220;
+
+        // Minimum separation nudge
+        if (i > 0) {
+          var prev = positions[i - 1];
+          if (Math.abs(x - prev.x) < 90 && Math.abs(y - prev.y) < 90) {
+            x += (x >= prev.x ? 30 : -30);
+          }
+        }
+
+        positions.push({ x: x, y: y });
+      }
+
+      // Inject shared keyframes once
+      var styleEl = document.getElementById('paw-keyframes');
+      if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'paw-keyframes';
+        document.head.appendChild(styleEl);
+      }
+      styleEl.textContent = '@keyframes pawCycle{0%{opacity:0}5%{opacity:0.45}20%{opacity:0.45}28%{opacity:0}100%{opacity:0}}';
+
+      // Place SVG paws
+      for (var j = 0; j < PAW_COUNT; j++) {
+        var pos = positions[j];
+        var angle = 0;
+        if (j < PAW_COUNT - 1) {
+          var dx = positions[j + 1].x - pos.x;
+          var dy = positions[j + 1].y - pos.y;
+          angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+        } else {
+          var pdx = pos.x - positions[j - 1].x;
+          var pdy = pos.y - positions[j - 1].y;
+          angle = Math.atan2(pdy, pdx) * 180 / Math.PI + 90;
+        }
+
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 20 20');
+        svg.setAttribute('width', PAW_SIZE);
+        svg.setAttribute('height', PAW_SIZE);
+        svg.setAttribute('fill', '#E91E8C');
+        svg.innerHTML = '<circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/>';
+
+        var delay = j * stagger;
+        svg.style.cssText = [
+          'position:absolute',
+          'left:' + (pos.x - PAW_SIZE / 2) + 'px',
+          'top:'  + (pos.y - PAW_SIZE / 2) + 'px',
+          'transform:rotate(' + angle + 'deg)',
+          'opacity:0',
+          'animation:pawCycle ' + CYCLE + 's ' + delay + 's linear infinite'
+        ].join(';');
+
+        layer.appendChild(svg);
+      }
     }
 
-    function spawnPaw() {
-      if (activePaws >= MAX_PAWS) return;
-      var pos = nextPos();
-      var el = document.createElement('div');
-      el.style.cssText = [
-        'position:fixed',
-        'left:' + pos.x + 'px',
-        'top:' + pos.y + 'px',
-        'width:' + PAW_SIZE + 'px',
-        'height:' + PAW_SIZE + 'px',
-        'pointer-events:none',
-        'z-index:48',
-        'opacity:0',
-        'transition:opacity 0.3s ease'
-      ].join(';');
-      el.innerHTML = '<svg viewBox="0 0 20 20" width="' + PAW_SIZE + '" height="' + PAW_SIZE + '" fill="#E91E8C" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>';
-      document.body.appendChild(el);
-      activePaws++;
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() { el.style.opacity = '0.45'; });
-      });
-      var holdTime = LIFE - 800 - 300;
-      setTimeout(function() {
-        el.style.transition = 'opacity 0.8s ease';
-        el.style.opacity = '0';
-        setTimeout(function() {
-          if (el.parentNode) el.parentNode.removeChild(el);
-          activePaws--;
-        }, 800);
-      }, 300 + holdTime);
-    }
+    setTimeout(buildPaws, 200);
 
-    setTimeout(function() {
-      setInterval(spawnPaw, INTERVAL);
-    }, 3000);
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildPaws, 300);
+    });
   })();
 </script>
 </body>
