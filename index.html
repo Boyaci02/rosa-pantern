@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -150,7 +151,7 @@
       gap: 10px;
       flex-shrink: 0;
     }
-    .navbar-logo img { height: 38px; width: auto; display: none; }
+    .navbar-logo img { height: 42px; width: auto; display: none; border-radius: 50%; }
     .navbar-links {
       display: flex;
       align-items: center;
@@ -226,8 +227,9 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 80% 60% at 30% 80%, rgba(233,30,140,0.22) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(181,16,106,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 90% 70% at 20% 90%, rgba(233,30,140,0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(181,16,106,0.30) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 55% 50%, rgba(233,30,140,0.12) 0%, transparent 50%),
         linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
       padding-top: 80px;
     }
@@ -254,9 +256,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(233,30,140,0.14);
-      border: 1px solid rgba(233,30,140,0.38);
-      color: var(--pink-light);
+      background: var(--pink);
+      border: 1px solid var(--pink-dark);
+      color: #fff;
       font-weight: 700;
       font-size: 0.92rem;
       padding: 10px 20px;
@@ -356,8 +358,8 @@
       background: var(--surface);
       border-radius: 16px;
       padding: 32px 26px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 24px rgba(233,30,140,0.1), 0 1px 4px rgba(0,0,0,0.4);
+      border: 1px solid rgba(233,30,140,0.4);
+      box-shadow: 0 4px 28px rgba(233,30,140,0.22), 0 1px 4px rgba(0,0,0,0.4);
       transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
     }
     .menu-card:hover {
@@ -393,6 +395,15 @@
       transform: translateY(-3px);
     }
     .platform-icon { font-size: 1.3rem; }
+
+    /* ── ORDER SECTION (pink bg overrides) ── */
+    #bestall .eyebrow { color: rgba(255,255,255,0.75); }
+    #bestall .section-heading, #bestall .section-heading .pink { color: #fff; }
+    #bestall .order-sub { color: rgba(255,255,255,0.82); }
+    #bestall .order-cta { background: #fff; color: #1A1A2E; box-shadow: 0 0 24px rgba(0,0,0,0.25); }
+    #bestall .order-cta:hover { box-shadow: 0 0 36px rgba(0,0,0,0.35); background: #fff; }
+    #bestall .platform-card { background: #fff; color: #1A1A2E; border-color: rgba(255,255,255,0.3); }
+    #bestall .platform-card:hover { border-color: #fff; box-shadow: 0 0 22px rgba(0,0,0,0.18); }
 
     /* ── SOCIAL PROOF ── */
     .stars { display: flex; justify-content: center; gap: 5px; margin: 14px 0 6px; }
@@ -509,7 +520,8 @@
     #panther-wrap {
       position: fixed;
       bottom: 0;
-      right: -20px;
+      right: 10px;
+      width: 150px;
       z-index: 50;
       animation: pantherPeek 8s 2s infinite;
       animation-fill-mode: backwards;
@@ -567,7 +579,7 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
     <a href="#hero" class="navbar-logo" id="navbar-logo">
-      <img src="assets/logo.png" alt="Rosa Pantern" id="logo-img" />
+      <img src="assets/logo.webp" alt="Rosa Pantern" id="logo-img" />
       <span id="logo-text">Rosa Pantern</span>
     </a>
     <ul class="navbar-links">
@@ -651,14 +663,14 @@
 </div>
 
 <!-- ── PAW DIVIDER ── -->
-<div class="paw-divider fade-up">
+<div class="paw-divider fade-up" style="background:#1a0a14;">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
 </div>
 
 <!-- ── MENU HIGHLIGHTS ── -->
-<section class="section" id="meny-highlights">
+<section class="section" id="meny-highlights" style="background:linear-gradient(180deg,#1a0a14,#1A1A2E);">
   <div class="container">
     <span class="eyebrow fade-up">VAD VI GÖR BÄST</span>
     <h2 class="section-heading fade-up">Våra <span class="pink">Signaturrätter</span></h2>
@@ -689,14 +701,14 @@
 </section>
 
 <!-- ── PAW DIVIDER ── -->
-<div class="paw-divider fade-up">
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+<div class="paw-divider fade-up" style="background:#E91E8C;">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="#fff" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="#fff" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="#fff" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
 </div>
 
 <!-- ── ORDER ── -->
-<section class="section section-dark order-section" id="bestall">
+<section class="section order-section" id="bestall" style="background:#E91E8C;">
   <div class="container">
     <span class="eyebrow fade-up">BESTÄLL ONLINE</span>
     <h2 class="section-heading fade-up">Hungrig? Vi kör<br/><span class="pink">hem till dig.</span></h2>
@@ -720,7 +732,7 @@
 </section>
 
 <!-- ── PAW DIVIDER ── -->
-<div class="paw-divider fade-up">
+<div class="paw-divider fade-up" style="background:var(--charcoal);">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
@@ -753,14 +765,14 @@
 </section>
 
 <!-- ── PAW DIVIDER ── -->
-<div class="paw-divider fade-up">
+<div class="paw-divider fade-up" style="background:#1a0a14;">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
 </div>
 
 <!-- ── ÖPPETTIDER ── -->
-<section class="section section-dark" id="oppettider">
+<section class="section" id="oppettider" style="background:#1a0a14;">
   <div class="container">
     <span class="eyebrow fade-up">NÄR HITTAR DU OSS</span>
     <h2 class="section-heading fade-up"><span class="pink">Öppettider</span></h2>
@@ -829,40 +841,7 @@
 <!-- ── PANTHER ANIMATION ── -->
 <div id="panther-wrap">
   <div class="panther-bubble">Hallå! Beställ nu! 🍕</div>
-  <svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
-    <!-- Body -->
-    <ellipse cx="60" cy="110" rx="34" ry="44" fill="#E91E8C" stroke="#B5106A" stroke-width="2"/>
-    <!-- Head -->
-    <circle cx="60" cy="58" r="30" fill="#E91E8C" stroke="#B5106A" stroke-width="2"/>
-    <!-- Left ear -->
-    <polygon points="38,36 28,16 50,34" fill="#E91E8C" stroke="#B5106A" stroke-width="2"/>
-    <!-- Right ear -->
-    <polygon points="82,36 92,16 70,34" fill="#E91E8C" stroke="#B5106A" stroke-width="2"/>
-    <!-- Snout -->
-    <ellipse cx="60" cy="68" rx="14" ry="10" fill="#B5106A" opacity="0.7"/>
-    <!-- Eyes -->
-    <ellipse cx="49" cy="52" rx="6" ry="5" fill="#fff"/>
-    <ellipse cx="71" cy="52" rx="6" ry="5" fill="#fff"/>
-    <circle cx="50" cy="52" r="3" fill="#1A1A2E"/>
-    <circle cx="72" cy="52" r="3" fill="#1A1A2E"/>
-    <!-- Shine -->
-    <circle cx="51.5" cy="50.5" r="1" fill="#fff"/>
-    <circle cx="73.5" cy="50.5" r="1" fill="#fff"/>
-    <!-- Nose -->
-    <ellipse cx="60" cy="64" rx="4" ry="3" fill="#fff" opacity="0.6"/>
-    <!-- Whiskers left -->
-    <line x1="46" y1="67" x2="28" y2="64" stroke="#B5106A" stroke-width="1.2" opacity="0.6"/>
-    <line x1="46" y1="70" x2="28" y2="72" stroke="#B5106A" stroke-width="1.2" opacity="0.6"/>
-    <!-- Whiskers right -->
-    <line x1="74" y1="67" x2="92" y2="64" stroke="#B5106A" stroke-width="1.2" opacity="0.6"/>
-    <line x1="74" y1="70" x2="92" y2="72" stroke="#B5106A" stroke-width="1.2" opacity="0.6"/>
-    <!-- Left paw -->
-    <ellipse cx="36" cy="150" rx="13" ry="9" fill="#E91E8C" stroke="#B5106A" stroke-width="1.5"/>
-    <!-- Right paw -->
-    <ellipse cx="84" cy="150" rx="13" ry="9" fill="#E91E8C" stroke="#B5106A" stroke-width="1.5"/>
-    <!-- Tail -->
-    <path id="panther-tail" d="M94,95 C118,75 128,42 104,28 C98,24 92,28 96,34" fill="none" stroke="#E91E8C" stroke-width="9" stroke-linecap="round"/>
-  </svg>
+  <img src="assets/panther.webp" alt="Pink Panther" style="width:100%;display:block;" />
 </div>
 
 <script>
