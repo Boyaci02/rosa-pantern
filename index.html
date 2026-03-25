@@ -917,19 +917,21 @@
     function buildPaws() {
       layer.innerHTML = '';
 
-      var isMobile = window.innerWidth < 768;
-      var PAW_COUNT = isMobile ? 12 : 20;
-      var PAW_SIZE  = isMobile ? 16 : 22;
-      var CYCLE     = 20; // seconds for full animation loop
-      var stagger   = CYCLE / PAW_COUNT;
+      var isMobile      = window.innerWidth < 768;
+      var PAW_SIZE      = isMobile ? 16 : 22;
+      var stepDistance  = isMobile ? 55 : 70;
+      var footOffsetMax = isMobile ? 7 : 10;
 
       var docH = document.body.scrollHeight;
       layer.style.height = docH + 'px';
 
-      // Compute positions spread top→bottom with sine-wave wander
-      var positions = [];
-      for (var i = 0; i < PAW_COUNT; i++) {
-        var progress = i / (PAW_COUNT - 1);
+      // Dynamic paw count: one paw every stepDistance px, capped at 80
+      var totalPaws = Math.min(Math.floor(docH / stepDistance), 80);
+
+      // First pass — base positions via sine-wave wander (no foot offset yet)
+      var basePos = [];
+      for (var i = 0; i < totalPaws; i++) {
+        var progress = i / (totalPaws - 1);
         var y = progress * docH * 0.93 + docH * 0.03;
         var x = (Math.sin(progress * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
 
@@ -939,55 +941,67 @@
         // Avoid panther zone (bottom-right 180px corner)
         if (y > docH - 180 && x > window.innerWidth - 180) x = window.innerWidth - 220;
 
-        // Minimum separation nudge
-        if (i > 0) {
-          var prev = positions[i - 1];
-          if (Math.abs(x - prev.x) < 90 && Math.abs(y - prev.y) < 90) {
-            x += (x >= prev.x ? 30 : -30);
-          }
-        }
-
-        positions.push({ x: x, y: y });
+        basePos.push({ x: x, y: y });
       }
 
-      // Inject shared keyframes once
+      // Animation timing: ~5 paws visible at any moment
+      var visibleCount  = 5;
+      var holdFraction  = visibleCount / totalPaws;
+      var cycleDuration = totalPaws * 0.18;
+      var stagger       = cycleDuration / totalPaws; // = 0.18s
+
+      var fadeInEnd  = 3;
+      var holdEnd    = fadeInEnd + holdFraction * 100;
+      var fadeOutEnd = holdEnd + 5;
+
       var styleEl = document.getElementById('paw-keyframes');
       if (!styleEl) {
         styleEl = document.createElement('style');
         styleEl.id = 'paw-keyframes';
         document.head.appendChild(styleEl);
       }
-      styleEl.textContent = '@keyframes pawCycle{0%{opacity:0}5%{opacity:0.45}20%{opacity:0.45}28%{opacity:0}100%{opacity:0}}';
+      styleEl.textContent = '@keyframes pawCycle{' +
+        '0%{opacity:0}' +
+        fadeInEnd.toFixed(1) + '%{opacity:0.5}' +
+        holdEnd.toFixed(1)   + '%{opacity:0.5}' +
+        fadeOutEnd.toFixed(1)+ '%{opacity:0}' +
+        '100%{opacity:0}}';
 
-      // Place SVG paws
-      for (var j = 0; j < PAW_COUNT; j++) {
-        var pos = positions[j];
-        var angle = 0;
-        if (j < PAW_COUNT - 1) {
-          var dx = positions[j + 1].x - pos.x;
-          var dy = positions[j + 1].y - pos.y;
+      // Second pass — compute angle, apply foot offset, place SVGs
+      for (var j = 0; j < totalPaws; j++) {
+        var pos = basePos[j];
+        var angle;
+
+        if (j < totalPaws - 1) {
+          var dx = basePos[j + 1].x - pos.x;
+          var dy = basePos[j + 1].y - pos.y;
           angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
         } else {
-          var pdx = pos.x - positions[j - 1].x;
-          var pdy = pos.y - positions[j - 1].y;
+          var pdx = pos.x - basePos[j - 1].x;
+          var pdy = pos.y - basePos[j - 1].y;
           angle = Math.atan2(pdy, pdx) * 180 / Math.PI + 90;
         }
 
+        // Alternate left/right feet perpendicular to travel direction
+        var footOffset = (j % 2 === 0) ? -footOffsetMax : footOffsetMax;
+        var perpAngle  = (angle - 90) * Math.PI / 180;
+        var finalX = pos.x + Math.cos(perpAngle) * footOffset;
+        var finalY = pos.y + Math.sin(perpAngle) * footOffset;
+
         var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', '0 0 20 20');
-        svg.setAttribute('width', PAW_SIZE);
-        svg.setAttribute('height', PAW_SIZE);
-        svg.setAttribute('fill', '#E91E8C');
+        svg.setAttribute('width',   PAW_SIZE);
+        svg.setAttribute('height',  PAW_SIZE);
+        svg.setAttribute('fill',    '#E91E8C');
         svg.innerHTML = '<circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/>';
 
-        var delay = j * stagger;
         svg.style.cssText = [
           'position:absolute',
-          'left:' + (pos.x - PAW_SIZE / 2) + 'px',
-          'top:'  + (pos.y - PAW_SIZE / 2) + 'px',
-          'transform:rotate(' + angle + 'deg)',
+          'left:'      + (finalX - PAW_SIZE / 2).toFixed(1) + 'px',
+          'top:'       + (finalY - PAW_SIZE / 2).toFixed(1) + 'px',
+          'transform:rotate(' + angle.toFixed(1) + 'deg)',
           'opacity:0',
-          'animation:pawCycle ' + CYCLE + 's ' + delay + 's linear infinite'
+          'animation:pawCycle ' + cycleDuration.toFixed(2) + 's ' + (j * stagger).toFixed(2) + 's linear infinite'
         ].join(';');
 
         layer.appendChild(svg);
