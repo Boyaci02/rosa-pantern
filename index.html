@@ -519,8 +519,8 @@
     /* ── PANTHER ANIMATION ── */
     #panther-wrap {
       position: fixed;
-      bottom: 0;
-      right: 10px;
+      bottom: 40px;
+      right: 0;
       width: 150px;
       z-index: 50;
       animation: pantherPeek 8s 2s infinite;
@@ -528,10 +528,10 @@
       cursor: pointer;
     }
     @keyframes pantherPeek {
-      0%   { transform: translateY(100%); }
-      25%  { transform: translateY(0); }
-      75%  { transform: translateY(0); }
-      100% { transform: translateY(100%); }
+      0%   { transform: translateX(120%); }
+      25%  { transform: translateX(0); }
+      75%  { transform: translateX(0); }
+      100% { transform: translateX(120%); }
     }
     #panther-tail {
       animation: tailWag 1s ease-in-out infinite;
@@ -543,7 +543,7 @@
     }
     .panther-bubble {
       position: absolute;
-      bottom: 148px;
+      bottom: calc(100% + 14px);
       right: 10px;
       background: var(--pink);
       color: #fff;
@@ -708,7 +708,7 @@
 </div>
 
 <!-- ── ORDER ── -->
-<section class="section order-section" id="bestall" style="background:#E91E8C;">
+<section class="section order-section" id="bestall" style="background:radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%);">
   <div class="container">
     <span class="eyebrow fade-up">BESTÄLL ONLINE</span>
     <h2 class="section-heading fade-up">Hungrig? Vi kör<br/><span class="pink">hem till dig.</span></h2>
@@ -806,6 +806,9 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Öppna i Google Maps
         </a>
+        <div style="margin-top:20px;border-radius:12px;overflow:hidden;border:1px solid rgba(233,30,140,0.2);">
+          <iframe src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1774477570267!5m2!1sen!2sin!6m8!1m7!1sIFa7xJp6Nkvu45UDWtch5w!2m2!1d59.86027916084795!2d17.62936129783873!3f25.66122065862148!4f2.7839880811453526!5f1.184866916696" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </div>
