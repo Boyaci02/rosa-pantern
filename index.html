@@ -914,15 +914,20 @@
     layer.id = 'paw-layer';
     document.body.appendChild(layer);
 
-    function buildPaws() {
+    function initPaws() {
       layer.innerHTML = '';
 
-      var isMobile     = window.innerWidth < 768;
+      var isMobile     = window.innerWidth <= 768;
       var PAW_SIZE     = isMobile ? 16 : 22;
       var stepDistance = isMobile ? 45 : 55;
       var footSpacing  = isMobile ? 10 : 14;
 
-      var docH = document.body.scrollHeight;
+      var docH = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      );
       layer.style.height = docH + 'px';
 
       var totalPaws = Math.min(Math.floor(docH / stepDistance), 80);
@@ -1003,12 +1008,20 @@
       }
     }
 
-    setTimeout(buildPaws, 200);
+    var delay = window.innerWidth <= 768 ? 800 : 200;
+    setTimeout(initPaws, delay);
+
+    window.addEventListener('load', function() {
+      if (window.innerWidth <= 768) {
+        layer.innerHTML = '';
+        initPaws();
+      }
+    });
 
     var resizeTimer;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(buildPaws, 300);
+      resizeTimer = setTimeout(initPaws, 300);
     });
   })();
 </script>
