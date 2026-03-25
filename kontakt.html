@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Rosa Pantern Uppsala</title>
+  <meta name="description" content="Kontakta Rosa Pantern i Uppsala. Adress, telefon, e-post och karta." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #E91E8C;
+      --pink-light: #FF6EC7;
+      --pink-dark: #B5106A;
+      --charcoal: #1A1A2E;
+      --surface: #16213E;
+      --cream: #FFF8F0;
+      --muted: #A0A0B8;
+      --font-head: 'Fredoka One', cursive;
+      --font-body: 'Nunito', sans-serif;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: var(--font-body);
+      background: var(--charcoal);
+      color: var(--cream);
+      line-height: 1.7;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-head); line-height: 1.1; }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px,4vw,48px); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-spring), opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px) scale(1.03); }
+    .btn:active { transform: scale(0.97); }
+    .btn-pink {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .btn-pink:hover { box-shadow: 0 0 32px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.5); }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 16px clamp(16px,4vw,48px);
+      background: rgba(26,26,46,0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(233,30,140,0.12);
+    }
+    .navbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .navbar-logo {
+      font-family: var(--font-head);
+      font-size: 1.55rem;
+      color: var(--pink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .navbar-logo img { height: 42px; width: auto; display: none; border-radius: 50%; }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .navbar-links a {
+      color: rgba(255,248,240,0.72);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
+    .navbar-links a.active { color: var(--pink); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .mobile-menu a:hover { color: var(--pink); }
+    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; }
+    @media (max-width: 768px) {
+      .navbar-links, .navbar-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO BANNER ── */
+    .kontakt-hero {
+      padding: 120px 0 60px;
+      background:
+        radial-gradient(ellipse 90% 70% at 20% 90%, rgba(233,30,140,0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(181,16,106,0.30) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 55% 50%, rgba(233,30,140,0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .kontakt-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .kontakt-hero h1 span { color: var(--pink); }
+    .kontakt-hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    /* ── INFO CARDS ── */
+    .info-cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 52px 0;
+    }
+    .info-card {
+      background: rgba(233,30,140,0.08);
+      border: 1px solid rgba(233,30,140,0.2);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.3s var(--ease-spring);
+    }
+    .info-card:hover {
+      border-color: rgba(233,30,140,0.5);
+      box-shadow: 0 0 28px rgba(233,30,140,0.12);
+      transform: translateY(-3px);
+    }
+    .info-card-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .info-card-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 8px;
+    }
+    .info-card-value {
+      font-size: 0.95rem;
+      color: var(--cream);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .info-card-value a {
+      color: var(--pink-light);
+      text-decoration: none;
+    }
+    .info-card-value a:hover { text-decoration: underline; }
+
+    /* ── MAP + FORM LAYOUT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding-bottom: clamp(60px,8vw,100px);
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    .map-block {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(233,30,140,0.2);
+      box-shadow: 0 4px 32px rgba(233,30,140,0.08);
+    }
+
+    /* ── CONTACT FORM ── */
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form h3 {
+      font-size: 1.6rem;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(233,30,140,0.2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(233,30,140,0.12);
+    }
+    .form-group textarea { min-height: 130px; }
+    .btn-submit {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(233,30,140,0.4);
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.2s ease;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 32px rgba(233,30,140,0.6); }
+    .btn-submit:active { transform: scale(0.97); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0D0D1A;
+      border-top: 1px solid rgba(233,30,140,0.14);
+      padding: 52px clamp(16px,4vw,48px) 24px;
+      margin-top: auto;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-logo { font-family: var(--font-head); font-size: 1.55rem; color: var(--pink); text-decoration: none; }
+    .footer-nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; }
+    .footer-nav a:hover { color: var(--pink-light); }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { color: var(--muted); transition: color 0.2s ease; }
+    .footer-social a:hover { color: var(--pink); }
+    .footer-social svg { width: 22px; height: 22px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(233,30,140,0.1);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo" id="navbar-logo">
+      <img src="assets/logo.webp" alt="Rosa Pantern" id="logo-img" />
+      <span id="logo-text">Rosa Pantern</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="index.html">Hem</a></li>
+      <li><a href="meny.html">Meny</a></li>
+      <li><a href="index.html#oppettider">Öppettider</a></li>
+      <li><a href="index.html#bestall">Beställ</a></li>
+      <li><a href="index.html#oppettider">Hitta oss</a></li>
+      <li><a href="kontakt.html" class="active">Kontakt</a></li>
+    </ul>
+    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="mob-link">Hem</a>
+  <a href="meny.html" class="mob-link">Meny</a>
+  <a href="index.html#oppettider" class="mob-link">Öppettider</a>
+  <a href="index.html#bestall" class="mob-link">Beställ</a>
+  <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
+  <a href="kontakt.html" class="mob-link">Kontakt</a>
+  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+</div>
+
+<!-- ── HERO BANNER ── -->
+<section class="kontakt-hero">
+  <div class="container">
+    <span class="eyebrow fade-up">VI FINNS HÄR FÖR DIG</span>
+    <h1 class="fade-up">Kontakta <span>oss</span></h1>
+    <p class="fade-up">Vi svarar gärna på dina frågor — hör av dig!</p>
+  </div>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<main style="flex:1;">
+  <div class="container">
+
+    <!-- INFO CARDS -->
+    <div class="info-cards">
+      <div class="info-card fade-up">
+        <div class="info-card-icon">📍</div>
+        <div class="info-card-label">Plats</div>
+        <div class="info-card-value">Sysslomansgatan 11<br/>753 11 Uppsala, Sweden</div>
+      </div>
+      <div class="info-card fade-up">
+        <div class="info-card-icon">📞</div>
+        <div class="info-card-label">Telefonnummer</div>
+        <div class="info-card-value"><a href="tel:+46181215600">+46 18 12 15 60</a></div>
+      </div>
+      <div class="info-card fade-up">
+        <div class="info-card-icon">✉️</div>
+        <div class="info-card-label">E-post</div>
+        <div class="info-card-value"><a href="mailto:info@rzgroupab.com">info@rzgroupab.com</a></div>
+      </div>
+    </div>
+
+    <!-- MAP + FORM -->
+    <div class="contact-grid">
+      <!-- MAP -->
+      <div class="map-block fade-up">
+        <iframe src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1774477570267!5m2!1sen!2sin!6m8!1m7!1sIFa7xJp6Nkvu45UDWtch5w!2m2!1d59.86027916084795!2d17.62936129783873!3f25.66122065862148!4f2.7839880811453526!5f1.184866916696" width="100%" height="420" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <!-- FORM -->
+      <form class="contact-form fade-up" onsubmit="return false;">
+        <h3>Skicka ett meddelande</h3>
+        <div class="form-group">
+          <label for="namn">Namn</label>
+          <input type="text" id="namn" name="namn" placeholder="Ditt namn" />
+        </div>
+        <div class="form-group">
+          <label for="epost">E-post</label>
+          <input type="email" id="epost" name="epost" placeholder="din@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="amne">Ämne</label>
+          <input type="text" id="amne" name="amne" placeholder="Vad handlar det om?" />
+        </div>
+        <div class="form-group">
+          <label for="meddelande">Meddelande</label>
+          <textarea id="meddelande" name="meddelande" placeholder="Skriv ditt meddelande här..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Skicka meddelande</button>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href="index.html" class="footer-logo">Rosa Pantern</a>
+      <nav class="footer-nav">
+        <a href="index.html">Hem</a>
+        <a href="meny.html">Meny</a>
+        <a href="index.html#oppettider">Öppettider</a>
+        <a href="index.html#bestall">Beställ</a>
+        <a href="index.html#oppettider">Hitta oss</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Rosa Pantern · Sysslomansgatan 11, Uppsala · Alla rättigheter förbehållna
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Logo image check
+  (function() {
+    var img = document.getElementById('logo-img');
+    var txt = document.getElementById('logo-text');
+    img.onload = function() { img.style.display = 'block'; txt.style.display = 'none'; };
+    img.onerror = function() { img.style.display = 'none'; txt.style.display = 'block'; };
+  })();
+
+  // Hamburger menu
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  function openMenu() {
+    hamburger.classList.add('open');
+    mobileMenu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', function() {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  document.querySelectorAll('.mob-link').forEach(function(l) { l.addEventListener('click', closeMenu); });
+
+  // Scroll fade-in
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
