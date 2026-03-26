@@ -197,7 +197,7 @@
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(2) { transform: scaleX(0); opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-menu {
@@ -317,7 +317,7 @@
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
       .hero-ctas { justify-content: center; }
-      .hero-badge { justify-content: center; }
+      .hero-badge { justify-content: center; display: none; }
       .hero-visual { order: -1; }
       .hero-circle { width: 200px; height: 200px; }
     }
@@ -505,10 +505,18 @@
     .footer-bottom {
       border-top: 1px solid rgba(233,30,140,0.1);
       padding-top: 20px;
-      text-align: center;
       font-size: 0.78rem;
       color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 4px 8px;
     }
+    .poweredby-link { color: var(--muted); text-decoration: none; transition: color 0.2s ease; }
+    .poweredby-link:hover { color: var(--pink-light); }
+    .poweredby-link strong { color: var(--pink-light); font-weight: 700; }
+    @media (max-width: 480px) { .footer-bottom { flex-direction: column; gap: 4px; } }
 
     /* ── PANTHER ANIMATION ── */
     #panther-wrap {
@@ -786,7 +794,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      © 2025 Rosa Pantern · Sysslomansgatan 11, Uppsala · Alla rättigheter förbehållna
+      <span>© 2025 Rosa Pantern · Sysslomansgatan 11, Uppsala · Alla rättigheter förbehållna</span>
+      <a href="https://synsnumedia.se/" target="_blank" rel="noopener" class="poweredby-link">· Powered by <strong>SynsNu</strong></a>
     </div>
   </div>
 </footer>
@@ -850,6 +859,7 @@
 
     function initPaws() {
       layer.innerHTML = '';
+      layer.style.height = '0';
 
       var isMobile     = window.innerWidth <= 768;
       var PAW_SIZE     = isMobile ? 16 : 22;
