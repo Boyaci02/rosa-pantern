@@ -240,30 +240,30 @@
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      padding: 10px 0;
-      scrollbar-width: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 0;
     }
-    .cat-nav-inner::-webkit-scrollbar { display: none; }
     .cat-pill {
-      flex-shrink: 0;
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.82rem;
       color: var(--muted);
-      text-decoration: none;
-      padding: 7px 16px;
+      background: transparent;
+      padding: 8px 18px;
       border-radius: 999px;
-      border: 1px solid transparent;
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      border: 1.5px solid rgba(233,30,140,0.35);
+      cursor: pointer;
       white-space: nowrap;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .cat-pill:hover { color: var(--cream); background: rgba(233,30,140,0.1); }
+    .cat-pill:hover { color: var(--cream); background: rgba(233,30,140,0.1); border-color: rgba(233,30,140,0.55); }
     .cat-pill.active {
-      color: var(--pink);
-      background: rgba(233,30,140,0.14);
-      border-color: rgba(233,30,140,0.35);
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+      box-shadow: 0 0 18px rgba(233,30,140,0.45);
     }
 
     /* ── MENU MAIN ── */
@@ -275,12 +275,24 @@
 
     /* ── SECTION ── */
     .menu-section {
-      padding-top: 64px;
+      padding-top: 56px;
+      display: none;
     }
+    .menu-section.section-visible {
+      display: block;
+      animation: sectionIn 0.35s var(--ease-out);
+    }
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .paw-divider { display: none; }
     .section-title {
       font-size: clamp(2rem, 4vw, 3rem);
       color: var(--pink);
       margin-bottom: 8px;
+      border-left: 4px solid var(--pink);
+      padding-left: 16px;
     }
     .section-subtitle {
       font-size: 1rem;
@@ -303,30 +315,30 @@
     }
 
     /* ── ITEM LIST ── */
-    .item-list { display: flex; flex-direction: column; gap: 2px; }
+    .item-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
     .item-row {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      padding: 14px 18px;
+      padding: 16px 20px;
       border-radius: 12px;
-      background: rgba(22,33,62,0.5);
-      border: 1px solid transparent;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-spring);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(233,30,140,0.18);
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
     .item-row:hover {
       background: rgba(233,30,140,0.07);
-      border-color: rgba(233,30,140,0.22);
-      transform: translateX(4px);
+      border-color: rgba(233,30,140,0.35);
     }
 
     .item-left { flex: 1; min-width: 0; }
 
     .item-name {
-      font-family: var(--font-head);
-      font-size: 1.05rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
       color: var(--cream);
       display: flex;
       align-items: center;
@@ -346,7 +358,7 @@
     .item-price {
       font-family: var(--font-head);
       font-size: 1.05rem;
-      color: var(--cream);
+      color: var(--pink);
       white-space: nowrap;
     }
 
@@ -370,7 +382,7 @@
     .price-variant .price-val {
       font-family: var(--font-head);
       font-size: 1rem;
-      color: var(--cream);
+      color: var(--pink);
     }
 
     /* ── BADGES ── */
@@ -580,7 +592,7 @@
     .pizza-price {
       font-family: var(--font-head);
       font-size: 1rem;
-      color: var(--cream);
+      color: var(--pink);
       flex-shrink: 0;
     }
 
@@ -694,6 +706,7 @@
     @media (max-width: 640px) {
       .pizza-grid { grid-template-columns: 1fr; }
       .box-grid { grid-template-columns: 1fr; }
+      .item-list { grid-template-columns: 1fr; }
       .item-row { flex-direction: column; gap: 8px; }
       .item-right { text-align: left; }
       .price-variants { align-items: flex-start; }
@@ -719,7 +732,7 @@
       <li><a href="index.html#oppettider">Hitta oss</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -734,7 +747,7 @@
   <a href="index.html#bestall" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -749,12 +762,12 @@
 <!-- ── CATEGORY NAV ── -->
 <nav class="cat-nav" id="cat-nav">
   <div class="cat-nav-inner">
-    <a href="#burgare" class="cat-pill active">🍔 Burgare &amp; Snacks</a>
-    <a href="#falafel" class="cat-pill">🧆 Falafel &amp; Halloumi</a>
-    <a href="#vegansk" class="cat-pill">🌱 Vegansk Kebab</a>
-    <a href="#kebab" class="cat-pill">🥙 Kebab</a>
-    <a href="#kyckling" class="cat-pill">🍗 Kyckling &amp; Gyros</a>
-    <a href="#pizzor" class="cat-pill">🍕 Pizzor</a>
+    <button type="button" class="cat-pill active" data-section="burgare">🍔 Burgare &amp; Snacks</button>
+    <button type="button" class="cat-pill" data-section="falafel">🧆 Falafel &amp; Halloumi</button>
+    <button type="button" class="cat-pill" data-section="vegansk">🌱 Vegansk Kebab</button>
+    <button type="button" class="cat-pill" data-section="kebab">🥙 Kebab</button>
+    <button type="button" class="cat-pill" data-section="kyckling">🍗 Kyckling &amp; Gyros</button>
+    <button type="button" class="cat-pill" data-section="pizzor">🍕 Pizzor</button>
   </div>
 </nav>
 
@@ -764,7 +777,7 @@
   <!-- ════════════════════════════════════
        BURGARE & SNACKS
   ════════════════════════════════════ -->
-  <section id="burgare" class="menu-section fade-up">
+  <section id="burgare" class="menu-section section-visible">
     <h2 class="section-title">🍔 Burgare &amp; Snacks</h2>
     <p class="section-subtitle">Saftiga burgare och krispiga snacks — serveras med pommes</p>
 
@@ -1050,7 +1063,7 @@
   <!-- ════════════════════════════════════
        FALAFEL & HALLOUMI
   ════════════════════════════════════ -->
-  <section id="falafel" class="menu-section fade-up">
+  <section id="falafel" class="menu-section">
     <h2 class="section-title">🧆 Falafel &amp; Halloumi</h2>
     <p class="section-subtitle">Vegetariska favoriter — krispigt stekt &amp; serverat med fräscha tillbehör</p>
 
@@ -1145,7 +1158,7 @@
   <!-- ════════════════════════════════════
        VEGANSK KEBAB
   ════════════════════════════════════ -->
-  <section id="vegansk" class="menu-section fade-up">
+  <section id="vegansk" class="menu-section">
     <h2 class="section-title">🌱 Vegansk Kebab</h2>
     <p class="section-subtitle">Växtbaserat kebabkött — full smak, noll kompromiss</p>
 
@@ -1244,7 +1257,7 @@
   <!-- ════════════════════════════════════
        KEBAB
   ════════════════════════════════════ -->
-  <section id="kebab" class="menu-section fade-up">
+  <section id="kebab" class="menu-section">
     <h2 class="section-title">🥙 Kebab</h2>
     <p class="section-subtitle">Klassisk kebab, tillagad på traditionellt vis med nyfärskade ingredienser</p>
 
@@ -1310,7 +1323,7 @@
   <!-- ════════════════════════════════════
        KYCKLING & GYROS
   ════════════════════════════════════ -->
-  <section id="kyckling" class="menu-section fade-up">
+  <section id="kyckling" class="menu-section">
     <h2 class="section-title">🍗 Kyckling &amp; Gyros</h2>
     <p class="section-subtitle">Marinerad kyckling och klassisk gyros — kryddat till perfektion</p>
 
@@ -1399,7 +1412,7 @@
   <!-- ════════════════════════════════════
        PIZZOR
   ════════════════════════════════════ -->
-  <section id="pizzor" class="menu-section fade-up">
+  <section id="pizzor" class="menu-section">
     <h2 class="section-title">🍕 Pizzor</h2>
     <p class="section-subtitle">Handgjord deg, färsk tomatsås &amp; generösa toppings</p>
 
@@ -1606,7 +1619,7 @@
   <h2>Redo att beställa?</h2>
   <p>Beställ online via Qopla — snabb leverans eller upphämtning</p>
   <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink" style="font-size:1.1rem;padding:16px 36px;">
-    Beställ Nu 🍕
+    Beställ 🍕
   </a>
 </section>
 
@@ -1680,31 +1693,22 @@
   }, { threshold: 0.08 });
   fadeEls.forEach(function(el) { observer.observe(el); });
 
-  // Category nav scrollspy
-  var sections = ['burgare','falafel','vegansk','kebab','kyckling','pizzor'];
-  var pills = document.querySelectorAll('.cat-pill');
-  var lastActive = null;
+  // Category tabs — toggle sections, no scroll
+  var catButtons = document.querySelectorAll('.cat-pill');
+  var sectionIds = ['burgare','falafel','vegansk','kebab','kyckling','pizzor'];
 
-  function updateActivePill() {
-    var scrollY = window.scrollY + 160;
-    var active = sections[0];
-    sections.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el && el.offsetTop <= scrollY) { active = id; }
+  catButtons.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = btn.dataset.section;
+      catButtons.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      sectionIds.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.classList.toggle('section-visible', id === target);
+      });
     });
-    pills.forEach(function(p) {
-      var href = p.getAttribute('href').replace('#','');
-      p.classList.toggle('active', href === active);
-    });
-    if (active !== lastActive && lastActive !== null) {
-      var activePill = document.querySelector('.cat-pill[href="#' + active + '"]');
-      if (activePill) activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-    lastActive = active;
-  }
-
-  window.addEventListener('scroll', updateActivePill, { passive: true });
-  updateActivePill();
+  });
 </script>
 </body>
 </html>
