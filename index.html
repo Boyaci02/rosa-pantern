@@ -1033,17 +1033,16 @@
     var delay = window.innerWidth <= 768 ? 800 : 200;
     setTimeout(initPaws, delay);
 
-    window.addEventListener('load', function() {
-      if (window.innerWidth <= 768) {
+    var lastWidth = window.innerWidth;
+    window.addEventListener('resize', function() {
+      var newWidth = window.innerWidth;
+      if (newWidth === lastWidth) return; // height-only change (mobile URL bar) — ignore
+      lastWidth = newWidth;
+      var layer = document.getElementById('paw-layer');
+      if (layer) {
         layer.innerHTML = '';
         initPaws();
       }
-    });
-
-    var resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(initPaws, 300);
     });
   })();
 </script>
