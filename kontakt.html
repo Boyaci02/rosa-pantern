@@ -255,6 +255,55 @@
     }
     .info-card-value a:hover { text-decoration: underline; }
 
+    /* ── DELIVERY PLATFORMS ── */
+    .delivery-section {
+      text-align: center;
+      padding: 48px 0 56px;
+      border-top: 1px solid rgba(233,30,140,0.1);
+      border-bottom: 1px solid rgba(233,30,140,0.1);
+      margin-bottom: 56px;
+      position: relative;
+    }
+    .delivery-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--cream);
+      margin-bottom: 0;
+    }
+    .platform-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .platform-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(233,30,140,0.35);
+      background: rgba(233,30,140,0.07);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.25s var(--ease-spring);
+    }
+    .platform-btn:hover {
+      background: rgba(233,30,140,0.18);
+      border-color: var(--pink);
+      transform: translateY(-3px);
+    }
+    .platform-btn:first-child {
+      background: var(--pink);
+      border-color: var(--pink);
+      box-shadow: 0 0 20px rgba(233,30,140,0.4);
+    }
+    .platform-btn:first-child:hover {
+      box-shadow: 0 0 32px rgba(233,30,140,0.6);
+    }
+
     /* ── MAP + FORM LAYOUT ── */
     .contact-grid {
       display: grid;
@@ -448,6 +497,26 @@
         <div class="info-card-icon">✉️</div>
         <div class="info-card-label">E-post</div>
         <div class="info-card-value"><a href="mailto:info@rzgroupab.com">info@rzgroupab.com</a></div>
+      </div>
+    </div>
+
+    <!-- DELIVERY PLATFORMS -->
+    <div class="delivery-section fade-up">
+      <span class="eyebrow">BESTÄLL ONLINE</span>
+      <h2>Hungrig? Välj din plattform</h2>
+      <div class="platform-row">
+        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="platform-btn">
+          🍕 Beställ direkt
+        </a>
+        <a href="https://www.ubereats.com/se/store/rosa-pantern/RArN7vHRVTegVPDHXzmNtg" target="_blank" rel="noopener" class="platform-btn">
+          🚗 Uber Eats
+        </a>
+        <a href="https://wolt.com/en/swe/uppsala/restaurant/rosa-pantern" target="_blank" rel="noopener" class="platform-btn">
+          🔵 Wolt
+        </a>
+        <a href="https://www.foodora.se/en/restaurant/s8zv/rosa-pantern" target="_blank" rel="noopener" class="platform-btn">
+          🟣 Foodora
+        </a>
       </div>
     </div>
 
