@@ -495,7 +495,7 @@
       flex-wrap: wrap;
     }
     .footer-logo { font-family: var(--font-head); font-size: 1.55rem; color: var(--pink); text-decoration: none; }
-    .footer-nav { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
     .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; }
     .footer-nav a:hover { color: var(--pink-light); }
     .footer-social { display: flex; gap: 14px; }
@@ -508,15 +508,15 @@
       font-size: 0.78rem;
       color: var(--muted);
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 4px 8px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .poweredby-link { color: var(--muted); text-decoration: none; transition: color 0.2s ease; }
     .poweredby-link:hover { color: var(--pink-light); }
     .poweredby-link strong { color: var(--pink-light); font-weight: 700; }
-    @media (max-width: 480px) { .footer-bottom { flex-direction: column; gap: 4px; } }
+    @media (max-width: 640px) { .footer-bottom { justify-content: center; text-align: center; } }
 
     /* ── PANTHER ANIMATION ── */
     #panther-wrap {
@@ -617,7 +617,7 @@
       <li><a href="#oppettider">Hitta oss</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -632,7 +632,7 @@
   <a href="#bestall" class="mob-link">Beställ</a>
   <a href="#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -645,7 +645,7 @@
       <p class="hero-tagline">Vi är öppna när alla andra stänger.<br/>Kom in — dag eller natt.</p>
       <div class="hero-badge">🌙 Öppet till 04:00 på helger!</div>
       <div class="hero-ctas">
-        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink">🍕 Beställ Nu</a>
+        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink">🍕 Beställ</a>
         <a href="meny.html" class="btn btn-ghost">Se Menyn</a>
       </div>
     </div>
@@ -665,7 +665,6 @@
     <span class="ticker-item">🌙 Öppet till 04:00</span><span class="ticker-dot"></span>
     <span class="ticker-item">🌱 Veganska alternativ</span><span class="ticker-dot"></span>
     <span class="ticker-item">🔥 Freshaste Kebab</span><span class="ticker-dot"></span>
-    <span class="ticker-item">⭐ 4.8/5 betyg</span><span class="ticker-dot"></span>
     <span class="ticker-item">🍔 Burgare &amp; Falafel</span><span class="ticker-dot"></span>
     <span class="ticker-item">📍 Uppsala Centrum</span><span class="ticker-dot"></span>
     <span class="ticker-item">🕐 Öppet varje dag</span><span class="ticker-dot"></span>
@@ -674,7 +673,6 @@
     <span class="ticker-item">🌙 Öppet till 04:00</span><span class="ticker-dot"></span>
     <span class="ticker-item">🌱 Veganska alternativ</span><span class="ticker-dot"></span>
     <span class="ticker-item">🔥 Freshaste Kebab</span><span class="ticker-dot"></span>
-    <span class="ticker-item">⭐ 4.8/5 betyg</span><span class="ticker-dot"></span>
     <span class="ticker-item">🍔 Burgare &amp; Falafel</span><span class="ticker-dot"></span>
     <span class="ticker-item">📍 Uppsala Centrum</span><span class="ticker-dot"></span>
     <span class="ticker-item">🕐 Öppet varje dag</span><span class="ticker-dot"></span>
@@ -683,7 +681,6 @@
     <span class="ticker-item">🌙 Öppet till 04:00</span><span class="ticker-dot"></span>
     <span class="ticker-item">🌱 Veganska alternativ</span><span class="ticker-dot"></span>
     <span class="ticker-item">🔥 Freshaste Kebab</span><span class="ticker-dot"></span>
-    <span class="ticker-item">⭐ 4.8/5 betyg</span><span class="ticker-dot"></span>
     <span class="ticker-item">🍔 Burgare &amp; Falafel</span><span class="ticker-dot"></span>
     <span class="ticker-item">📍 Uppsala Centrum</span><span class="ticker-dot"></span>
     <span class="ticker-item">🕐 Öppet varje dag</span><span class="ticker-dot"></span>
@@ -773,14 +770,16 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <a href="#hero" class="footer-logo">Rosa Pantern</a>
+      <a href="#hero" class="footer-logo">
+        <img src="assets/logo.webp" alt="Rosa Pantern" style="height:56px;width:auto;border-radius:50%;" />
+      </a>
       <nav class="footer-nav">
         <a href="#hero">Hem</a>
         <a href="meny.html">Meny</a>
         <a href="#oppettider">Öppettider</a>
-        <a href="#bestall">Beställ</a>
         <a href="#oppettider">Hitta oss</a>
       </nav>
+      <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink" style="font-size:0.85rem;padding:10px 22px;margin-top:8px;">Beställ</a>
       <div class="footer-social">
         <a href="#" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
@@ -794,7 +793,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Rosa Pantern · Sysslomansgatan 11, Uppsala · Alla rättigheter förbehållna</span>
+      <span>© 2025 Rosa Pantern</span>
       <a href="https://synsnumedia.se/" target="_blank" rel="noopener" class="poweredby-link">· Powered by <strong>SynsNu</strong></a>
     </div>
   </div>
