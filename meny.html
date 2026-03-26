@@ -4,7 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meny – Rosa Pantern Uppsala</title>
-  <meta name="description" content="Hela menyn för Rosa Pantern — pizza, kebab, burgare, falafel och mer i Uppsala." />
+  <!-- SEO -->
+  <meta name="description" content="Se hela menyn för Rosa Pantern i Uppsala. Pizza, kebab, burgare, falafel och veganska alternativ." />
+  <meta name="keywords" content="Rosa Pantern, pizza Uppsala, kebab Uppsala, nattmat Uppsala, restaurang Uppsala, öppet sent Uppsala" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.rosapanternuppsala.se/meny.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Meny – Rosa Pantern Uppsala | Pizza, Kebab & Mer" />
+  <meta property="og:description" content="Se hela menyn för Rosa Pantern i Uppsala. Pizza, kebab, burgare, falafel och veganska alternativ." />
+  <meta property="og:image" content="https://www.rosapanternuppsala.se/assets/rp2.webp" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1350" />
+  <meta property="og:url" content="https://www.rosapanternuppsala.se/meny.html" />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:locale" content="sv_SE" />
+  <meta property="og:site_name" content="Rosa Pantern Uppsala" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meny – Rosa Pantern Uppsala | Pizza, Kebab & Mer" />
+  <meta name="twitter:description" content="Se hela menyn för Rosa Pantern i Uppsala. Pizza, kebab, burgare, falafel och veganska alternativ." />
+  <meta name="twitter:image" content="https://www.rosapanternuppsala.se/assets/rp2.webp" />
+
+  <!-- Menu structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "name": "Meny – Rosa Pantern",
+    "url": "https://www.rosapanternuppsala.se/meny.html",
+    "hasMenuSection": [],
+    "hasMenuItem": [],
+    "mainEntityOfPage": {
+      "@type": "Restaurant",
+      "name": "Rosa Pantern",
+      "url": "https://www.rosapanternuppsala.se/"
+    }
+  }
+  </script>
+
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -107,7 +146,7 @@
       gap: 10px;
       flex-shrink: 0;
     }
-    .navbar-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; display: none; }
+    .navbar-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; display: block; }
     .navbar-links {
       display: flex;
       align-items: center;
@@ -225,81 +264,103 @@
       margin: 0 auto;
     }
 
-    /* ── CATEGORY NAV ── */
-    .cat-nav {
-      position: sticky;
-      top: 70px;
-      z-index: 90;
-      background: rgba(22,22,46,0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(233,30,140,0.15);
-      padding: 0 clamp(16px,4vw,48px);
-    }
-    .cat-nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      padding: 14px 0;
-    }
-    .cat-pill {
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: var(--muted);
-      background: transparent;
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1.5px solid rgba(233,30,140,0.35);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .cat-pill:hover { color: var(--cream); background: rgba(233,30,140,0.1); border-color: rgba(233,30,140,0.55); }
-    .cat-pill.active {
-      background: var(--pink);
-      color: #fff;
-      border-color: var(--pink);
-      box-shadow: 0 0 18px rgba(233,30,140,0.45);
-    }
-
     /* ── MENU MAIN ── */
     .meny-main {
-      max-width: 1100px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 0 clamp(16px,4vw,48px) 80px;
+      padding: clamp(60px,6vw,100px) clamp(16px,4vw,48px) 80px;
+    }
+    .menu-intro {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .menu-intro .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      background: rgba(233,30,140,0.1);
+      border: 1px solid rgba(233,30,140,0.25);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .menu-heading {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--cream);
     }
 
-    /* ── SECTION ── */
-    .menu-section {
-      padding-top: 56px;
-      display: none;
+    /* ── ACCORDION CARDS ── */
+    .cat-cards { display: flex; flex-direction: column; gap: 12px; }
+
+    .cat-card {
+      border-radius: 16px;
+      border: 1px solid rgba(233,30,140,0.2);
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    .menu-section.section-visible {
-      display: block;
-      animation: sectionIn 0.35s var(--ease-out);
+    .cat-card:hover { border-color: rgba(233,30,140,0.4); }
+    .cat-card.open {
+      border-color: rgba(233,30,140,0.5);
+      box-shadow: 0 0 28px rgba(233,30,140,0.08);
     }
-    @keyframes sectionIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+
+    .cat-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: rgba(233,30,140,0.06);
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s ease;
+      gap: 16px;
     }
-    .paw-divider { display: none; }
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--pink);
-      margin-bottom: 8px;
-      border-left: 4px solid var(--pink);
-      padding-left: 16px;
+    .cat-header:hover { background: rgba(233,30,140,0.1); }
+    .cat-card.open .cat-header { background: rgba(233,30,140,0.1); border-bottom: 1px solid rgba(233,30,140,0.15); }
+
+    .cat-header-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+    .cat-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+    .cat-name { font-family: var(--font-head); font-size: 1.3rem; color: var(--cream); line-height: 1.2; }
+    .cat-header-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .cat-count { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+    .cat-chevron { color: var(--muted); transition: transform 0.3s ease; flex-shrink: 0; }
+    .cat-card.open .cat-chevron { transform: rotate(180deg); color: var(--pink-light); }
+
+    .cat-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s var(--ease-out), padding 0.3s ease;
+      padding: 0 24px;
     }
+    .cat-card.open .cat-body { max-height: 5000px; padding: 20px 24px 32px; }
+
     .section-subtitle {
-      font-size: 1rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 32px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(233,30,140,0.1);
     }
+
+    /* Item rows inside accordion — lighter, cleaner */
+    .cat-body .item-row {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(233,30,140,0.08);
+      border-radius: 0;
+      padding: 12px 4px;
+      transition: background 0.15s ease;
+    }
+    .cat-body .item-row:last-child { border-bottom: none; }
+    .cat-body .item-row:hover { background: rgba(233,30,140,0.05); border-radius: 6px; }
+
+    .paw-divider { display: none; }
 
     /* ── SUBSECTION ── */
     .subsection-label {
@@ -645,18 +706,26 @@
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
     .footer-col-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .footer-logo-img { height: 52px; width: 52px; border-radius: 50%; object-fit: cover; display: block; }
+    .footer-logo-img { height: 68px; width: 68px; border-radius: 50%; object-fit: cover; display: block; }
     .footer-logo-name { font-family: var(--font-head); font-size: 1.25rem; color: var(--pink); }
     .footer-tagline { font-size: 0.82rem; color: var(--muted); line-height: 1.5; max-width: 200px; }
-    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-bottom: 16px; }
-    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s ease; }
-    .footer-nav a:hover { color: var(--pink-light); }
+    .footer-col-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .footer-bestall { font-size: 0.88rem; padding: 11px 28px; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; white-space: nowrap; }
+    .footer-links a:hover { color: var(--pink-light); }
+    @media (max-width: 768px) {
+      .footer-col-nav { flex-direction: column; align-items: center; gap: 16px; }
+      .footer-bestall { width: auto; padding: 13px 36px; }
+      .footer-links { justify-items: center; }
+    }
     .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--muted); }
     .footer-contact a { color: var(--pink-light); text-decoration: none; transition: color 0.2s ease; }
     .footer-contact a:hover { color: var(--pink); }
     .footer-socials { display: flex; gap: 14px; margin-top: 12px; }
     .footer-socials a { color: var(--muted); transition: color 0.2s ease; }
     .footer-socials a:hover { color: var(--pink); }
+    @media (max-width: 768px) { .footer-socials { justify-content: center; } }
     .footer-powered { display: inline-block; margin-top: 16px; }
     .footer-bottom {
       border-top: 1px solid rgba(233,30,140,0.12);
@@ -711,8 +780,8 @@
       <span id="logo-text">Rosa Pantern</span>
     </a>
     <ul class="navbar-links">
-      <li><a href="index.html">Hem</a></li>
       <li><a href="meny.html" class="active">Meny</a></li>
+      <li><a href="butik.html">Butik</a></li>
       <li><a href="index.html#oppettider">Öppettider</a></li>
       <li><a href="index.html#bestall">Beställ</a></li>
       <li><a href="index.html#oppettider">Hitta oss</a></li>
@@ -727,8 +796,8 @@
 
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="index.html" class="mob-link">Hem</a>
   <a href="meny.html" class="mob-link">Meny</a>
+  <a href="butik.html" class="mob-link">Butik</a>
   <a href="index.html#oppettider" class="mob-link">Öppettider</a>
   <a href="index.html#bestall" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
@@ -1622,14 +1691,14 @@
       </div>
 
       <!-- Center: Nav + order -->
-      <div class="footer-col">
-        <nav class="footer-nav">
-          <a href="index.html">Hem</a>
+      <div class="footer-col footer-col-nav">
+        <nav class="footer-links">
           <a href="meny.html">Meny</a>
           <a href="index.html#oppettider">Öppettider</a>
+          <a href="butik.html">Butik</a>
           <a href="index.html#oppettider">Hitta oss</a>
         </nav>
-        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink" style="font-size:0.85rem;padding:10px 22px;">Beställ</a>
+        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
       </div>
 
       <!-- Right: Contact + socials -->
@@ -1649,7 +1718,6 @@
             <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
           </a>
         </div>
-        <a href="https://synsnumedia.se/" target="_blank" rel="noopener" class="poweredby-link footer-powered">Powered by <strong>SynsNu</strong></a>
       </div>
 
     </div>
@@ -1664,9 +1732,7 @@
   // Logo image check
   (function() {
     var img = document.getElementById('logo-img');
-    var txt = document.getElementById('logo-text');
-    img.onload = function() { img.style.display = 'block'; txt.style.display = 'none'; };
-    img.onerror = function() { img.style.display = 'none'; txt.style.display = 'block'; };
+    img.onerror = function() { img.style.display = 'none'; };
   })();
 
   // Hamburger menu

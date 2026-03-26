@@ -4,7 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rosa Pantern – Pizza & Kebab Uppsala | Öppet till 04:00</title>
-  <meta name="description" content="Uppsalas hetaste nattrestaurang. Pizza, kebab, burgare och falafel. Öppet till 04:00 på helger. Sysslomansgatan 11, Uppsala." />
+  <!-- SEO -->
+  <meta name="description" content="Rosa Pantern — Uppsalas hetaste nattrestaurang. Pizza, kebab, burgare och falafel på Sysslomansgatan 11. Öppet till 04:00 på helger." />
+  <meta name="keywords" content="Rosa Pantern, pizza Uppsala, kebab Uppsala, nattmat Uppsala, restaurang Uppsala, öppet sent Uppsala" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.rosapanternuppsala.se/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rosa Pantern – Pizza & Kebab Uppsala | Öppet till 04:00" />
+  <meta property="og:description" content="Uppsalas hetaste nattrestaurang. Pizza, kebab, burgare och falafel. Öppet till 04:00 på helger. Beställ direkt online." />
+  <meta property="og:image" content="https://www.rosapanternuppsala.se/assets/rp1.webp" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1261" />
+  <meta property="og:url" content="https://www.rosapanternuppsala.se/" />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:locale" content="sv_SE" />
+  <meta property="og:site_name" content="Rosa Pantern Uppsala" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rosa Pantern – Pizza & Kebab Uppsala | Öppet till 04:00" />
+  <meta name="twitter:description" content="Uppsalas hetaste nattrestaurang. Öppet till 04:00 på helger." />
+  <meta name="twitter:image" content="https://www.rosapanternuppsala.se/assets/rp1.webp" />
+
+  <!-- Local Business structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Rosa Pantern",
+    "image": "https://www.rosapanternuppsala.se/assets/rp1.webp",
+    "url": "https://www.rosapanternuppsala.se/",
+    "telephone": "+46181215600",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Sysslomansgatan 11",
+      "addressLocality": "Uppsala",
+      "postalCode": "753 11",
+      "addressCountry": "SE"
+    },
+    "servesCuisine": ["Pizza", "Kebab", "Burgare", "Falafel"],
+    "openingHours": ["Mo 11:00-20:00","Tu-Th 11:00-03:30","Fr-Sa 11:00-04:00","Su 11:00-20:00"],
+    "menu": "https://www.rosapanternuppsala.se/meny.html",
+    "hasMap": "https://www.google.com/maps/search/Sysslomansgatan+11+Uppsala"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -161,7 +206,7 @@
       gap: 10px;
       flex-shrink: 0;
     }
-    .navbar-logo img { height: 42px; width: auto; display: none; border-radius: 50%; }
+    .navbar-logo img { height: 38px; width: auto; display: block; border-radius: 50%; }
     .navbar-links {
       display: flex;
       align-items: center;
@@ -486,18 +531,26 @@
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
     .footer-col-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .footer-logo-img { height: 52px; width: 52px; border-radius: 50%; object-fit: cover; display: block; }
+    .footer-logo-img { height: 68px; width: 68px; border-radius: 50%; object-fit: cover; display: block; }
     .footer-logo-name { font-family: var(--font-head); font-size: 1.25rem; color: var(--pink); }
     .footer-tagline { font-size: 0.82rem; color: var(--muted); line-height: 1.5; max-width: 200px; }
-    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-bottom: 16px; }
-    .footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s ease; }
-    .footer-nav a:hover { color: var(--pink-light); }
+    .footer-col-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .footer-bestall { font-size: 0.88rem; padding: 11px 28px; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; white-space: nowrap; }
+    .footer-links a:hover { color: var(--pink-light); }
+    @media (max-width: 768px) {
+      .footer-col-nav { flex-direction: column; align-items: center; gap: 16px; }
+      .footer-bestall { width: auto; padding: 13px 36px; }
+      .footer-links { justify-items: center; }
+    }
     .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--muted); }
     .footer-contact a { color: var(--pink-light); text-decoration: none; transition: color 0.2s ease; }
     .footer-contact a:hover { color: var(--pink); }
     .footer-socials { display: flex; gap: 14px; margin-top: 12px; }
     .footer-socials a { color: var(--muted); transition: color 0.2s ease; }
     .footer-socials a:hover { color: var(--pink); }
+    @media (max-width: 768px) { .footer-socials { justify-content: center; } }
     .footer-powered { display: inline-block; margin-top: 16px; }
     .footer-bottom {
       border-top: 1px solid rgba(233,30,140,0.12);
@@ -608,13 +661,13 @@
 <!-- ── NAVBAR ── -->
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
-    <a href="#hero" class="navbar-logo" id="navbar-logo">
+    <a href="index.html" class="navbar-logo" id="navbar-logo">
       <img src="assets/logo.webp" alt="Rosa Pantern" id="logo-img" />
       <span id="logo-text">Rosa Pantern</span>
     </a>
     <ul class="navbar-links">
-      <li><a href="#hero">Hem</a></li>
       <li><a href="meny.html">Meny</a></li>
+      <li><a href="butik.html">Butik</a></li>
       <li><a href="#oppettider">Öppettider</a></li>
       <li><a href="#bestall">Beställ</a></li>
       <li><a href="#oppettider">Hitta oss</a></li>
@@ -629,8 +682,8 @@
 
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#hero" class="mob-link">Hem</a>
   <a href="meny.html" class="mob-link">Meny</a>
+  <a href="butik.html" class="mob-link">Butik</a>
   <a href="#oppettider" class="mob-link">Öppettider</a>
   <a href="#bestall" class="mob-link">Beställ</a>
   <a href="#oppettider" class="mob-link">Hitta oss</a>
@@ -776,20 +829,20 @@
 
       <!-- Left: Brand -->
       <div class="footer-col footer-col-logo">
-        <a href="#hero"><img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" /></a>
+        <a href="index.html"><img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" /></a>
         <span class="footer-logo-name">Rosa Pantern</span>
         <p class="footer-tagline">Uppsalas hetaste nattrestaurang</p>
       </div>
 
       <!-- Center: Nav + order -->
-      <div class="footer-col">
-        <nav class="footer-nav">
-          <a href="#hero">Hem</a>
+      <div class="footer-col footer-col-nav">
+        <nav class="footer-links">
           <a href="meny.html">Meny</a>
           <a href="#oppettider">Öppettider</a>
+          <a href="butik.html">Butik</a>
           <a href="#oppettider">Hitta oss</a>
         </nav>
-        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink" style="font-size:0.85rem;padding:10px 22px;">Beställ</a>
+        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
       </div>
 
       <!-- Right: Contact + socials -->
@@ -809,7 +862,6 @@
             <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
           </a>
         </div>
-        <a href="https://synsnumedia.se/" target="_blank" rel="noopener" class="poweredby-link footer-powered">Powered by <strong>SynsNu</strong></a>
       </div>
 
     </div>
@@ -830,9 +882,7 @@
   // Logo image check
   (function() {
     var img = document.getElementById('logo-img');
-    var txt = document.getElementById('logo-text');
-    img.onload = function() { img.style.display = 'block'; txt.style.display = 'none'; };
-    img.onerror = function() { img.style.display = 'none'; txt.style.display = 'block'; };
+    img.onerror = function() { img.style.display = 'none'; };
   })();
 
   // Navbar scroll behavior
