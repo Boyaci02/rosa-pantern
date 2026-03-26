@@ -705,18 +705,22 @@
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
-    .footer-col-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-    .footer-logo-img { height: 68px; width: 68px; border-radius: 50%; object-fit: cover; display: block; }
-    .footer-logo-name { font-family: var(--font-head); font-size: 1.25rem; color: var(--pink); }
-    .footer-tagline { font-size: 0.82rem; color: var(--muted); line-height: 1.5; max-width: 200px; }
+    .footer-col-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 18px; }
+    .footer-logo-img { height: 68px; width: auto; border-radius: 50%; }
+    .footer-logo-text { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 4px; }
+    .footer-logo-name { font-family: var(--font-head); font-size: 1.2rem; color: var(--pink); }
+    .footer-tagline { font-size: 0.82rem; color: var(--muted); }
     .footer-col-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
-    .footer-bestall { font-size: 0.88rem; padding: 11px 28px; }
+    .footer-bestall { font-size: 0.88rem; padding: 11px 24px; flex-shrink: 0; }
     .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; white-space: nowrap; }
     .footer-links a:hover { color: var(--pink-light); }
     @media (max-width: 768px) {
+      .footer-col-logo { align-items: center; }
+      .footer-logo-row { flex-direction: column; align-items: center; gap: 12px; }
+      .footer-logo-text { align-items: center; }
       .footer-col-nav { flex-direction: column; align-items: center; gap: 16px; }
-      .footer-bestall { width: auto; padding: 13px 36px; }
       .footer-links { justify-items: center; }
     }
     .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--muted); }
@@ -743,8 +747,6 @@
     .poweredby-link strong { color: var(--pink-light); font-weight: 700; }
     @media (max-width: 768px) {
       .footer-grid { flex-direction: column; align-items: center; text-align: center; gap: 36px; }
-      .footer-col-logo { align-items: center; }
-      .footer-tagline { max-width: 100%; }
       .footer-bottom { flex-direction: column; align-items: center; }
       .footer-nav { justify-items: center; }
     }
@@ -1690,12 +1692,20 @@
 
       <!-- Left: Brand -->
       <div class="footer-col footer-col-logo">
-        <a href="index.html"><img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" /></a>
-        <span class="footer-logo-name">Rosa Pantern</span>
-        <p class="footer-tagline">Uppsalas hetaste nattrestaurang</p>
+        <div class="footer-logo-row">
+          <a href="index.html">
+            <img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" />
+          </a>
+          <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728"
+             target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
+        </div>
+        <div class="footer-logo-text">
+          <span class="footer-logo-name">Rosa Pantern</span>
+          <span class="footer-tagline">Uppsalas hetaste nattrestaurang</span>
+        </div>
       </div>
 
-      <!-- Center: Nav + order -->
+      <!-- Center: Nav -->
       <div class="footer-col footer-col-nav">
         <nav class="footer-links">
           <a href="meny.html">Meny</a>
@@ -1703,7 +1713,6 @@
           <a href="butik.html">Butik</a>
           <a href="index.html#oppettider">Hitta oss</a>
         </nav>
-        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
       </div>
 
       <!-- Right: Contact + socials -->
