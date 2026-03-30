@@ -40,10 +40,11 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
-      background: var(--charcoal);
-      color: var(--cream);
+      background: #FFF0F5;
+      color: var(--charcoal);
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
     }
     body::after {
       content: '';
@@ -75,9 +76,9 @@
     .btn-pink {
       background: var(--pink);
       color: #fff;
-      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.5);
     }
-    .btn-pink:hover { box-shadow: 0 0 36px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-pink:hover { box-shadow: 0 0 32px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.5); }
     .btn-ghost {
       background: transparent;
       color: var(--pink);
@@ -98,12 +99,41 @@
       top: 0; left: 0; right: 0;
       z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
-      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+      transition: box-shadow 0.7s ease;
     }
-    .navbar.scrolled {
-      background: rgba(26,26,46,0.94);
+    .navbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 70% at 10% 50%, rgba(233,30,140,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 90% 30%, rgba(181,16,106,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(233,30,140,0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+    .navbar.scrolled::before { opacity: 1; }
+    /* ── RP FIGURES ── */
+    .rp-figure {
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      pointer-events: none;
+      user-select: none;
+      display: block;
+    }
+    .rp-figure-left  { left: 0; }
+    .rp-figure-right { right: 0; }
+    @media (max-width: 768px) {
+      .rp-figure { display: none; }
+    }
+
+    .navbar.scrolled {
       box-shadow: 0 1px 0 rgba(233,30,140,0.12);
     }
     .navbar-inner {
@@ -199,42 +229,34 @@
 
     /* ── HERO ── */
     .bestall-hero {
-      min-height: 50vh;
-      max-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: clamp(120px,14vw,160px) clamp(16px,4vw,48px) clamp(56px,7vw,80px);
       text-align: center;
       position: relative;
       overflow: hidden;
-      background:
-        radial-gradient(ellipse 80% 70% at 50% 100%, rgba(233,30,140,0.5) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 20% 20%, rgba(181,16,106,0.25) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 35% at 80% 30%, rgba(233,30,140,0.15) 0%, transparent 50%),
-        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
-      padding: 100px clamp(16px,4vw,48px) 60px;
+      background: transparent;
     }
-    .bestall-hero-inner { max-width: 680px; }
+    .bestall-hero-inner { max-width: 680px; margin: 0 auto; }
     .bestall-hero .eyebrow {
       font-family: var(--font-body);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--pink-light);
+      color: var(--pink);
       display: block;
       margin-bottom: 16px;
     }
     .bestall-hero h1 {
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      color: #fff8f0;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      color: #1A1A2E;
       line-height: 1.0;
       margin-bottom: 16px;
     }
+    .bestall-hero h1 .pink { color: var(--pink); }
     .bestall-hero p {
       font-size: 1.05rem;
-      color: rgba(255,248,240,0.72);
-      margin-bottom: 36px;
+      color: #5A4A5A;
+      margin-bottom: 18px;
       line-height: 1.65;
     }
     .bestall-primary-cta {
@@ -255,7 +277,10 @@
 
     /* ── PLATFORM BENTO SECTION ── */
     .platforms-section {
-      padding: clamp(64px,8vw,100px) clamp(16px,4vw,48px);
+      padding: clamp(24px,3vw,40px) clamp(16px,4vw,48px) clamp(64px,8vw,100px);
+      position: relative;
+      overflow: visible;
+      background: transparent;
     }
     .platforms-label {
       text-align: center;
@@ -264,23 +289,26 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #7A5A6A;
       margin-bottom: 12px;
     }
     .platforms-heading {
       text-align: center;
       font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      color: var(--cream);
-      margin-bottom: 48px;
+      color: var(--charcoal);
+      margin-bottom: 28px;
     }
     .bento-grid {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+    }
+    @media (max-width: 560px) {
       .bento-grid { grid-template-columns: 1fr; max-width: 440px; }
     }
     .bento-card {
@@ -301,21 +329,32 @@
     }
     .bento-logo {
       width: 100%;
-      height: 80px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
     }
-    .bento-logo svg { width: auto; max-width: 180px; height: 100%; }
+    .bento-logo-img {
+      max-height: 80px;
+      max-width: 180px;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+    @media (max-width: 560px) {
+      .bento-logo { height: 80px; }
+      .bento-logo-img { max-height: 60px; max-width: 140px; }
+    }
     .bento-name {
       font-size: 1.5rem;
-      color: var(--cream);
+      color: var(--charcoal);
       margin-bottom: 8px;
     }
     .bento-tagline {
       font-size: 0.88rem;
-      color: var(--muted);
+      color: #7A5A6A;
       line-height: 1.5;
       margin-bottom: 28px;
       flex: 1;
@@ -328,7 +367,7 @@
     }
 
     /* ── FOOTER ── */
-    footer { background: #0D0D1A; padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
+    footer { background: radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%); padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
@@ -410,33 +449,36 @@
 <section class="bestall-hero">
   <div class="bestall-hero-inner">
     <span class="eyebrow">HUNGRIG?</span>
-    <h1>Välj hur du vill beställa</h1>
-    <p>Direkt via oss eller via din favoritplattform<br/>— alltid färskt, alltid gott.</p>
-    <a
-      href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728"
-      target="_blank"
-      rel="noopener"
-      class="btn btn-pink bestall-primary-cta"
-    >🍕 Beställ direkt via Rosa Pantern</a>
-    <span class="cta-sublabel">Snabbast och alltid uppdaterat</span>
+    <h1>Välj hur du vill <span class="pink">beställa</span></h1>
+    <p>Beställ hos oss direkt eller via din favoritplattform<br/>— alltid färskt, alltid gott.</p>
   </div>
 </section>
 
 <!-- ── PLATFORM BENTO ── -->
 <section class="platforms-section">
-  <p class="platforms-label fade-up">ELLER BESTÄLL VIA</p>
-  <h2 class="platforms-heading fade-up">Leveransplattformar</h2>
+  <p class="platforms-label fade-up">BESTÄLL VIA</p>
+  <h2 class="platforms-heading fade-up">Välj din plattform</h2>
   <div class="bento-grid">
+
+    <!-- Qopla — first in DOM = first on mobile -->
+    <div class="bento-card fade-up">
+      <div class="bento-logo">
+        <img src="assets/qoplalogo.webp" alt="Qopla" class="bento-logo-img">
+      </div>
+      <p class="bento-tagline">Beställ direkt — snabbast och alltid uppdaterat</p>
+      <a
+        href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728/order"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-pink bento-btn"
+      >Beställ på Qopla</a>
+    </div>
 
     <!-- Uber Eats -->
     <div class="bento-card fade-up">
       <div class="bento-logo">
-        <svg viewBox="0 0 220 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Uber Eats">
-          <text x="0" y="48" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="46" fill="#000000" letter-spacing="-1">Uber</text>
-          <text x="0" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="20" fill="#06C167" letter-spacing="0.5">Eats</text>
-        </svg>
+        <img src="assets/ubereatslogo.webp" alt="Uber Eats" class="bento-logo-img">
       </div>
-      <h3 class="bento-name">Uber Eats</h3>
       <p class="bento-tagline">Snabb leverans till din dörr</p>
       <a
         href="https://www.ubereats.com/se/store/rosa-pantern/RArN7vHRVTegVPDHXzmNtg"
@@ -449,13 +491,8 @@
     <!-- Wolt -->
     <div class="bento-card fade-up">
       <div class="bento-logo">
-        <svg viewBox="0 0 140 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wolt">
-          <circle cx="28" cy="32" r="26" fill="#009DE0"/>
-          <text x="28" y="42" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="30" fill="#ffffff" text-anchor="middle">W</text>
-          <text x="70" y="44" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="30" fill="#009DE0" letter-spacing="-0.5">wolt</text>
-        </svg>
+        <img src="assets/woltlogo.webp" alt="Wolt" class="bento-logo-img">
       </div>
-      <h3 class="bento-name">Wolt</h3>
       <p class="bento-tagline">Enkel beställning, snabb leverans</p>
       <a
         href="https://wolt.com/en/swe/uppsala/restaurant/rosa-pantern"
@@ -468,11 +505,8 @@
     <!-- Foodora -->
     <div class="bento-card fade-up">
       <div class="bento-logo">
-        <svg viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foodora">
-          <text x="4" y="44" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="40" fill="#E9006C" letter-spacing="-0.5">foodora</text>
-        </svg>
+        <img src="assets/foodoralogo.webp" alt="Foodora" class="bento-logo-img">
       </div>
-      <h3 class="bento-name">Foodora</h3>
       <p class="bento-tagline">Mat hem på nolltid</p>
       <a
         href="https://www.foodora.se/en/restaurant/s8zv/rosa-pantern"
@@ -483,6 +517,8 @@
     </div>
 
   </div>
+  <img src="assets/rpleft.png"  class="rp-figure rp-figure-left"  alt="" aria-hidden="true">
+  <img src="assets/rpright.png" class="rp-figure rp-figure-right" alt="" aria-hidden="true">
 </section>
 
 <!-- ── FOOTER ── -->

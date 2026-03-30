@@ -70,15 +70,6 @@
       background: var(--charcoal);
     }
 
-    #paw-layer {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      pointer-events: none;
-      z-index: 2;
-      overflow: hidden;
-    }
-
     body::after {
       content: '';
       position: fixed;
@@ -146,12 +137,41 @@
       top: 0; left: 0; right: 0;
       z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
-      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+      transition: box-shadow 0.7s ease;
     }
-    .navbar.scrolled {
-      background: rgba(26,26,46,0.94);
+    .navbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 70% at 10% 50%, rgba(233,30,140,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 90% 30%, rgba(181,16,106,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(233,30,140,0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+    .navbar.scrolled::before { opacity: 1; }
+    /* ── RP FIGURES ── */
+    .rp-figure {
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      pointer-events: none;
+      user-select: none;
+      display: block;
+    }
+    .rp-figure-left  { left: 0; }
+    .rp-figure-right { right: 0; }
+    @media (max-width: 768px) {
+      .rp-figure { display: none; }
+    }
+
+    .navbar.scrolled {
       box-shadow: 0 1px 0 rgba(233,30,140,0.12);
     }
     .navbar-inner {
@@ -180,7 +200,7 @@
       list-style: none;
     }
     .navbar-links a {
-      color: rgba(255,248,240,0.72);
+      color: rgba(42,21,32,0.72);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.88rem;
@@ -190,6 +210,8 @@
     }
     .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
     .navbar-links a.active { color: var(--pink); }
+    .navbar.scrolled .navbar-links a { color: rgba(255,248,240,0.72); }
+    .navbar.scrolled .navbar-links a:hover { color: #fff8f0; }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -206,8 +228,9 @@
       height: 2px;
       background: var(--cream);
       border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
     }
+    .navbar.scrolled .hamburger span { background: var(--pink); }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { transform: scaleX(0); opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -243,12 +266,12 @@
 
     /* ── PAGE HERO ── */
     .page-hero {
-      padding: clamp(120px,14vw,160px) 0 clamp(56px,7vw,80px);
+      padding: clamp(120px,14vw,160px) clamp(16px,4vw,48px) clamp(56px,7vw,80px);
       text-align: center;
     }
     .page-hero-heading {
-      font-size: clamp(2.4rem,5.5vw,4rem);
-      color: var(--cream);
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      color: #1A1A2E;
       margin-bottom: 18px;
       line-height: 1.05;
     }
@@ -262,7 +285,7 @@
     }
 
     /* ── SHOP GRID ── */
-    .shop-section { padding: 0 0 clamp(72px,9vw,112px); }
+    .shop-section { padding: 0 0 clamp(72px,9vw,112px); position: relative; overflow: visible; }
     .shop-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -434,7 +457,7 @@
     }
 
     /* ── FOOTER ── */
-    footer { background: #0D0D1A; padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
+    footer { background: radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%); padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
@@ -634,6 +657,8 @@
 
     </div>
   </div>
+  <img src="assets/rpleft.png"  class="rp-figure rp-figure-left"  alt="" aria-hidden="true">
+  <img src="assets/rpright.png" class="rp-figure rp-figure-right" alt="" aria-hidden="true">
 </section>
 
 <!-- ── FOOTER ── -->
@@ -766,115 +791,6 @@
       btn.click();
     });
   });
-
-  // ── PAW TRAIL ──
-  (function() {
-    var layer = document.createElement('div');
-    layer.id = 'paw-layer';
-    document.body.appendChild(layer);
-
-    function initPaws() {
-      layer.innerHTML = '';
-      layer.style.height = '0';
-
-      var isMobile     = window.innerWidth <= 768;
-      var PAW_SIZE     = isMobile ? 16 : 22;
-      var stepDistance = isMobile ? 45 : 55;
-      var footSpacing  = isMobile ? 10 : 14;
-
-      var docH = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-      layer.style.height = docH + 'px';
-
-      var bottomLimit = isMobile ? 0.98 : 0.93;
-      var topOffset   = isMobile ? 0.01 : 0.03;
-      var maxPaws     = isMobile ? 120 : 80;
-
-      var totalPaws = Math.min(
-        Math.floor(docH / stepDistance),
-        Math.floor((docH * bottomLimit - docH * topOffset) / stepDistance),
-        maxPaws
-      );
-
-      var basePos = [];
-      for (var i = 0; i < totalPaws; i++) {
-        var baseY = docH * topOffset + i * stepDistance;
-        var baseX = (Math.sin(i / (totalPaws - 1) * Math.PI * 4.5 + 0.8) * 0.28 + 0.5) * window.innerWidth;
-        if (baseY < 80) baseY = 80;
-        if (baseY > docH - 180 && baseX > window.innerWidth - 180) baseX = window.innerWidth - 220;
-        basePos.push({ x: baseX, y: baseY });
-      }
-
-      var visibleCount  = 5;
-      var holdFraction  = visibleCount / totalPaws;
-      var cycleDuration = totalPaws * 0.35;
-      var stagger       = cycleDuration / totalPaws;
-
-      var fadeInEnd  = 3;
-      var holdEnd    = fadeInEnd + holdFraction * 100;
-      var fadeOutEnd = holdEnd + 5;
-
-      var styleEl = document.getElementById('paw-keyframes');
-      if (!styleEl) {
-        styleEl = document.createElement('style');
-        styleEl.id = 'paw-keyframes';
-        document.head.appendChild(styleEl);
-      }
-      styleEl.textContent = '@keyframes pawCycle{' +
-        '0%{opacity:0}' +
-        fadeInEnd.toFixed(1) + '%{opacity:0.5}' +
-        holdEnd.toFixed(1)   + '%{opacity:0.5}' +
-        fadeOutEnd.toFixed(1)+ '%{opacity:0}' +
-        '100%{opacity:0}}';
-
-      for (var j = 0; j < totalPaws; j++) {
-        var bx = basePos[j].x;
-        var by = basePos[j].y;
-        var dx = j < totalPaws - 1 ? basePos[j + 1].x - bx : 0;
-        var dy = stepDistance;
-        var travelAngle = Math.atan2(dy, dx);
-        var perpX = Math.cos(travelAngle - Math.PI / 2);
-        var perpY = Math.sin(travelAngle - Math.PI / 2);
-        var side  = (j % 2 === 0) ? 1 : -1;
-        var finalX = bx + perpX * footSpacing * side;
-        var finalY = by + perpY * footSpacing * side;
-        var rotDeg = travelAngle * 180 / Math.PI + 90;
-
-        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('viewBox', '0 0 20 20');
-        svg.setAttribute('width',   PAW_SIZE);
-        svg.setAttribute('height',  PAW_SIZE);
-        svg.setAttribute('fill',    '#E91E8C');
-        svg.innerHTML = '<circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/>';
-        svg.style.cssText = [
-          'position:absolute',
-          'left:'  + (finalX - PAW_SIZE / 2).toFixed(1) + 'px',
-          'top:'   + (finalY - PAW_SIZE / 2).toFixed(1) + 'px',
-          'transform:rotate(' + rotDeg.toFixed(1) + 'deg)',
-          'opacity:0',
-          'animation:pawCycle ' + cycleDuration.toFixed(2) + 's ' + (j * stagger).toFixed(2) + 's linear infinite'
-        ].join(';');
-        layer.appendChild(svg);
-      }
-    }
-
-    var delay = window.innerWidth <= 768 ? 800 : 200;
-    setTimeout(initPaws, delay);
-
-    window.addEventListener('load', function() {
-      if (window.innerWidth <= 768) { layer.innerHTML = ''; initPaws(); }
-    });
-
-    var resizeTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(initPaws, 300);
-    });
-  })();
 </script>
 </body>
 </html>

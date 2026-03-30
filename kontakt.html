@@ -36,13 +36,14 @@
     html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: var(--font-body);
-      background: var(--charcoal);
-      color: var(--cream);
+      background: #FFF0F5;
+      color: var(--charcoal);
       line-height: 1.7;
       overflow-x: hidden;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      position: relative;
     }
 
     body::after {
@@ -106,9 +107,42 @@
       top: 0; left: 0; right: 0;
       z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
-      background: rgba(26,26,46,0.94);
+      transition: box-shadow 0.7s ease;
+    }
+    .navbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 70% at 10% 50%, rgba(233,30,140,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 90% 30%, rgba(181,16,106,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(233,30,140,0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+    .navbar.scrolled::before { opacity: 1; }
+    /* ── RP FIGURES ── */
+    .rp-figure {
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      pointer-events: none;
+      user-select: none;
+      display: block;
+    }
+    .rp-figure-left  { left: 0; }
+    .rp-figure-right { right: 0; }
+    .contact-figures-wrap { position: relative; overflow: visible; }
+    @media (max-width: 768px) {
+      .rp-figure { display: none; }
+    }
+
+    .navbar.scrolled {
       box-shadow: 0 1px 0 rgba(233,30,140,0.12);
     }
     .navbar-inner {
@@ -137,7 +171,7 @@
       list-style: none;
     }
     .navbar-links a {
-      color: rgba(255,248,240,0.72);
+      color: rgba(42,21,32,0.72);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.88rem;
@@ -146,7 +180,10 @@
       transition: color 0.2s ease, background 0.2s ease;
     }
     .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
-    .navbar-links a.active { color: var(--pink); }
+    .navbar-links a.active { color: var(--pink); background: rgba(233,30,140,0.1); }
+    .navbar.scrolled .navbar-links a { color: rgba(255,248,240,0.72); }
+    .navbar.scrolled .navbar-links a:hover { color: #fff8f0; }
+    .navbar.scrolled .navbar-links a.active { color: var(--pink-light); }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -163,10 +200,11 @@
       height: 2px;
       background: var(--cream);
       border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
     }
+    .navbar.scrolled .hamburger span { background: var(--pink); }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(2) { transform: scaleX(0); opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu {
       position: fixed;
@@ -190,7 +228,7 @@
       transition: color 0.2s ease;
     }
     .mobile-menu a:hover { color: var(--pink); }
-    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; }
+    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; font-family: var(--font-body); }
     @media (max-width: 768px) {
       .navbar-links, .navbar-cta { display: none; }
       .hamburger { display: flex; }
@@ -198,25 +236,23 @@
 
     /* ── HERO BANNER ── */
     .kontakt-hero {
-      padding: 120px 0 60px;
-      background:
-        radial-gradient(ellipse 90% 70% at 20% 90%, rgba(233,30,140,0.45) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(181,16,106,0.30) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 55% 50%, rgba(233,30,140,0.12) 0%, transparent 50%),
-        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+      padding: clamp(120px,14vw,160px) clamp(16px,4vw,48px) clamp(56px,7vw,80px);
+      background: transparent;
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
     .kontakt-hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      color: var(--cream);
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      color: #1A1A2E;
       margin-bottom: 12px;
     }
     .kontakt-hero h1 span { color: var(--pink); }
     .kontakt-hero p {
       font-size: 1.05rem;
-      color: var(--muted);
+      color: #5A4A5A;
       max-width: 480px;
+      margin: 0 auto;
     }
 
     /* ── INFO CARDS ── */
@@ -227,8 +263,8 @@
       margin: 52px 0;
     }
     .info-card {
-      background: rgba(233,30,140,0.08);
-      border: 1px solid rgba(233,30,140,0.2);
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(233,30,140,0.25);
       border-radius: 16px;
       padding: 28px;
       text-align: center;
@@ -252,12 +288,12 @@
     }
     .info-card-value {
       font-size: 0.95rem;
-      color: var(--cream);
+      color: #000;
       font-weight: 600;
       line-height: 1.5;
     }
     .info-card-value a {
-      color: var(--pink-light);
+      color: #000;
       text-decoration: none;
     }
     .info-card-value a:hover { text-decoration: underline; }
@@ -273,7 +309,7 @@
     }
     .delivery-section h2 {
       font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--cream);
+      color: var(--charcoal);
       margin-bottom: 0;
     }
     .platform-row {
@@ -290,8 +326,8 @@
       padding: 13px 26px;
       border-radius: 999px;
       border: 1px solid rgba(233,30,140,0.35);
-      background: rgba(233,30,140,0.07);
-      color: var(--cream);
+      background: rgba(233,30,140,0.08);
+      color: var(--charcoal);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.92rem;
@@ -391,7 +427,7 @@
 
     /* ── FOOTER ── */
     /* ── FOOTER ── */
-    footer { background: #0D0D1A; padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
+    footer { background: radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%); padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
@@ -453,12 +489,13 @@
     </a>
     <ul class="navbar-links">
       <li><a href="meny.html">Meny</a></li>
+      <li><a href="butik.html">Butik</a></li>
       <li><a href="index.html#oppettider">Öppettider</a></li>
       <li><a href="bestall.html">Beställ</a></li>
       <li><a href="index.html#oppettider">Hitta oss</a></li>
       <li><a href="kontakt.html" class="active">Kontakt</a></li>
     </ul>
-    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -468,11 +505,12 @@
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="meny.html" class="mob-link">Meny</a>
+  <a href="butik.html" class="mob-link">Butik</a>
   <a href="index.html#oppettider" class="mob-link">Öppettider</a>
   <a href="bestall.html" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="bestall.html" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+  <a href="bestall.html" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
 <!-- ── HERO BANNER ── -->
@@ -485,7 +523,7 @@
 </section>
 
 <!-- ── MAIN CONTENT ── -->
-<main style="flex:1;">
+<main style="flex:1;background:transparent;">
   <div class="container">
 
     <!-- INFO CARDS -->
@@ -508,6 +546,7 @@
     </div>
 
     <!-- MAP + FORM -->
+    <div class="contact-figures-wrap">
     <div class="contact-grid">
       <!-- MAP -->
       <div class="map-block fade-up">
@@ -535,6 +574,9 @@
         </div>
         <button type="submit" class="btn-submit">Skicka meddelande</button>
       </form>
+    </div>
+    <img src="assets/rpleft.png"  class="rp-figure rp-figure-left"  alt="" aria-hidden="true">
+    <img src="assets/rpright.png" class="rp-figure rp-figure-right" alt="" aria-hidden="true">
     </div>
 
   </div>
@@ -603,6 +645,12 @@
     var img = document.getElementById('logo-img');
     img.onerror = function() { img.style.display = 'none'; };
   })();
+
+  // Navbar scroll state
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
 
   // Hamburger menu
   var hamburger = document.getElementById('hamburger');

@@ -179,6 +179,7 @@
       align-items: center;
       gap: 16px;
       padding: 20px 0;
+      background: #FFE4EF;
     }
 
     /* ── NAVBAR ── */
@@ -187,12 +188,41 @@
       top: 0; left: 0; right: 0;
       z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
-      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+      transition: box-shadow 0.7s ease;
     }
-    .navbar.scrolled {
-      background: rgba(26,26,46,0.94);
+    .navbar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 70% at 10% 50%, rgba(233,30,140,0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 90% 30%, rgba(181,16,106,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(233,30,140,0.18) 0%, transparent 50%),
+        linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+    }
+    .navbar.scrolled::before { opacity: 1; }
+    /* ── RP FIGURES ── */
+    .rp-figure {
+      position: absolute;
+      bottom: 0;
+      width: 140px;
+      pointer-events: none;
+      user-select: none;
+      display: block;
+    }
+    .rp-figure-left  { left: 0; }
+    .rp-figure-right { right: 0; }
+    @media (max-width: 768px) {
+      .rp-figure { display: none; }
+    }
+
+    .navbar.scrolled {
       box-shadow: 0 1px 0 rgba(233,30,140,0.12);
     }
     .navbar-inner {
@@ -221,7 +251,7 @@
       list-style: none;
     }
     .navbar-links a {
-      color: rgba(255,248,240,0.72);
+      color: rgba(42,21,32,0.72);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.88rem;
@@ -230,6 +260,8 @@
       transition: color 0.2s ease, background 0.2s ease;
     }
     .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
+    .navbar.scrolled .navbar-links a { color: rgba(255,248,240,0.72); }
+    .navbar.scrolled .navbar-links a:hover { color: #fff8f0; }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -289,10 +321,10 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 90% 70% at 20% 90%, rgba(233,30,140,0.45) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(181,16,106,0.30) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 55% 50%, rgba(233,30,140,0.12) 0%, transparent 50%),
-        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+        radial-gradient(ellipse 70% 60% at 15% 100%, rgba(233,30,140,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 45% at 90% 10%, rgba(233,30,140,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 35% at 55% 50%, rgba(255,110,199,0.07) 0%, transparent 50%),
+        linear-gradient(155deg, #FFF8F0 0%, #FFE8F4 60%, #FFF0FA 100%);
       padding-top: 80px;
     }
     .hero-inner {
@@ -307,13 +339,13 @@
     }
     .hero-h1 {
       font-size: clamp(3.5rem, 8vw, 7rem);
-      color: var(--cream);
+      color: #1A1A2E;
       line-height: 0.95;
       margin-bottom: 14px;
     }
     .hero-h1 .pink { color: var(--pink); }
-    .hero-sub { font-size: 1.1rem; color: var(--muted); margin-bottom: 14px; font-weight: 500; }
-    .hero-tagline { font-size: 1.02rem; color: rgba(255,248,240,0.78); margin-bottom: 28px; }
+    .hero-sub { font-size: 1.1rem; color: #5A4A5A; margin-bottom: 14px; font-weight: 500; }
+    .hero-tagline { font-size: 1.02rem; color: #7A5A6A; margin-bottom: 28px; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -343,13 +375,13 @@
       width: 300px;
       height: 300px;
       border-radius: 50%;
-      border: 2px solid rgba(233,30,140,0.4);
-      box-shadow: 0 0 50px rgba(233,30,140,0.18), inset 0 0 40px rgba(233,30,140,0.05);
+      border: 2px solid rgba(233,30,140,0.5);
+      box-shadow: 0 0 50px rgba(233,30,140,0.3), inset 0 0 40px rgba(233,30,140,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      background: rgba(22,33,62,0.55);
+      background: radial-gradient(ellipse 80% 70% at 30% 80%, rgba(233,30,140,0.55) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(181,16,106,0.35) 0%, transparent 55%), linear-gradient(135deg, #1A1A2E 0%, #0D0D1A 100%);
     }
     .scroll-indicator {
       position: absolute;
@@ -370,6 +402,7 @@
       .hero-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
       .hero-ctas { justify-content: center; }
       .hero-badge { justify-content: center; display: none; }
+      .hero-rp-fig { display: none; }
       .hero-visual { order: -1; }
       .hero-circle { width: 200px; height: 200px; }
     }
@@ -533,7 +566,7 @@
 
     /* ── FOOTER ── */
     /* ── FOOTER ── */
-    footer { background: #0D0D1A; padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
+    footer { background: radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%); padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-grid { display: flex; justify-content: space-between; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
     .footer-col { flex: 1; min-width: 180px; }
@@ -642,7 +675,70 @@
       #panther-wrap { width: 100px; bottom: 0; right: 0; }
     }
 
-    /* ── PHOTO GALLERY ── */
+    /* ── FOOD CAROUSEL ── */
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .carousel-wrapper {
+      overflow: hidden;
+      margin-top: 52px;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .carousel-track {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 20px;
+      width: max-content;
+      padding: 8px 0 24px;
+      animation: scrollLeft 45s linear infinite;
+    }
+    .food-card {
+      width: 260px;
+      height: 268px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(233,30,140,0.12), 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .food-card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .food-card-body { background: var(--surface); padding: 14px 16px; }
+    .food-card-name {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--cream);
+      line-height: 1.25;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .food-card-tag {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin-top: 6px;
+    }
+
+    /* ── GALLERY rpiz ── */
+    .rpiz-hero { width: clamp(160px, 22vw, 260px); height: auto; display: block; }
+    @media (max-width: 768px) {
+      .rpiz-hero { width: clamp(140px, 45vw, 220px); display: block; margin: 20px auto 0; }
+      #galleri .container > div { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── GALLERY dark section text overrides ── */
+    #galleri .eyebrow { color: rgba(255,248,240,0.6); }
+    #galleri .section-heading { color: #fff8f0; }
+    #galleri .section-sub { color: rgba(255,248,240,0.58); }
+
+    /* ── PHOTO GALLERY (legacy, keep for safety) ── */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -662,6 +758,8 @@
     }
     @media (max-width: 768px) {
       .photo-grid { grid-template-columns: 1fr; }
+      .food-card { width: 200px; height: 233px; }
+      .food-card-img { height: 145px; }
     }
   </style>
 </head>
@@ -709,9 +807,13 @@
       <p class="hero-sub">Pizza · Kebab · Snacks · Burgare · Falafel</p>
       <p class="hero-tagline">Vi är öppna när alla andra stänger.<br/>Kom in — dag eller natt.</p>
       <div class="hero-badge">🌙 Öppet till 04:00 på helger!</div>
-      <div class="hero-ctas">
-        <a href="bestall.html" class="btn btn-pink">🍕 Beställ</a>
-        <a href="meny.html" class="btn btn-ghost">Se Menyn</a>
+      <div style="position:relative;width:max-content;">
+        <img src="assets/rpleft.png" alt="" aria-hidden="true" class="hero-rp-fig" style="position:absolute;left:clamp(-110px,-8vw,-80px);bottom:0;width:clamp(75px,7vw,95px);height:auto;pointer-events:none;">
+        <div class="hero-ctas" style="flex-wrap:nowrap;">
+          <a href="bestall.html" class="btn btn-pink">🍕 Beställ</a>
+          <a href="meny.html" class="btn btn-ghost">Se Menyn</a>
+        </div>
+        <img src="assets/rpright.png" alt="" aria-hidden="true" class="hero-rp-fig" style="position:absolute;right:-105px;bottom:0;width:clamp(75px,7vw,95px);height:auto;pointer-events:none;">
       </div>
     </div>
     <div class="hero-visual">
@@ -752,6 +854,141 @@
   </div>
 </div>
 
+<!-- ── FOOD CAROUSEL ── -->
+<section class="section" id="galleri" style="background:radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%);">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;">
+      <div style="flex:1;">
+        <span class="eyebrow fade-up">POPULÄRT HOS OSS</span>
+        <h2 class="section-heading fade-up">Våra <span class="pink">favoriträtter</span></h2>
+        <p class="section-sub fade-up" style="margin-top:12px;">Handplockat från köket — det här älskar Uppsalaborna.</p>
+      </div>
+      <img src="assets/rpiz.png" alt="" aria-hidden="true" class="rpiz-hero" style="pointer-events:none;user-select:none;flex-shrink:0;">
+    </div>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+
+      <!-- ── 8 original cards ── -->
+      <div class="food-card">
+        <img src="assets/qopla-images/Panterns_Kebab_Supreme_kebabpizza.webp" alt="Panterns Kebab Supreme" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Panterns Kebab Supreme</span>
+          <span class="food-card-tag">Kebabpizza</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Kebabtallrik_pommes.webp" alt="Kebabtallrik" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebabtallrik</span>
+          <span class="food-card-tag">Grillat</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Rulle.webp" alt="Crunchy Kebab Royale" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Crunchy Kebab Royale</span>
+          <span class="food-card-tag">Kebab</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Kebab_Pizza_Special_sallad_lok_tomat_kebab.webp" alt="Kebab Pizza Special" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebab Pizza Special</span>
+          <span class="food-card-tag">Pizza</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Falafeltallrik_pommes.webp" alt="Falafeltallrik" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Falafeltallrik</span>
+          <span class="food-card-tag">Veganskt</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Chicken_wings.webp" alt="Chicken Wings" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Chicken Wings</span>
+          <span class="food-card-tag">Snacks</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/Kebab_Pizza.webp" alt="Kebabpizza" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebabpizza</span>
+          <span class="food-card-tag">Pizza</span>
+        </div>
+      </div>
+      <div class="food-card">
+        <img src="assets/qopla-images/wPT_Gyros_Tallrik.webp" alt="Gyros Tallrik" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Gyros Tallrik</span>
+          <span class="food-card-tag">Grillat</span>
+        </div>
+      </div>
+
+      <!-- ── 8 cloned cards (seamless loop) ── -->
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Panterns_Kebab_Supreme_kebabpizza.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Panterns Kebab Supreme</span>
+          <span class="food-card-tag">Kebabpizza</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Kebabtallrik_pommes.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebabtallrik</span>
+          <span class="food-card-tag">Grillat</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Rulle.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Crunchy Kebab Royale</span>
+          <span class="food-card-tag">Kebab</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Kebab_Pizza_Special_sallad_lok_tomat_kebab.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebab Pizza Special</span>
+          <span class="food-card-tag">Pizza</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Falafeltallrik_pommes.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Falafeltallrik</span>
+          <span class="food-card-tag">Veganskt</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Chicken_wings.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Chicken Wings</span>
+          <span class="food-card-tag">Snacks</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/Kebab_Pizza.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Kebabpizza</span>
+          <span class="food-card-tag">Pizza</span>
+        </div>
+      </div>
+      <div class="food-card" aria-hidden="true">
+        <img src="assets/qopla-images/wPT_Gyros_Tallrik.webp" alt="" class="food-card-img">
+        <div class="food-card-body">
+          <span class="food-card-name">Gyros Tallrik</span>
+          <span class="food-card-tag">Grillat</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ── PAW DIVIDER ── -->
 <div class="paw-divider fade-up">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
@@ -759,42 +996,15 @@
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
 </div>
 
-<!-- ── PHOTO GALLERY ── -->
-<section class="section" id="galleri" style="background:#FFF0F5;">
-  <div class="container">
-    <span class="eyebrow fade-up">VÅRT KÖK I BILDER</span>
-    <h2 class="section-heading fade-up">Färsk mat, <span class="pink">varje dag</span></h2>
-    <div class="photo-grid fade-up">
-      <div class="photo-card">
-        <img src="assets/rp1.webp" alt="Rosa Pantern kök" style="width:100%;height:280px;object-fit:cover;display:block;">
-      </div>
-      <div class="photo-card">
-        <img src="assets/rp2.webp" alt="Rosa Pantern mat" style="width:100%;height:280px;object-fit:cover;display:block;">
-      </div>
-      <div class="photo-card">
-        <img src="assets/rp3.webp" alt="Rosa Pantern restaurang" style="width:100%;height:280px;object-fit:cover;display:block;">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── ORDER ── -->
-<section class="section order-section" id="bestall" style="background:radial-gradient(ellipse 80% 70% at 10% 50%,rgba(233,30,140,0.55) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 90% 30%,rgba(181,16,106,0.35) 0%,transparent 50%),radial-gradient(ellipse 40% 40% at 50% 80%,rgba(233,30,140,0.18) 0%,transparent 50%),linear-gradient(135deg,#0D0D1A 0%,#1A1A2E 100%);">
-  <div class="container">
-    <span class="eyebrow fade-up">BESTÄLL ONLINE</span>
-    <h2 class="section-heading fade-up">Hungrig? Vi kör<br/><span class="pink">hem till dig.</span></h2>
-    <a href="bestall.html" class="btn btn-pink order-cta fade-up">🍕 Beställ direkt</a>
-  </div>
-</section>
-
-
 <!-- ── ÖPPETTIDER ── -->
 <section class="section" id="oppettider" style="background:#FFE4EF;">
   <div class="container">
     <span class="eyebrow fade-up">NÄR HITTAR DU OSS</span>
     <h2 class="section-heading fade-up"><span class="pink">Öppettider</span></h2>
     <div class="hours-grid">
-      <div class="fade-up">
+      <div class="fade-up" style="position:relative;">
+        <img src="assets/rpsil.png" alt="" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(180px,90%,320px);height:auto;opacity:0.18;mix-blend-mode:multiply;pointer-events:none;user-select:none;z-index:0;">
+        <div style="position:relative;z-index:1;">
         <div class="hours-row"><span class="hours-day">Måndag</span><span class="hours-time">11:00–20:00</span></div>
         <div class="hours-row"><span class="hours-day">Tisdag</span><span class="hours-time">11:00–03:30</span></div>
         <div class="hours-row"><span class="hours-day">Onsdag</span><span class="hours-time">11:00–03:30</span></div>
@@ -808,6 +1018,7 @@
           <span class="hours-time">11:00–04:00</span>
         </div>
         <div class="hours-row"><span class="hours-day">Söndag</span><span class="hours-time">11:00–20:00</span></div>
+        </div>
       </div>
       <div class="address-card fade-up">
         <h3>Hitta oss</h3>
@@ -829,6 +1040,8 @@
       </div>
     </div>
   </div>
+  <img src="assets/rpleft.png"  class="rp-figure rp-figure-left"  alt="" aria-hidden="true">
+  <img src="assets/rpright.png" class="rp-figure rp-figure-right" alt="" aria-hidden="true">
 </section>
 
 <!-- ── FOOTER ── -->
