@@ -1462,31 +1462,52 @@
   (function() {
     var pills = document.querySelectorAll('.cat-pill');
     var sections = document.querySelectorAll('.cat-section');
+    var filterBar = document.querySelector('.meny-filter-inner');
     var pillMap = {};
     pills.forEach(function(pill) { pillMap[pill.dataset.target] = pill; });
+
+    var OFFSET = 130; // navbar (64px) + filter bar (~56px) + breathing room
+    var clickLock = false;
+    var clickTimer;
+
+    // Scroll pill horizontally within the bar without touching the page scroll
+    function centerPill(pill) {
+      if (!filterBar) return;
+      var target = pill.offsetLeft - filterBar.offsetWidth / 2 + pill.offsetWidth / 2;
+      filterBar.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }
+
+    function setActive(id) {
+      pills.forEach(function(p) { p.classList.remove('active'); });
+      if (pillMap[id]) {
+        pillMap[id].classList.add('active');
+        centerPill(pillMap[id]);
+      }
+    }
 
     pills.forEach(function(pill) {
       pill.addEventListener('click', function() {
         var id = pill.dataset.target;
         var target = document.getElementById(id);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        pills.forEach(function(p) { p.classList.remove('active'); });
-        pill.classList.add('active');
+        if (!target) return;
+        // Lock observer updates while click-scroll settles
+        clickLock = true;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(function() { clickLock = false; }, 1200);
+        setActive(id);
+        var top = target.getBoundingClientRect().top + window.scrollY - OFFSET;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
       });
     });
 
     var sectionObserver = new IntersectionObserver(function(entries) {
+      if (clickLock) return; // don't fight an in-progress click-scroll
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          var id = entry.target.id;
-          pills.forEach(function(p) { p.classList.remove('active'); });
-          if (pillMap[id]) {
-            pillMap[id].classList.add('active');
-            pillMap[id].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          }
+          setActive(entry.target.id);
         }
       });
-    }, { threshold: 0.15, rootMargin: '-80px 0px -65% 0px' });
+    }, { threshold: 0, rootMargin: '-' + OFFSET + 'px 0px -55% 0px' });
 
     sections.forEach(function(section) { sectionObserver.observe(section); });
   })();
