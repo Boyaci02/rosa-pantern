@@ -123,7 +123,7 @@
     .navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
       background: rgba(26,26,46,0.94);
       backdrop-filter: blur(16px);
@@ -180,11 +180,11 @@
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--cream);
+      background: var(--pink);
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
@@ -889,6 +889,8 @@
       border-radius: 16px;
       border: 1.5px solid var(--border);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
     }
     .food-card:hover {
@@ -922,7 +924,7 @@
       padding: 10px;
       background: #fff;
     }
-    .food-info { padding: 14px 16px 16px; }
+    .food-info { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
     .food-info h3 {
       font-family: var(--font-head);
       font-size: 1rem;
@@ -940,6 +942,8 @@
       font-weight: 700;
       font-size: 0.95rem;
       color: var(--pink);
+      margin-top: auto;
+      display: block;
     }
     @media (max-width: 640px) {
       .food-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -964,11 +968,11 @@
       <li><a href="meny.html" class="active">Meny</a></li>
       <li><a href="butik.html">Butik</a></li>
       <li><a href="index.html#oppettider">Öppettider</a></li>
-      <li><a href="index.html#bestall">Beställ</a></li>
+      <li><a href="bestall.html">Beställ</a></li>
       <li><a href="index.html#oppettider">Hitta oss</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
+    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -980,10 +984,10 @@
   <a href="meny.html" class="mob-link">Meny</a>
   <a href="butik.html" class="mob-link">Butik</a>
   <a href="index.html#oppettider" class="mob-link">Öppettider</a>
-  <a href="index.html#bestall" class="mob-link">Beställ</a>
+  <a href="bestall.html" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ 🍕</a>
+  <a href="bestall.html" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
 <!-- ── HERO ── -->
@@ -1093,7 +1097,7 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rulle.webp" alt="Gyrosrulle" loading="lazy"/></div>
-          <div class="food-info"><h3>Gyrosrulle</h3><p class="food-desc">Gyrosskött, färska grönsaker &amp; tzatziki insvept i tunnbröd</p><span class="food-price">130 kr</span></div>
+          <div class="food-info"><h3>Gyrosrulle</h3><p class="food-desc">Gyrosskött, färska grönsaker &amp; tzatziki insvept i tunnbröd</p><span class="food-price">149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rulle.webp" alt="Gyros Med Bröd" loading="lazy"/></div>
@@ -1101,7 +1105,7 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Skrovmal.webp" alt="Gyros Skrovmål" loading="lazy"/></div>
-          <div class="food-info"><h3>Gyros Skrovmål</h3><p class="food-desc">Gyrosskött med bröd &amp; pommes, sallad &amp; tzatziki</p><span class="food-price">153 kr</span></div>
+          <div class="food-info"><h3>Gyros Skrovmål</h3><p class="food-desc">Gyrosskött med bröd &amp; pommes, sallad &amp; tzatziki</p><span class="food-price">155 kr</span></div>
         </div>
       </div>
     </div>
@@ -1119,7 +1123,7 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Falafel_med_brod.webp" alt="Falafel Med Bröd" loading="lazy"/></div>
-          <div class="food-info"><h3>Falafel Med Bröd</h3><p class="food-desc">Falafel i pitabröd med sallad, tomat, lök, fefferoni &amp; valfri kebabsås</p><span class="food-price">125 kr</span></div>
+          <div class="food-info"><h3>Falafel Med Bröd</h3><p class="food-desc">Falafel i pitabröd med sallad, tomat, lök, fefferoni &amp; valfri kebabsås</p><span class="food-price">120 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Falafel_skrov_mal.webp" alt="Falafel Skrovmål" loading="lazy"/></div>
@@ -1133,11 +1137,11 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rulle.webp" alt="Crunchy Kebab Royale" loading="lazy"/></div>
-          <div class="food-info"><h3>Crunchy Kebab Royale</h3><p class="food-desc">Kebabkött, pommes, sallad, tomat, rödlök, fefferoni &amp; valfri kebabsås</p><span class="food-price">165 kr</span></div>
+          <div class="food-info"><h3>Crunchy Kebab Royale</h3><p class="food-desc">Kebabkött, pommes, sallad, tomat, rödlök, fefferoni &amp; valfri kebabsås</p><span class="food-price">från 165 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rulle.webp" alt="Panterns Ferrari Rulle" loading="lazy"/></div>
-          <div class="food-info"><h3>Panterns Ferrari Rulle</h3><p class="food-desc">Kebabkött, smält ost, sallad, tomat, rödlök, fefferoni &amp; valfri kebabsås</p><span class="food-price">159 kr</span></div>
+          <div class="food-info"><h3>Panterns Ferrari Rulle</h3><p class="food-desc">Kebabkött, smält ost, sallad, tomat, rödlök, fefferoni &amp; valfri kebabsås</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rulle.webp" alt="Hawaiian Delight" loading="lazy"/></div>
@@ -1173,19 +1177,19 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Falafeltallrik_pommes.webp" alt="Vegansk Kebabtallrik" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Kebabtallrik</h3><p class="food-desc">Vegansk kebab med pommes, ris eller bulgur, sallad, tomat, lök &amp; valfri sås</p><span class="food-price">149 kr</span></div>
+          <div class="food-info"><h3>Vegansk Kebabtallrik</h3><p class="food-desc">Vegansk kebab med pommes, ris eller bulgur, sallad, tomat, lök &amp; valfri sås</p><span class="food-price">169 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Falafel_rulle.webp" alt="Vegansk Kebab-Rulle" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Kebab-Rulle</h3><p class="food-desc">Vegansk kebab, färska grönsaker &amp; valfri sås insvept i tunnbröd</p><span class="food-price">149 kr</span></div>
+          <div class="food-info"><h3>Vegansk Kebab-Rulle</h3><p class="food-desc">Vegansk kebab, färska grönsaker &amp; valfri sås insvept i tunnbröd</p><span class="food-price">169 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/kebab_med_Brod.webp" alt="Vegansk Kebab med Bröd" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Kebab med Bröd</h3><p class="food-desc">Vegansk kebab i pitabröd med sallad, tomat, lök &amp; valfri sås</p><span class="food-price">129 kr</span></div>
+          <div class="food-info"><h3>Vegansk Kebab med Bröd</h3><p class="food-desc">Vegansk kebab i pitabröd med sallad, tomat, lök &amp; valfri sås</p><span class="food-price">149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Skrovmal.webp" alt="Vegansk Kebab-Skrovmål" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Kebab-Skrovmål</h3><p class="food-desc">Vegansk kebab med bröd &amp; pommes, sallad &amp; tillbehör</p><span class="food-price">173 kr</span></div>
+          <div class="food-info"><h3>Vegansk Kebab-Skrovmål</h3><p class="food-desc">Vegansk kebab med bröd &amp; pommes, sallad &amp; tillbehör</p><span class="food-price">179 kr</span></div>
         </div>
       </div>
     </div>
@@ -1195,31 +1199,31 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_150_g_panterns.webp" alt="Panterns Burgarmeny" loading="lazy"/></div>
-          <div class="food-info"><h3>Panterns Burgarmeny</h3><p class="food-desc">Panterns signaturmeny med hemgjord sås &amp; tillbehör</p><span class="food-price">från 149 kr</span></div>
+          <div class="food-info"><h3>Panterns Burgarmeny</h3><p class="food-desc">Panterns signaturmeny med hemgjord sås &amp; tillbehör</p><span class="food-price">från 110 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_150_g_burgare.webp" alt="Hamburgare" loading="lazy"/></div>
-          <div class="food-info"><h3>Hamburgare</h3><p class="food-desc">Saftigt nötkött, sallad, tomat &amp; ketchup</p><span class="food-price">från 99 kr</span></div>
+          <div class="food-info"><h3>Hamburgare</h3><p class="food-desc">Saftigt nötkött, sallad, tomat &amp; ketchup</p><span class="food-price">från 89 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Gunsson_Special_Meny.webp" alt="Gunsons Special" loading="lazy"/></div>
-          <div class="food-info"><h3>Gunsons Special</h3><p class="food-desc">Signaturmeny med hemgjord sås</p><span class="food-price">från 159 kr</span></div>
+          <div class="food-info"><h3>Gunsons Special</h3><p class="food-desc">Signaturmeny med hemgjord sås</p><span class="food-price">149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Chicken_burger_hamburgertallrik.webp" alt="Kycklingburgare" loading="lazy"/></div>
-          <div class="food-info"><h3>Kycklingburgare</h3><p class="food-desc">Krispig kycklingburgare med sallad &amp; sås</p><span class="food-price">från 109 kr</span></div>
+          <div class="food-info"><h3>Kycklingburgare</h3><p class="food-desc">Krispig kycklingburgare med sallad &amp; sås</p><span class="food-price">139 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Halloumi_burgare.webp" alt="Halloumiburgare" loading="lazy"/></div>
-          <div class="food-info"><h3>Halloumiburgare</h3><p class="food-desc">Grillad halloumi med sallad &amp; sås</p><span class="food-price">från 109 kr</span></div>
+          <div class="food-info"><h3>Halloumiburgare</h3><p class="food-desc">Grillad halloumi med sallad &amp; sås</p><span class="food-price">139 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Fish_and_Chips.webp" alt="Fish and Chips" loading="lazy"/></div>
-          <div class="food-info"><h3>Fish and Chips</h3><p class="food-desc">Panerad fisk med pommes frites &amp; tartarsås</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Fish and Chips</h3><p class="food-desc">Panerad fisk med pommes frites &amp; tartarsås</p><span class="food-price">135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Chicken_nuggets.webp" alt="Chicken Nuggets" loading="lazy"/></div>
-          <div class="food-info"><h3>Chicken Nuggets</h3><p class="food-desc">Krispiga kycklingnuggets med dippsås</p><span class="food-price">från 99 kr</span></div>
+          <div class="food-info"><h3>Chicken Nuggets</h3><p class="food-desc">Krispiga kycklingnuggets med dippsås</p><span class="food-price">från 110 kr</span></div>
         </div>
       </div>
     </div>
@@ -1229,7 +1233,7 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Marinara</h3><p class="food-desc">Tomatsås, vitlök, olivolja &amp; oregano</p><span class="food-price">från 109 kr</span></div>
+          <div class="food-info"><h3>Marinara</h3><p class="food-desc">Tomatsås, vitlök, olivolja &amp; oregano</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Campagnola.webp" alt="Campagnola" loading="lazy"/></div>
@@ -1237,7 +1241,7 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Havets_lakerheter_rakor_tonfisk_musslor.webp" alt="Havets Läckerheter" loading="lazy"/></div>
-          <div class="food-info"><h3>Havets Läckerheter</h3><p class="food-desc">Räkor, tonfisk, musslor &amp; kapris</p><span class="food-price">från 135 kr</span></div>
+          <div class="food-info"><h3>Havets Läckerheter</h3><p class="food-desc">Räkor, tonfisk, musslor &amp; kapris</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
@@ -1245,19 +1249,19 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Amigo</h3><p class="food-desc">Skinka, lök, paprika &amp; jalapeño</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Amigo</h3><p class="food-desc">Skinka, lök, paprika &amp; jalapeño</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>The Halloumi</h3><p class="food-desc">Halloumi, champinjoner, spenat &amp; vitlök</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>The Halloumi</h3><p class="food-desc">Halloumi, champinjoner, spenat &amp; vitlök</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Quattro Formaggi</h3><p class="food-desc">Fyra sorters ost på krämig bas</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Quattro Formaggi</h3><p class="food-desc">Fyra sorters ost på krämig bas</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Aztean.webp" alt="Azteka" loading="lazy"/></div>
-          <div class="food-info"><h3>Azteka</h3><p class="food-desc">Tomatsås, köttfärs, paprika &amp; chilisås</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Azteka</h3><p class="food-desc">Tomatsås, köttfärs, paprika &amp; chilisås</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Bussola.webp" alt="Tefat dubbelinbakad" loading="lazy"/></div>
@@ -1265,11 +1269,11 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Mexicana.webp" alt="Mexicana" loading="lazy"/></div>
-          <div class="food-info"><h3>Mexicana</h3><p class="food-desc">Köttfärs, jalapeño &amp; majs</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Mexicana</h3><p class="food-desc">Köttfärs, jalapeño &amp; majs</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Acapulco.webp" alt="Acapulco" loading="lazy"/></div>
-          <div class="food-info"><h3>Acapulco</h3><p class="food-desc">Tomatsås, köttfärs, paprika &amp; lök</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Acapulco</h3><p class="food-desc">Tomatsås, köttfärs, paprika &amp; lök</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Orientale.webp" alt="Orientale" loading="lazy"/></div>
@@ -1277,11 +1281,11 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Orientale_special.webp" alt="Orientale Special" loading="lazy"/></div>
-          <div class="food-info"><h3>Orientale Special</h3><p class="food-desc">Kebab, paprika, lök &amp; jalapeño</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Orientale Special</h3><p class="food-desc">Kebab, paprika, lök &amp; jalapeño</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Bussola.webp" alt="Bussola" loading="lazy"/></div>
-          <div class="food-info"><h3>Bussola</h3><p class="food-desc">Salami, oliver &amp; paprika</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Bussola</h3><p class="food-desc">Salami, oliver &amp; paprika</p><span class="food-price">från 129 kr</span></div>
         </div>
       </div>
     </div>
@@ -1291,31 +1295,31 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Panterns_Kebab_Supreme_kebabpizza.webp" alt="Pantern Kebab Supreme" loading="lazy"/></div>
-          <div class="food-info"><h3>Pantern Kebab Supreme</h3><p class="food-desc">Husets ultimata kebabpizza</p><span class="food-price">från 140 kr</span></div>
+          <div class="food-info"><h3>Pantern Kebab Supreme</h3><p class="food-desc">Husets ultimata kebabpizza</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Kebab_Viking_pizza.webp" alt="Viking Kebab Inbakad" loading="lazy"/></div>
-          <div class="food-info"><h3>Viking Kebab Inbakad</h3><p class="food-desc">Inbakad kebabpizza med paprika &amp; stark sås</p><span class="food-price">från 135 kr</span></div>
+          <div class="food-info"><h3>Viking Kebab Inbakad</h3><p class="food-desc">Inbakad kebabpizza med paprika &amp; stark sås</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Kebab_Pizza_Special_sallad_lok_tomat_kebab.webp" alt="Pantern Kebab Special" loading="lazy"/></div>
-          <div class="food-info"><h3>Pantern Kebab Special</h3><p class="food-desc">Med sallad, lök &amp; tomat</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Pantern Kebab Special</h3><p class="food-desc">Med sallad, lök &amp; tomat</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Pantern_gyros_delight.webp" alt="Pantern Gyros Delight" loading="lazy"/></div>
-          <div class="food-info"><h3>Pantern Gyros Delight</h3><p class="food-desc">Gyrosskött med hemgjord sås &amp; färska grönsaker</p><span class="food-price">från 135 kr</span></div>
+          <div class="food-info"><h3>Pantern Gyros Delight</h3><p class="food-desc">Gyrosskött med hemgjord sås &amp; färska grönsaker</p><span class="food-price">från 149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Kebab_Pizza.webp" alt="Panterns Klassiska Kebabpizza" loading="lazy"/></div>
-          <div class="food-info"><h3>Panterns Klassiska Kebabpizza</h3><p class="food-desc">Kebab, sallad &amp; kebabsås</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Panterns Klassiska Kebabpizza</h3><p class="food-desc">Kebab, sallad &amp; kebabsås</p><span class="food-price">från 149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Panterns Chicken Supreme</h3><p class="food-desc">Kycklingkebab med husets sås &amp; grönsaker</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Panterns Chicken Supreme</h3><p class="food-desc">Kycklingkebab med husets sås &amp; grönsaker</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Chicken Kebab Classic</h3><p class="food-desc">Kycklingkebab, sallad &amp; kebabsås</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Chicken Kebab Classic</h3><p class="food-desc">Kycklingkebab, sallad &amp; kebabsås</p><span class="food-price">från 149 kr</span></div>
         </div>
       </div>
     </div>
@@ -1337,23 +1341,23 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Hawaii.webp" alt="Hawaii" loading="lazy"/></div>
-          <div class="food-info"><h3>Hawaii</h3><p class="food-desc">Skinka, ananas &amp; ost</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Hawaii</h3><p class="food-desc">Skinka, ananas &amp; ost</p><span class="food-price">från 115 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Vesuvio.webp" alt="Vesuvio" loading="lazy"/></div>
-          <div class="food-info"><h3>Vesuvio</h3><p class="food-desc">Skinka &amp; ägg</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Vesuvio</h3><p class="food-desc">Skinka &amp; ägg</p><span class="food-price">från 110 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Fungi.webp" alt="Funghi" loading="lazy"/></div>
-          <div class="food-info"><h3>Funghi</h3><p class="food-desc">Champinjoner &amp; ost</p><span class="food-price">från 115 kr</span></div>
+          <div class="food-info"><h3>Funghi</h3><p class="food-desc">Champinjoner &amp; ost</p><span class="food-price">från 110 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Al_tonno.webp" alt="Al Tonno" loading="lazy"/></div>
-          <div class="food-info"><h3>Al Tonno</h3><p class="food-desc">Tonfisk, lök &amp; kapris</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Al Tonno</h3><p class="food-desc">Tonfisk, lök &amp; kapris</p><span class="food-price">från 110 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Quattro_stagioni.webp" alt="Quattro Stagioni" loading="lazy"/></div>
-          <div class="food-info"><h3>Quattro Stagioni</h3><p class="food-desc">Skinka, champinjoner, räkor &amp; kronärtskocka</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Quattro Stagioni</h3><p class="food-desc">Skinka, champinjoner, räkor &amp; kronärtskocka</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Peperoni.webp" alt="Peperoni" loading="lazy"/></div>
@@ -1361,47 +1365,47 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/diavola_salami_jalapeno_pizza.webp" alt="Diavola" loading="lazy"/></div>
-          <div class="food-info"><h3>Diavola</h3><p class="food-desc">Salami, jalapeño &amp; chili</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Diavola</h3><p class="food-desc">Salami, jalapeño &amp; chili</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Bombay_pizza.webp" alt="Bombay" loading="lazy"/></div>
-          <div class="food-info"><h3>Bombay</h3><p class="food-desc">Kyckling, curry &amp; mango</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Bombay</h3><p class="food-desc">Kyckling, curry &amp; mango</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Greken.webp" alt="Greken" loading="lazy"/></div>
-          <div class="food-info"><h3>Greken</h3><p class="food-desc">Feta, oliver &amp; soltorkade tomater</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Greken</h3><p class="food-desc">Feta, oliver &amp; soltorkade tomater</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Hawai_Special.webp" alt="Hawaii Special" loading="lazy"/></div>
-          <div class="food-info"><h3>Hawaii Special</h3><p class="food-desc">Skinka, ananas &amp; extra ost</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Hawaii Special</h3><p class="food-desc">Skinka, ananas &amp; extra ost</p><span class="food-price">från 120 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Spicy_du_chef.webp" alt="Spicy du Chef" loading="lazy"/></div>
-          <div class="food-info"><h3>Spicy du Chef</h3><p class="food-desc">Kockens heta skapelse</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Spicy du Chef</h3><p class="food-desc">Kockens heta skapelse</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Veggie_delight.webp" alt="Veggie Delight" loading="lazy"/></div>
-          <div class="food-info"><h3>Veggie Delight</h3><p class="food-desc">Paprika, lök, champinjoner &amp; oliver</p><span class="food-price">från 115 kr</span></div>
+          <div class="food-info"><h3>Veggie Delight</h3><p class="food-desc">Paprika, lök, champinjoner &amp; oliver</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Havets_lakerheter_rakor_tonfisk_musslor.webp" alt="Havets Läckerheter" loading="lazy"/></div>
-          <div class="food-info"><h3>Havets Läckerheter</h3><p class="food-desc">Räkor, tonfisk &amp; musslor</p><span class="food-price">från 135 kr</span></div>
+          <div class="food-info"><h3>Havets Läckerheter</h3><p class="food-desc">Räkor, tonfisk &amp; musslor</p><span class="food-price">från 125 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Quattro_stagioni.webp" alt="Quattro Formaggi" loading="lazy"/></div>
-          <div class="food-info"><h3>Quattro Formaggi</h3><p class="food-desc">Fyra sorters ost på krämig bas</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Quattro Formaggi</h3><p class="food-desc">Fyra sorters ost på krämig bas</p><span class="food-price">från 135 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Kebab_Pizza.webp" alt="Kebabpizza" loading="lazy"/></div>
-          <div class="food-info"><h3>Kebabpizza</h3><p class="food-desc">Kebab, sallad &amp; kebabsås</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Kebabpizza</h3><p class="food-desc">Kebab, sallad &amp; kebabsås</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Panterns_Kebab_Supreme_kebabpizza.webp" alt="Pantern Kebab Supreme" loading="lazy"/></div>
-          <div class="food-info"><h3>Pantern Kebab Supreme</h3><p class="food-desc">Husets ultimata kebabpizza</p><span class="food-price">från 140 kr</span></div>
+          <div class="food-info"><h3>Pantern Kebab Supreme</h3><p class="food-desc">Husets ultimata kebabpizza</p><span class="food-price">från 159 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Cia_Ciao.webp" alt="Ciao Ciao halvinbakad" loading="lazy"/></div>
-          <div class="food-info"><h3>Ciao Ciao halvinbakad</h3><p class="food-desc">Halvinbakad med kyckling &amp; soltorkade tomater</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Ciao Ciao halvinbakad</h3><p class="food-desc">Halvinbakad med kyckling &amp; soltorkade tomater</p><span class="food-price">från 145 kr</span></div>
         </div>
       </div>
     </div>
@@ -1411,39 +1415,39 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Smokey_BBQ_Checken-.webp" alt="Smoky BBQ Chicken" loading="lazy"/></div>
-          <div class="food-info"><h3>Smoky BBQ Chicken</h3><p class="food-desc">Kyckling, BBQ-sås &amp; rödlök</p><span class="food-price">från 135 kr</span></div>
+          <div class="food-info"><h3>Smoky BBQ Chicken</h3><p class="food-desc">Kyckling, BBQ-sås &amp; rödlök</p><span class="food-price">från 149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Turkish_delight.webp" alt="Turkish Delight" loading="lazy"/></div>
-          <div class="food-info"><h3>Turkish Delight</h3><p class="food-desc">Lammkött, yoghurt &amp; örter</p><span class="food-price">från 145 kr</span></div>
+          <div class="food-info"><h3>Turkish Delight</h3><p class="food-desc">Lammkött, yoghurt &amp; örter</p><span class="food-price">från 149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Spicy_shisko_oxfile_paprika_tomat_.webp" alt="Royal Shisko" loading="lazy"/></div>
-          <div class="food-info"><h3>Royal Shisko</h3><p class="food-desc">Oxfilé, paprika, tomat &amp; het sås</p><span class="food-price">från 155 kr</span></div>
+          <div class="food-info"><h3>Royal Shisko</h3><p class="food-desc">Oxfilé, paprika, tomat &amp; het sås</p><span class="food-price">från 149 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Bambino.webp" alt="Bambino" loading="lazy"/></div>
-          <div class="food-info"><h3>Bambino</h3><p class="food-desc">Barnstorlek — skinka &amp; ost</p><span class="food-price">från 85 kr</span></div>
+          <div class="food-info"><h3>Bambino</h3><p class="food-desc">Barnstorlek — skinka &amp; ost</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Caesar</h3><p class="food-desc">Kyckling, caesardressing &amp; ruccola</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Caesar</h3><p class="food-desc">Kyckling, caesardressing &amp; ruccola</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🧀</div>
-          <div class="food-info"><h3>Cinque Formaggi</h3><p class="food-desc">Fem sorters ost på krämig base</p><span class="food-price">från 140 kr</span></div>
+          <div class="food-info"><h3>Cinque Formaggi</h3><p class="food-desc">Fem sorters ost på krämig base</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_31.Diavola_2.0__2_.webp" alt="Diavola 2.0" loading="lazy"/></div>
-          <div class="food-info"><h3>Diavola 2.0</h3><p class="food-desc">Djävulskt hett med salami &amp; jalapeño</p><span class="food-price">från 130 kr</span></div>
+          <div class="food-info"><h3>Diavola 2.0</h3><p class="food-desc">Djävulskt hett med salami &amp; jalapeño</p><span class="food-price">från 145 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Spicy_tonno.webp" alt="Spicy Tonno" loading="lazy"/></div>
-          <div class="food-info"><h3>Spicy Tonno</h3><p class="food-desc">Tonfisk, chili &amp; kapris</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Spicy Tonno</h3><p class="food-desc">Tonfisk, chili &amp; kapris</p><span class="food-price">från 129 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍕</div>
-          <div class="food-info"><h3>Beef and Chill</h3><p class="food-desc">Mört nötkött med unika kryddor &amp; sås</p><span class="food-price">från 145 kr</span></div>
+          <div class="food-info"><h3>Beef and Chill</h3><p class="food-desc">Mört nötkött med unika kryddor &amp; sås</p><span class="food-price">från 149 kr</span></div>
         </div>
       </div>
     </div>
@@ -1453,19 +1457,19 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Margharita.webp" alt="Vegansk Margherita" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Margherita</h3><p class="food-desc">Tomatsås, vegansk ost &amp; basilika</p><span class="food-price">från 115 kr</span></div>
+          <div class="food-info"><h3>Vegansk Margherita</h3><p class="food-desc">Tomatsås, vegansk ost &amp; basilika</p><span class="food-price">från 140 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Kebab_Pizza.webp" alt="Vegansk Kebab" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Kebab</h3><p class="food-desc">Vegansk kebab, sallad &amp; kebabsås</p><span class="food-price">från 125 kr</span></div>
+          <div class="food-info"><h3>Vegansk Kebab</h3><p class="food-desc">Vegansk kebab, sallad &amp; kebabsås</p><span class="food-price">från 160 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/spicy_du_chef.webp" alt="Vegansk Du Chef" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Du Chef</h3><p class="food-desc">Kockens veganska skapelse med rik smak</p><span class="food-price">från 120 kr</span></div>
+          <div class="food-info"><h3>Vegansk Du Chef</h3><p class="food-desc">Kockens veganska skapelse med rik smak</p><span class="food-price">från 160 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Veggie_delight.webp" alt="Vegansk Veggie" loading="lazy"/></div>
-          <div class="food-info"><h3>Vegansk Veggie</h3><p class="food-desc">Paprika, lök, champinjoner, oliver &amp; tomater</p><span class="food-price">från 115 kr</span></div>
+          <div class="food-info"><h3>Vegansk Veggie</h3><p class="food-desc">Paprika, lök, champinjoner, oliver &amp; tomater</p><span class="food-price">från 160 kr</span></div>
         </div>
       </div>
     </div>
@@ -1475,27 +1479,27 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Chill_Cheese.webp" alt="Chili Cheese" loading="lazy"/></div>
-          <div class="food-info"><h3>Chili Cheese</h3><p class="food-desc">Pommes med chili &amp; ost</p><span class="food-price">från 55 kr</span></div>
+          <div class="food-info"><h3>Chili Cheese</h3><p class="food-desc">Pommes med chili &amp; ost</p><span class="food-price">från 35 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Mozzerella_Sticks.webp" alt="Mozzarella Sticks" loading="lazy"/></div>
-          <div class="food-info"><h3>Mozzarella Sticks</h3><p class="food-desc">6 st friterade mozzarella sticks</p><span class="food-price">från 65 kr</span></div>
+          <div class="food-info"><h3>Mozzarella Sticks</h3><p class="food-desc">6 st friterade mozzarella sticks</p><span class="food-price">från 35 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Chicken_wings.webp" alt="Chicken Wings" loading="lazy"/></div>
-          <div class="food-info"><h3>Chicken Wings</h3><p class="food-desc">6 st kryddiga kycklingvingar</p><span class="food-price">från 75 kr</span></div>
+          <div class="food-info"><h3>Chicken Wings</h3><p class="food-desc">6 st kryddiga kycklingvingar</p><span class="food-price">från 39 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Onion_Rings.webp" alt="Onion Rings" loading="lazy"/></div>
-          <div class="food-info"><h3>Onion Rings</h3><p class="food-desc">Friterade lökringar</p><span class="food-price">från 55 kr</span></div>
+          <div class="food-info"><h3>Onion Rings</h3><p class="food-desc">Friterade lökringar</p><span class="food-price">från 35 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Snackbox_mozzarella_sticks_pommes_onion_rings_chilicheese_snacks_alla.webp" alt="Snack Box" loading="lazy"/></div>
-          <div class="food-info"><h3>Snack Box</h3><p class="food-desc">Mix av mozzarella sticks, pommes, onion rings &amp; chili cheese</p><span class="food-price">från 95 kr</span></div>
+          <div class="food-info"><h3>Snack Box</h3><p class="food-desc">Mix av mozzarella sticks, pommes, onion rings &amp; chili cheese</p><span class="food-price">150 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/CheesBox.webp" alt="Cheesebox" loading="lazy"/></div>
-          <div class="food-info"><h3>Cheesebox</h3><p class="food-desc">Pommes med extra ost</p><span class="food-price">från 55 kr</span></div>
+          <div class="food-info"><h3>Cheesebox</h3><p class="food-desc">Pommes med extra ost</p><span class="food-price">150 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🧀</div>
@@ -1503,7 +1507,7 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pommes.webp" alt="Pommestallrik" loading="lazy"/></div>
-          <div class="food-info"><h3>Pommestallrik</h3><p class="food-desc">Generös tallrik med pommes frites</p><span class="food-price">från 55 kr</span></div>
+          <div class="food-info"><h3>Pommestallrik</h3><p class="food-desc">Generös tallrik med pommes frites</p><span class="food-price">85 kr</span></div>
         </div>
       </div>
     </div>
@@ -1513,55 +1517,55 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Panterns_Original_dip.webp" alt="Panterns Originaldip" loading="lazy"/></div>
-          <div class="food-info"><h3>Panterns Originaldip</h3><p class="food-desc">Panterns hemliga signatursås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Panterns Originaldip</h3><p class="food-desc">Panterns hemliga signatursås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/vitlokssas.webp" alt="Mild Kebabsås" loading="lazy"/></div>
-          <div class="food-info"><h3>Mild Kebabsås</h3><p class="food-desc">Mild och krämig kebabsås</p><span class="food-price">10 kr</span></div>
+          <div class="food-info"><h3>Mild Kebabsås</h3><p class="food-desc">Mild och krämig kebabsås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Spicy_Panther.webp" alt="Stark Kebabsås" loading="lazy"/></div>
-          <div class="food-info"><h3>Stark Kebabsås</h3><p class="food-desc">Het och kryddig kebabsås</p><span class="food-price">10 kr</span></div>
+          <div class="food-info"><h3>Stark Kebabsås</h3><p class="food-desc">Het och kryddig kebabsås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Blandad_Sas.webp" alt="Blandad Kebabsås" loading="lazy"/></div>
-          <div class="food-info"><h3>Blandad Kebabsås</h3><p class="food-desc">Mix av mild och stark kebabsås</p><span class="food-price">10 kr</span></div>
+          <div class="food-info"><h3>Blandad Kebabsås</h3><p class="food-desc">Mix av mild och stark kebabsås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Spicy_Panther.webp" alt="Spicy Panther" loading="lazy"/></div>
-          <div class="food-info"><h3>Spicy Panther</h3><p class="food-desc">Panterns heta specialsås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Spicy Panther</h3><p class="food-desc">Panterns heta specialsås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/vitlokssas.webp" alt="Vitlökssås" loading="lazy"/></div>
-          <div class="food-info"><h3>Vitlökssås</h3><p class="food-desc">Krämig vitlökssås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Vitlökssås</h3><p class="food-desc">Krämig vitlökssås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/bearnaise.webp" alt="Bearnaisesås" loading="lazy"/></div>
-          <div class="food-info"><h3>Bearnaisesås</h3><p class="food-desc">Klassisk bearnaisesås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Bearnaisesås</h3><p class="food-desc">Klassisk bearnaisesås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🥒</div>
-          <div class="food-info"><h3>Tzatziki</h3><p class="food-desc">Krämig yoghurtsås med gurka &amp; vitlök</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Tzatziki</h3><p class="food-desc">Krämig yoghurtsås med gurka &amp; vitlök</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Curry_Sas.webp" alt="Currysås" loading="lazy"/></div>
-          <div class="food-info"><h3>Currysås</h3><p class="food-desc">Mild currysås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Currysås</h3><p class="food-desc">Mild currysås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Chili_Majo.webp" alt="Chilli-Majo" loading="lazy"/></div>
-          <div class="food-info"><h3>Chilli-Majo</h3><p class="food-desc">Kryddig chilemajonnäs</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Chilli-Majo</h3><p class="food-desc">Kryddig chilemajonnäs</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Tryffelmayo.webp" alt="Tryffel-Majo" loading="lazy"/></div>
-          <div class="food-info"><h3>Tryffel-Majo</h3><p class="food-desc">Lyxig tryffelmajonnäs</p><span class="food-price">20 kr</span></div>
+          <div class="food-info"><h3>Tryffel-Majo</h3><p class="food-desc">Lyxig tryffelmajonnäs</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Garlic_Spread.webp" alt="Garlic Spread" loading="lazy"/></div>
-          <div class="food-info"><h3>Garlic Spread</h3><p class="food-desc">Stark vitlökssås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Garlic Spread</h3><p class="food-desc">Stark vitlökssås</p><span class="food-price">22 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/wPT_Pineapple_Blaze.webp" alt="Pineapple Blaze Dressing" loading="lazy"/></div>
-          <div class="food-info"><h3>Pineapple Blaze Dressing</h3><p class="food-desc">Söt &amp; het ananassås</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Pineapple Blaze Dressing</h3><p class="food-desc">Söt &amp; het ananassås</p><span class="food-price">22 kr</span></div>
         </div>
       </div>
     </div>
@@ -1571,11 +1575,11 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pizzasallad.webp" alt="Pizza Sallad" loading="lazy"/></div>
-          <div class="food-info"><h3>Pizza Sallad</h3><p class="food-desc">Klassisk pizzasallad</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Pizza Sallad</h3><p class="food-desc">Klassisk pizzasallad</p><span class="food-price">20 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Rodkalssallad.webp" alt="Rödkåls Sallad" loading="lazy"/></div>
-          <div class="food-info"><h3>Rödkåls Sallad</h3><p class="food-desc">Fräsch rödkålssallad med husets dressing</p><span class="food-price">15 kr</span></div>
+          <div class="food-info"><h3>Rödkåls Sallad</h3><p class="food-desc">Fräsch rödkålssallad med husets dressing</p><span class="food-price">20 kr</span></div>
         </div>
       </div>
     </div>
@@ -1585,23 +1589,23 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🥔</div>
-          <div class="food-info"><h3>Chips från Estrella</h3><p class="food-desc">Krispiga Estrella-chips</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Chips från Estrella</h3><p class="food-desc">Krispiga Estrella-chips</p><span class="food-price">45 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🥔</div>
-          <div class="food-info"><h3>Chips från Pringles</h3><p class="food-desc">Klassiska Pringles-chips</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Chips från Pringles</h3><p class="food-desc">Klassiska Pringles-chips</p><span class="food-price">45 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🧀</div>
-          <div class="food-info"><h3>OLW Ostsnacks</h3><p class="food-desc">Smakrika ostsnacks från OLW</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>OLW Ostsnacks</h3><p class="food-desc">Smakrika ostsnacks från OLW</p><span class="food-price">45 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🥔</div>
-          <div class="food-info"><h3>Chips från Lays</h3><p class="food-desc">Tunna och krispiga Lay's-chips</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Chips från Lays</h3><p class="food-desc">Tunna och krispiga Lay's-chips</p><span class="food-price">45 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🌽</div>
-          <div class="food-info"><h3>Doritos</h3><p class="food-desc">Krispiga majschips från Doritos</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Doritos</h3><p class="food-desc">Krispiga majschips från Doritos</p><span class="food-price">45 kr</span></div>
         </div>
       </div>
     </div>
@@ -1611,7 +1615,7 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍫</div>
-          <div class="food-info"><h3>Marabou</h3><p class="food-desc">Klassisk svensk choklad</p><span class="food-price">35 kr</span></div>
+          <div class="food-info"><h3>Marabou</h3><p class="food-desc">Klassisk svensk choklad</p><span class="food-price">55 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍫</div>
@@ -1619,23 +1623,23 @@
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍬</div>
-          <div class="food-info"><h3>Godis Påsar Fazer</h3><p class="food-desc">Utsökt godis från Fazer</p><span class="food-price">35 kr</span></div>
+          <div class="food-info"><h3>Godis Påsar Fazer</h3><p class="food-desc">Utsökt godis från Fazer</p><span class="food-price">47 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🚗</div>
-          <div class="food-info"><h3>Toms Ferrari</h3><p class="food-desc">Klassiska Ferrari-bilar från Toms</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>Toms Ferrari</h3><p class="food-desc">Klassiska Ferrari-bilar från Toms</p><span class="food-price">47 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🐻</div>
-          <div class="food-info"><h3>Haribo</h3><p class="food-desc">Gummibjörnar och gelegodisar</p><span class="food-price">35 kr</span></div>
+          <div class="food-info"><h3>Haribo</h3><p class="food-desc">Gummibjörnar och gelegodisar</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍭</div>
-          <div class="food-info"><h3>S-Märke</h3><p class="food-desc">Klassiska skumgodisbitar</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>S-Märke</h3><p class="food-desc">Klassiska skumgodisbitar</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍬</div>
-          <div class="food-info"><h3>Gott &amp; Blandat</h3><p class="food-desc">Blandad godis — lite av allt</p><span class="food-price">35 kr</span></div>
+          <div class="food-info"><h3>Gott &amp; Blandat</h3><p class="food-desc">Blandad godis — lite av allt</p><span class="food-price">45 kr</span></div>
         </div>
       </div>
     </div>
@@ -1645,43 +1649,43 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/karamell_sutra.png" alt="Karamell Sutra" loading="lazy"/></div>
-          <div class="food-info"><h3>Karamell Sutra</h3><p class="food-desc">Karamell & choklad i perfekt kombination</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Karamell Sutra</h3><p class="food-desc">Karamell & choklad i perfekt kombination</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/STRAWBERRY_CHEESECAKE.webp" alt="Strawberry Cheesecake" loading="lazy"/></div>
-          <div class="food-info"><h3>Strawberry Cheesecake</h3><p class="food-desc">Jordgubb & cheesecakeglass</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Strawberry Cheesecake</h3><p class="food-desc">Jordgubb & cheesecakeglass</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Half_Baked.webp" alt="Half Baked" loading="lazy"/></div>
-          <div class="food-info"><h3>Half Baked</h3><p class="food-desc">Choklad & vanilj med kakdeg & brownies</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Half Baked</h3><p class="food-desc">Choklad & vanilj med kakdeg & brownies</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Chocolate_Fudge_Brownie.webp" alt="Chocolate Fudge Brownie" loading="lazy"/></div>
-          <div class="food-info"><h3>Chocolate Fudge Brownie</h3><p class="food-desc">Chokladglass med browniesbitar</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Chocolate Fudge Brownie</h3><p class="food-desc">Chokladglass med browniesbitar</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/37882_BE-FR-NL_IC_CHUNKY-MONKEY_465ml_Open_Brand-1920px_8711327372955.png" alt="Chunky Monkey" loading="lazy"/></div>
-          <div class="food-info"><h3>Chunky Monkey</h3><p class="food-desc">Bananglass med chokladbitar & valnötter</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Chunky Monkey</h3><p class="food-desc">Bananglass med chokladbitar & valnötter</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/10578_B_J_0_5L_Cookie_Dough.png" alt="Cookie Dough" loading="lazy"/></div>
-          <div class="food-info"><h3>Cookie Dough</h3><p class="food-desc">Vaniljglass med kakdegsbitar</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Cookie Dough</h3><p class="food-desc">Vaniljglass med kakdegsbitar</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Vanilla_Pecan_Blondie_.webp" alt="Vanilla Pecan Blondie" loading="lazy"/></div>
-          <div class="food-info"><h3>Vanilla Pecan Blondie</h3><p class="food-desc">Vanilj, pekannötter & blondiekakor</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Vanilla Pecan Blondie</h3><p class="food-desc">Vanilj, pekannötter & blondiekakor</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Banoffe_Pie.webp" alt="Banoffee Pie" loading="lazy"/></div>
-          <div class="food-info"><h3>Banoffee Pie</h3><p class="food-desc">Banan, toffee & gräddglass</p><span class="food-price">79 kr</span></div>
+          <div class="food-info"><h3>Banoffee Pie</h3><p class="food-desc">Banan, toffee & gräddglass</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍦</div>
-          <div class="food-info"><h3>Ben &amp; Jerry's Half Baked 465ml</h3><p class="food-desc">Choklad &amp; vanilj med kakdeg &amp; brownies, 465ml</p><span class="food-price">89 kr</span></div>
+          <div class="food-info"><h3>Ben &amp; Jerry's Half Baked 465ml</h3><p class="food-desc">Choklad &amp; vanilj med kakdeg &amp; brownies, 465ml</p><span class="food-price">99 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap food-img-placeholder">🍦</div>
-          <div class="food-info"><h3>Ben &amp; Jerry's Vanilla Pecan Blondie 465ml</h3><p class="food-desc">Vanilj, pekannötter &amp; blondiekakor, 465ml</p><span class="food-price">89 kr</span></div>
+          <div class="food-info"><h3>Ben &amp; Jerry's Vanilla Pecan Blondie 465ml</h3><p class="food-desc">Vanilj, pekannötter &amp; blondiekakor, 465ml</p><span class="food-price">99 kr</span></div>
         </div>
       </div>
     </div>
@@ -1691,123 +1695,123 @@
       <div class="food-grid">
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pepsi_33cl.png" alt="Pepsi 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Pepsi 33cl</h3><p class="food-desc">Klassisk Pepsi, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Pepsi 33cl</h3><p class="food-desc">Klassisk Pepsi, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pepsi_Max_33cl.png" alt="Pepsi Max 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Pepsi Max 33cl</h3><p class="food-desc">Sockerfri Pepsi Max, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Pepsi Max 33cl</h3><p class="food-desc">Sockerfri Pepsi Max, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pepsi_Max_50cl.png" alt="Pepsi Max 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Pepsi Max 50cl</h3><p class="food-desc">Sockerfri Pepsi Max, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>Pepsi Max 50cl</h3><p class="food-desc">Sockerfri Pepsi Max, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Pepsi_Max_150cl.png" alt="Pepsi Max 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Pepsi Max 1.5L</h3><p class="food-desc">Sockerfri Pepsi Max, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Pepsi Max 1.5L</h3><p class="food-desc">Sockerfri Pepsi Max, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Coca-Cola_Original_50cl.png" alt="Coca-Cola Original 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Coca-Cola Original 50cl</h3><p class="food-desc">Klassisk Coca-Cola, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>Coca-Cola Original 50cl</h3><p class="food-desc">Klassisk Coca-Cola, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Coca-Cola_Zero_50cl.png" alt="Coca-Cola Zero 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Coca-Cola Zero 50cl</h3><p class="food-desc">Sockerfri Coca-Cola, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>Coca-Cola Zero 50cl</h3><p class="food-desc">Sockerfri Coca-Cola, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Coca-Cola_Original_150cl.png" alt="Coca-Cola Original 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Coca-Cola Original 1.5L</h3><p class="food-desc">Klassisk Coca-Cola, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Coca-Cola Original 1.5L</h3><p class="food-desc">Klassisk Coca-Cola, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Coca-Cola_Zero_150cl.png" alt="Coca-Cola Zero 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Coca-Cola Zero 1.5L</h3><p class="food-desc">Sockerfri Coca-Cola, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Coca-Cola Zero 1.5L</h3><p class="food-desc">Sockerfri Coca-Cola, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Fanta_Orange_150cl.png" alt="Fanta Orange 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Fanta Orange 1.5L</h3><p class="food-desc">Fanta Orange, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Fanta Orange 1.5L</h3><p class="food-desc">Fanta Orange, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Fanta_Exotic_150cl.png" alt="Fanta Exotic 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Fanta Exotic 1.5L</h3><p class="food-desc">Exotic fruktläsk, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Fanta Exotic 1.5L</h3><p class="food-desc">Exotic fruktläsk, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Trocadero_33cl.png" alt="Trocadero 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Trocadero 33cl</h3><p class="food-desc">Svensk klassiker, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Trocadero 33cl</h3><p class="food-desc">Svensk klassiker, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Trocadero_Zero_33cl.png" alt="Trocadero Zero 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Trocadero Zero 33cl</h3><p class="food-desc">Sockerfri Trocadero, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Trocadero Zero 33cl</h3><p class="food-desc">Sockerfri Trocadero, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Trocadero_50cl.png" alt="Trocadero 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Trocadero 50cl</h3><p class="food-desc">Svensk klassiker, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>Trocadero 50cl</h3><p class="food-desc">Svensk klassiker, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Trocadero_150cl.png" alt="Trocadero 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>Trocadero 1.5L</h3><p class="food-desc">Svensk klassiker, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>Trocadero 1.5L</h3><p class="food-desc">Svensk klassiker, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Zingo_Apelsin_33cl.png" alt="Zingo Apelsin 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Zingo Apelsin 33cl</h3><p class="food-desc">Apelsinläsk, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Zingo Apelsin 33cl</h3><p class="food-desc">Apelsinläsk, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Zingo_Apelsin_Zero_33cl.png" alt="Zingo Apelsin Zero 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Zingo Apelsin Zero 33cl</h3><p class="food-desc">Sockerfri apelsinläsk, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Zingo Apelsin Zero 33cl</h3><p class="food-desc">Sockerfri apelsinläsk, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Zingo_Citron_33cl_(1).png" alt="Zingo Citron 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Zingo Citron 33cl</h3><p class="food-desc">Citronläsk, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Zingo Citron 33cl</h3><p class="food-desc">Citronläsk, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/7up_33cl.png" alt="7UP 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>7UP 33cl</h3><p class="food-desc">Citrusläsk, 33cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>7UP 33cl</h3><p class="food-desc">Citrusläsk, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/7up_Free_50cl.png" alt="7UP Free 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>7UP Free 50cl</h3><p class="food-desc">Sockerfri citrusläsk, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>7UP Free 50cl</h3><p class="food-desc">Sockerfri citrusläsk, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/7_Up_150cl.png" alt="7UP 1.5L" loading="lazy"/></div>
-          <div class="food-info"><h3>7UP 1.5L</h3><p class="food-desc">Citrusläsk, 1.5L</p><span class="food-price">55 kr</span></div>
+          <div class="food-info"><h3>7UP 1.5L</h3><p class="food-desc">Citrusläsk, 1.5L</p><span class="food-price">50 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Ramlosa_Naturell_33cl.png" alt="Ramlösa Naturell 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Ramlösa Naturell 33cl</h3><p class="food-desc">Kolsyrat mineralvatten, 33cl</p><span class="food-price">20 kr</span></div>
+          <div class="food-info"><h3>Ramlösa Naturell 33cl</h3><p class="food-desc">Kolsyrat mineralvatten, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Ramlosa_Citrus_33cl.png" alt="Ramlösa Citrus 33cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Ramlösa Citrus 33cl</h3><p class="food-desc">Kolsyrat vatten med citrussmak, 33cl</p><span class="food-price">20 kr</span></div>
+          <div class="food-info"><h3>Ramlösa Citrus 33cl</h3><p class="food-desc">Kolsyrat vatten med citrussmak, 33cl</p><span class="food-price">28 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Loka_Naturell_50cl.png" alt="Loka Naturell 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Loka Naturell 50cl</h3><p class="food-desc">Naturligt mineralvatten, 50cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Loka Naturell 50cl</h3><p class="food-desc">Naturligt mineralvatten, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Loka_Citron_50cl.png" alt="Loka Citron 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Loka Citron 50cl</h3><p class="food-desc">Mineralvatten med citronsmak, 50cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Loka Citron 50cl</h3><p class="food-desc">Mineralvatten med citronsmak, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Loka_Paron_50cl.png" alt="Loka Päron 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Loka Päron 50cl</h3><p class="food-desc">Mineralvatten med päronsmak, 50cl</p><span class="food-price">25 kr</span></div>
+          <div class="food-info"><h3>Loka Päron 50cl</h3><p class="food-desc">Mineralvatten med päronsmak, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/Aqua_Dor_Stilla_50cl.png" alt="Aqua d'Or Stilla 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>Aqua d'Or Stilla 50cl</h3><p class="food-desc">Stilla vatten, 50cl</p><span class="food-price">20 kr</span></div>
+          <div class="food-info"><h3>Aqua d'Or Stilla 50cl</h3><p class="food-desc">Stilla vatten, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/MER_Paron_50_cl.png" alt="MER Päron 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>MER Päron 50cl</h3><p class="food-desc">Naturlig läsk med päronsmak, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>MER Päron 50cl</h3><p class="food-desc">Naturlig läsk med päronsmak, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/MER_Aplesin_50_cl.png" alt="MER Apelsin 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>MER Apelsin 50cl</h3><p class="food-desc">Naturlig läsk med apelsinsmak, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>MER Apelsin 50cl</h3><p class="food-desc">Naturlig läsk med apelsinsmak, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/MER_Apple_50_cl.png" alt="MER Äpple 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>MER Äpple 50cl</h3><p class="food-desc">Naturlig läsk med äpplesmak, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>MER Äpple 50cl</h3><p class="food-desc">Naturlig läsk med äpplesmak, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
         <div class="food-card">
           <div class="food-img-wrap"><img src="assets/qopla-images/MER_Hallon_&_Svartvinbar50_cl.png" alt="MER Hallon & Svartvinbär 50cl" loading="lazy"/></div>
-          <div class="food-info"><h3>MER Hallon & Svartvinbär 50cl</h3><p class="food-desc">Naturlig läsk med hallon & svartvinbär, 50cl</p><span class="food-price">30 kr</span></div>
+          <div class="food-info"><h3>MER Hallon & Svartvinbär 50cl</h3><p class="food-desc">Naturlig läsk med hallon & svartvinbär, 50cl</p><span class="food-price">37 kr</span></div>
         </div>
       </div>
     </div>
@@ -1820,7 +1824,7 @@
 <section class="meny-cta">
   <h2>Redo att beställa?</h2>
   <p>Beställ online via Qopla — snabb leverans eller upphämtning</p>
-  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink" style="font-size:1.1rem;padding:16px 36px;">
+  <a href="bestall.html" class="btn btn-pink" style="font-size:1.1rem;padding:16px 36px;">
     Beställ 🍕
   </a>
 </section>
@@ -1836,8 +1840,7 @@
           <a href="index.html">
             <img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" />
           </a>
-          <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728"
-             target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
+          <a href="bestall.html" class="btn btn-pink footer-bestall">Beställ</a>
         </div>
         <div class="footer-logo-text">
           <span class="footer-logo-name">Rosa Pantern</span>

@@ -52,22 +52,29 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <style>
+    @font-face {
+      font-family: 'PinkPanther';
+      src: url('assets/pinkpanther.TTF') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --pink: #E91E8C;
       --pink-light: #FF6EC7;
       --pink-dark: #B5106A;
-      --charcoal: #1A1A2E;
-      --surface: #16213E;
-      --cream: #FFF8F0;
+      --charcoal: #FFF0F5;
+      --surface: #FFE4EF;
+      --cream: #2A1520;
       --gold: #FFD700;
-      --muted: #A0A0B8;
+      --muted: #9A6070;
       --border: rgba(233,30,140,0.18);
-      --font-head: 'Righteous', sans-serif;
+      --font-head: 'PinkPanther', sans-serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -178,7 +185,7 @@
     .navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
       transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
     }
@@ -237,11 +244,11 @@
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--cream);
+      background: var(--pink);
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { transform: scaleX(0); opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
@@ -502,7 +509,7 @@
       align-items: flex-start;
       gap: 12px;
       margin-bottom: 14px;
-      color: rgba(255,248,240,0.78);
+      color: var(--cream);
       font-size: 0.93rem;
     }
     .address-line svg { flex-shrink: 0; margin-top: 2px; }
@@ -671,11 +678,11 @@
       <li><a href="meny.html">Meny</a></li>
       <li><a href="butik.html">Butik</a></li>
       <li><a href="#oppettider">Öppettider</a></li>
-      <li><a href="#bestall">Beställ</a></li>
+      <li><a href="bestall.html">Beställ</a></li>
       <li><a href="#oppettider">Hitta oss</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
+    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -687,23 +694,23 @@
   <a href="meny.html" class="mob-link">Meny</a>
   <a href="butik.html" class="mob-link">Butik</a>
   <a href="#oppettider" class="mob-link">Öppettider</a>
-  <a href="#bestall" class="mob-link">Beställ</a>
+  <a href="bestall.html" class="mob-link">Beställ</a>
   <a href="#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" class="btn btn-pink mob-link">Beställ 🍕</a>
+  <a href="bestall.html" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
 <!-- ── HERO ── -->
 <section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <span class="eyebrow">UPPSALAS HETASTE NATTMAT</span>
+      <span class="eyebrow">Sent &amp; Snabbt</span>
       <h1 class="hero-h1">Rosa<br/><span class="pink">Pantern</span></h1>
-      <p class="hero-sub">Pizza · Kebab · Burgare · Falafel</p>
+      <p class="hero-sub">Pizza · Kebab · Snacks · Burgare · Falafel</p>
       <p class="hero-tagline">Vi är öppna när alla andra stänger.<br/>Kom in — dag eller natt.</p>
       <div class="hero-badge">🌙 Öppet till 04:00 på helger!</div>
       <div class="hero-ctas">
-        <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink">🍕 Beställ</a>
+        <a href="bestall.html" class="btn btn-pink">🍕 Beställ</a>
         <a href="meny.html" class="btn btn-ghost">Se Menyn</a>
       </div>
     </div>
@@ -746,14 +753,14 @@
 </div>
 
 <!-- ── PAW DIVIDER ── -->
-<div class="paw-divider fade-up" style="background:#1a0a14;">
+<div class="paw-divider fade-up">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
   <svg width="20" height="20" viewBox="0 0 20 20" fill="var(--pink)" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="13" r="5"/><ellipse cx="4" cy="7" rx="2.5" ry="3"/><ellipse cx="16" cy="7" rx="2.5" ry="3"/><ellipse cx="7" cy="3.5" rx="2" ry="2.8"/><ellipse cx="13" cy="3.5" rx="2" ry="2.8"/></svg>
 </div>
 
 <!-- ── PHOTO GALLERY ── -->
-<section class="section" id="galleri" style="background:linear-gradient(180deg,#1a0a14,#1A1A2E);">
+<section class="section" id="galleri" style="background:#FFF0F5;">
   <div class="container">
     <span class="eyebrow fade-up">VÅRT KÖK I BILDER</span>
     <h2 class="section-heading fade-up">Färsk mat, <span class="pink">varje dag</span></h2>
@@ -776,13 +783,13 @@
   <div class="container">
     <span class="eyebrow fade-up">BESTÄLL ONLINE</span>
     <h2 class="section-heading fade-up">Hungrig? Vi kör<br/><span class="pink">hem till dig.</span></h2>
-    <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728" target="_blank" rel="noopener" class="btn btn-pink order-cta fade-up">🍕 Beställ direkt</a>
+    <a href="bestall.html" class="btn btn-pink order-cta fade-up">🍕 Beställ direkt</a>
   </div>
 </section>
 
 
 <!-- ── ÖPPETTIDER ── -->
-<section class="section" id="oppettider" style="background:#1a0a14;">
+<section class="section" id="oppettider" style="background:#FFE4EF;">
   <div class="container">
     <span class="eyebrow fade-up">NÄR HITTAR DU OSS</span>
     <h2 class="section-heading fade-up"><span class="pink">Öppettider</span></h2>
@@ -835,8 +842,7 @@
           <a href="index.html">
             <img src="assets/logo.webp" alt="Rosa Pantern" class="footer-logo-img" />
           </a>
-          <a href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728"
-             target="_blank" class="btn btn-pink footer-bestall">Beställ</a>
+          <a href="bestall.html" class="btn btn-pink footer-bestall">Beställ</a>
         </div>
         <div class="footer-logo-text">
           <span class="footer-logo-name">Rosa Pantern</span>

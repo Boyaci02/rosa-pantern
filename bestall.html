@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kontakt – Rosa Pantern Uppsala</title>
-  <meta name="description" content="Kontakta Rosa Pantern i Uppsala. Adress, telefon, e-post och karta." />
+  <title>Beställ – Rosa Pantern Uppsala | Pizza & Kebab Online</title>
+  <meta name="description" content="Beställ mat från Rosa Pantern i Uppsala. Direkt via oss eller via Uber Eats, Wolt och Foodora. Alltid färskt, alltid gott." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.rosapanternuppsala.se/bestall.html" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'PinkPanther';
@@ -26,25 +28,23 @@
       --charcoal: #FFF0F5;
       --surface: #FFE4EF;
       --cream: #2A1520;
+      --gold: #FFD700;
       --muted: #9A6070;
+      --border: rgba(233,30,140,0.18);
       --font-head: 'PinkPanther', sans-serif;
-      --font-body: 'Nunito', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
       background: var(--charcoal);
       color: var(--cream);
       line-height: 1.7;
       overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
-
     body::after {
       content: '';
       position: fixed;
@@ -54,21 +54,7 @@
       pointer-events: none;
       z-index: 9999;
     }
-
     h1,h2,h3,h4 { font-family: var(--font-head); line-height: 1.1; }
-
-    .eyebrow {
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--pink);
-      display: block;
-      margin-bottom: 14px;
-    }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px,4vw,48px); }
 
     .btn {
       display: inline-flex;
@@ -82,16 +68,22 @@
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: transform 0.25s var(--ease-spring), opacity 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.2s ease;
     }
     .btn:hover { transform: translateY(-2px) scale(1.03); }
     .btn:active { transform: scale(0.97); }
     .btn-pink {
       background: var(--pink);
       color: #fff;
-      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.5);
+      box-shadow: 0 0 20px rgba(233,30,140,0.45), 0 4px 16px rgba(0,0,0,0.15);
     }
-    .btn-pink:hover { box-shadow: 0 0 32px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.5); }
+    .btn-pink:hover { box-shadow: 0 0 36px rgba(233,30,140,0.65), 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+    }
+    .btn-ghost:hover { background: rgba(233,30,140,0.1); }
 
     .fade-up {
       opacity: 0;
@@ -106,6 +98,9 @@
       top: 0; left: 0; right: 0;
       z-index: 300;
       padding: 16px clamp(16px,4vw,48px);
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+    }
+    .navbar.scrolled {
       background: rgba(26,26,46,0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -137,7 +132,7 @@
       list-style: none;
     }
     .navbar-links a {
-      color: rgba(255,248,240,0.72);
+      color: rgba(42,21,32,0.65);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.88rem;
@@ -146,7 +141,13 @@
       transition: color 0.2s ease, background 0.2s ease;
     }
     .navbar-links a:hover { color: var(--cream); background: rgba(233,30,140,0.12); }
-    .navbar-links a.active { color: var(--pink); }
+    .navbar-links a.active {
+      color: var(--pink);
+      background: rgba(233,30,140,0.1);
+    }
+    .navbar.scrolled .navbar-links a { color: rgba(255,248,240,0.72); }
+    .navbar.scrolled .navbar-links a:hover { color: #fff8f0; }
+    .navbar.scrolled .navbar-links a.active { color: var(--pink-light); }
     .hamburger {
       display: none;
       flex-direction: column;
@@ -161,12 +162,12 @@
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--cream);
+      background: var(--pink);
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { transform: scaleX(0); opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     .mobile-menu {
       position: fixed;
@@ -190,206 +191,142 @@
       transition: color 0.2s ease;
     }
     .mobile-menu a:hover { color: var(--pink); }
-    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; }
+    .mobile-menu .btn-pink { margin-top: 28px; font-size: 1.2rem; font-family: var(--font-body); }
     @media (max-width: 768px) {
       .navbar-links, .navbar-cta { display: none; }
       .hamburger { display: flex; }
     }
 
-    /* ── HERO BANNER ── */
-    .kontakt-hero {
-      padding: 120px 0 60px;
-      background:
-        radial-gradient(ellipse 90% 70% at 20% 90%, rgba(233,30,140,0.45) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(181,16,106,0.30) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 55% 50%, rgba(233,30,140,0.12) 0%, transparent 50%),
-        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+    /* ── HERO ── */
+    .bestall-hero {
+      min-height: 50vh;
+      max-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       position: relative;
       overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 70% at 50% 100%, rgba(233,30,140,0.5) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 20%, rgba(181,16,106,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 80% 30%, rgba(233,30,140,0.15) 0%, transparent 50%),
+        linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+      padding: 100px clamp(16px,4vw,48px) 60px;
     }
-    .kontakt-hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      color: var(--cream);
-      margin-bottom: 12px;
+    .bestall-hero-inner { max-width: 680px; }
+    .bestall-hero .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink-light);
+      display: block;
+      margin-bottom: 16px;
     }
-    .kontakt-hero h1 span { color: var(--pink); }
-    .kontakt-hero p {
+    .bestall-hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      color: #fff8f0;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+    .bestall-hero p {
       font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 480px;
+      color: rgba(255,248,240,0.72);
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+    .bestall-primary-cta {
+      font-size: 1.15rem;
+      padding: 18px 40px;
+      box-shadow: 0 0 40px rgba(233,30,140,0.55), 0 8px 28px rgba(0,0,0,0.3);
+    }
+    .bestall-primary-cta:hover {
+      box-shadow: 0 0 60px rgba(233,30,140,0.75), 0 12px 36px rgba(0,0,0,0.35);
+    }
+    .cta-sublabel {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: rgba(255,248,240,0.5);
+      font-weight: 500;
     }
 
-    /* ── INFO CARDS ── */
-    .info-cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin: 52px 0;
+    /* ── PLATFORM BENTO SECTION ── */
+    .platforms-section {
+      padding: clamp(64px,8vw,100px) clamp(16px,4vw,48px);
     }
-    .info-card {
-      background: rgba(233,30,140,0.08);
-      border: 1px solid rgba(233,30,140,0.2);
-      border-radius: 16px;
-      padding: 28px;
+    .platforms-label {
       text-align: center;
-      flex: 1;
-      min-width: 200px;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.3s var(--ease-spring);
-    }
-    .info-card:hover {
-      border-color: rgba(233,30,140,0.5);
-      box-shadow: 0 0 28px rgba(233,30,140,0.12);
-      transform: translateY(-3px);
-    }
-    .info-card-icon { font-size: 1.8rem; margin-bottom: 12px; }
-    .info-card-label {
-      font-size: 0.68rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--pink);
-      margin-bottom: 8px;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
-    .info-card-value {
-      font-size: 0.95rem;
-      color: var(--cream);
-      font-weight: 600;
-      line-height: 1.5;
-    }
-    .info-card-value a {
-      color: var(--pink-light);
-      text-decoration: none;
-    }
-    .info-card-value a:hover { text-decoration: underline; }
-
-    /* ── DELIVERY PLATFORMS ── */
-    .delivery-section {
+    .platforms-heading {
       text-align: center;
-      padding: 48px 0 56px;
-      border-top: 1px solid rgba(233,30,140,0.1);
-      border-bottom: 1px solid rgba(233,30,140,0.1);
-      margin-bottom: 56px;
-      position: relative;
-    }
-    .delivery-section h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       color: var(--cream);
-      margin-bottom: 0;
+      margin-bottom: 48px;
     }
-    .platform-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 28px;
-    }
-    .platform-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(233,30,140,0.35);
-      background: rgba(233,30,140,0.07);
-      color: var(--cream);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.25s var(--ease-spring);
-    }
-    .platform-btn:hover {
-      background: rgba(233,30,140,0.18);
-      border-color: var(--pink);
-      transform: translateY(-3px);
-    }
-    .platform-btn:first-child {
-      background: var(--pink);
-      border-color: var(--pink);
-      box-shadow: 0 0 20px rgba(233,30,140,0.4);
-    }
-    .platform-btn:first-child:hover {
-      box-shadow: 0 0 32px rgba(233,30,140,0.6);
-    }
-
-    /* ── MAP + FORM LAYOUT ── */
-    .contact-grid {
+    .bento-grid {
+      max-width: 1000px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-      padding-bottom: clamp(60px,8vw,100px);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
     @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .bento-grid { grid-template-columns: 1fr; max-width: 440px; }
     }
-
-    .map-block {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(233,30,140,0.2);
-      box-shadow: 0 4px 32px rgba(233,30,140,0.08);
+    .bento-card {
+      background: #fff;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      padding: 36px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: box-shadow 0.25s ease, transform 0.25s var(--ease-spring), border-color 0.25s ease;
     }
-
-    /* ── CONTACT FORM ── */
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .contact-form h3 {
-      font-size: 1.6rem;
-      color: var(--cream);
-      margin-bottom: 4px;
-    }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(233,30,140,0.2);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: var(--cream);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      resize: vertical;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--muted);
-      opacity: 0.6;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
+    .bento-card:hover {
       border-color: var(--pink);
-      box-shadow: 0 0 0 3px rgba(233,30,140,0.12);
+      box-shadow: 0 0 32px rgba(233,30,140,0.14), 0 8px 28px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
     }
-    .form-group textarea { min-height: 130px; }
-    .btn-submit {
-      background: var(--pink);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 14px 32px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(233,30,140,0.4);
-      transition: transform 0.25s var(--ease-spring), box-shadow 0.2s ease;
-      align-self: flex-start;
+    .bento-logo {
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
     }
-    .btn-submit:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 32px rgba(233,30,140,0.6); }
-    .btn-submit:active { transform: scale(0.97); }
+    .bento-logo svg { width: auto; max-width: 180px; height: 100%; }
+    .bento-name {
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .bento-tagline {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+    .bento-btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.92rem;
+      padding: 13px 20px;
+    }
 
-    /* ── FOOTER ── */
     /* ── FOOTER ── */
     footer { background: #0D0D1A; padding: clamp(48px,6vw,80px) clamp(16px,4vw,48px) 24px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
@@ -406,21 +343,12 @@
     .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
     .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s ease; white-space: nowrap; }
     .footer-links a:hover { color: var(--pink-light); }
-    @media (max-width: 768px) {
-      .footer-col-logo { align-items: center; }
-      .footer-logo-row { flex-direction: column; align-items: center; gap: 12px; }
-      .footer-logo-text { align-items: center; }
-      .footer-col-nav { flex-direction: column; align-items: center; gap: 16px; }
-      .footer-links { justify-items: center; }
-    }
     .footer-contact { display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--muted); }
     .footer-contact a { color: var(--pink-light); text-decoration: none; transition: color 0.2s ease; }
     .footer-contact a:hover { color: var(--pink); }
     .footer-socials { display: flex; gap: 14px; margin-top: 12px; }
     .footer-socials a { color: var(--muted); transition: color 0.2s ease; }
     .footer-socials a:hover { color: var(--pink); }
-    @media (max-width: 768px) { .footer-socials { justify-content: center; } }
-    .footer-powered { display: inline-block; margin-top: 16px; }
     .footer-bottom {
       border-top: 1px solid rgba(233,30,140,0.12);
       padding-top: 16px;
@@ -438,7 +366,8 @@
     @media (max-width: 768px) {
       .footer-grid { flex-direction: column; align-items: center; text-align: center; gap: 36px; }
       .footer-bottom { flex-direction: column; align-items: center; }
-      .footer-nav { justify-items: center; }
+      .footer-col-nav { align-items: center; }
+      .footer-links { justify-items: center; }
     }
   </style>
 </head>
@@ -453,12 +382,13 @@
     </a>
     <ul class="navbar-links">
       <li><a href="meny.html">Meny</a></li>
+      <li><a href="butik.html">Butik</a></li>
       <li><a href="index.html#oppettider">Öppettider</a></li>
-      <li><a href="bestall.html">Beställ</a></li>
+      <li><a href="bestall.html" class="active">Beställ</a></li>
       <li><a href="index.html#oppettider">Hitta oss</a></li>
-      <li><a href="kontakt.html" class="active">Kontakt</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ Nu</a>
+    <a href="bestall.html" class="btn btn-pink navbar-cta" style="font-size:0.88rem;padding:10px 20px;">Beställ</a>
     <button class="hamburger" id="hamburger" aria-label="Öppna meny">
       <span></span><span></span><span></span>
     </button>
@@ -468,79 +398,93 @@
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="meny.html" class="mob-link">Meny</a>
+  <a href="butik.html" class="mob-link">Butik</a>
   <a href="index.html#oppettider" class="mob-link">Öppettider</a>
   <a href="bestall.html" class="mob-link">Beställ</a>
   <a href="index.html#oppettider" class="mob-link">Hitta oss</a>
   <a href="kontakt.html" class="mob-link">Kontakt</a>
-  <a href="bestall.html" class="btn btn-pink mob-link">Beställ Nu 🍕</a>
+  <a href="bestall.html" class="btn btn-pink mob-link">Beställ 🍕</a>
 </div>
 
-<!-- ── HERO BANNER ── -->
-<section class="kontakt-hero">
-  <div class="container">
-    <span class="eyebrow fade-up">VI FINNS HÄR FÖR DIG</span>
-    <h1 class="fade-up">Kontakta <span>oss</span></h1>
-    <p class="fade-up">Vi svarar gärna på dina frågor — hör av dig!</p>
+<!-- ── HERO ── -->
+<section class="bestall-hero">
+  <div class="bestall-hero-inner">
+    <span class="eyebrow">HUNGRIG?</span>
+    <h1>Välj hur du vill beställa</h1>
+    <p>Direkt via oss eller via din favoritplattform<br/>— alltid färskt, alltid gott.</p>
+    <a
+      href="https://qopla.com/restaurant/rosa-pantern-uppsala/qDQedKO728"
+      target="_blank"
+      rel="noopener"
+      class="btn btn-pink bestall-primary-cta"
+    >🍕 Beställ direkt via Rosa Pantern</a>
+    <span class="cta-sublabel">Snabbast och alltid uppdaterat</span>
   </div>
 </section>
 
-<!-- ── MAIN CONTENT ── -->
-<main style="flex:1;">
-  <div class="container">
+<!-- ── PLATFORM BENTO ── -->
+<section class="platforms-section">
+  <p class="platforms-label fade-up">ELLER BESTÄLL VIA</p>
+  <h2 class="platforms-heading fade-up">Leveransplattformar</h2>
+  <div class="bento-grid">
 
-    <!-- INFO CARDS -->
-    <div class="info-cards">
-      <div class="info-card fade-up">
-        <div class="info-card-icon">📍</div>
-        <div class="info-card-label">Plats</div>
-        <div class="info-card-value">Sysslomansgatan 11<br/>753 11 Uppsala, Sweden</div>
+    <!-- Uber Eats -->
+    <div class="bento-card fade-up">
+      <div class="bento-logo">
+        <svg viewBox="0 0 220 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Uber Eats">
+          <text x="0" y="48" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="46" fill="#000000" letter-spacing="-1">Uber</text>
+          <text x="0" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="20" fill="#06C167" letter-spacing="0.5">Eats</text>
+        </svg>
       </div>
-      <div class="info-card fade-up">
-        <div class="info-card-icon">📞</div>
-        <div class="info-card-label">Telefonnummer</div>
-        <div class="info-card-value"><a href="tel:+46181215600">+46 18 12 15 60</a></div>
-      </div>
-      <div class="info-card fade-up">
-        <div class="info-card-icon">✉️</div>
-        <div class="info-card-label">E-post</div>
-        <div class="info-card-value"><a href="mailto:info@rzgroupab.com">info@rzgroupab.com</a></div>
-      </div>
+      <h3 class="bento-name">Uber Eats</h3>
+      <p class="bento-tagline">Snabb leverans till din dörr</p>
+      <a
+        href="https://www.ubereats.com/se/store/rosa-pantern/RArN7vHRVTegVPDHXzmNtg"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-pink bento-btn"
+      >Beställ på Uber Eats</a>
     </div>
 
-    <!-- MAP + FORM -->
-    <div class="contact-grid">
-      <!-- MAP -->
-      <div class="map-block fade-up">
-        <iframe src="https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1774477570267!5m2!1sen!2sin!6m8!1m7!1sIFa7xJp6Nkvu45UDWtch5w!2m2!1d59.86027916084795!2d17.62936129783873!3f25.66122065862148!4f2.7839880811453526!5f1.184866916696" width="100%" height="420" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- Wolt -->
+    <div class="bento-card fade-up">
+      <div class="bento-logo">
+        <svg viewBox="0 0 140 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wolt">
+          <circle cx="28" cy="32" r="26" fill="#009DE0"/>
+          <text x="28" y="42" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="30" fill="#ffffff" text-anchor="middle">W</text>
+          <text x="70" y="44" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="30" fill="#009DE0" letter-spacing="-0.5">wolt</text>
+        </svg>
       </div>
+      <h3 class="bento-name">Wolt</h3>
+      <p class="bento-tagline">Enkel beställning, snabb leverans</p>
+      <a
+        href="https://wolt.com/en/swe/uppsala/restaurant/rosa-pantern"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-pink bento-btn"
+      >Beställ på Wolt</a>
+    </div>
 
-      <!-- FORM -->
-      <form class="contact-form fade-up" onsubmit="return false;">
-        <h3>Skicka ett meddelande</h3>
-        <div class="form-group">
-          <label for="namn">Namn</label>
-          <input type="text" id="namn" name="namn" placeholder="Ditt namn" />
-        </div>
-        <div class="form-group">
-          <label for="epost">E-post</label>
-          <input type="email" id="epost" name="epost" placeholder="din@email.com" />
-        </div>
-        <div class="form-group">
-          <label for="amne">Ämne</label>
-          <input type="text" id="amne" name="amne" placeholder="Vad handlar det om?" />
-        </div>
-        <div class="form-group">
-          <label for="meddelande">Meddelande</label>
-          <textarea id="meddelande" name="meddelande" placeholder="Skriv ditt meddelande här..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Skicka meddelande</button>
-      </form>
+    <!-- Foodora -->
+    <div class="bento-card fade-up">
+      <div class="bento-logo">
+        <svg viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foodora">
+          <text x="4" y="44" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="900" font-size="40" fill="#E9006C" letter-spacing="-0.5">foodora</text>
+        </svg>
+      </div>
+      <h3 class="bento-name">Foodora</h3>
+      <p class="bento-tagline">Mat hem på nolltid</p>
+      <a
+        href="https://www.foodora.se/en/restaurant/s8zv/rosa-pantern"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-pink bento-btn"
+      >Beställ på Foodora</a>
     </div>
 
   </div>
-</main>
+</section>
 
-<!-- ── FOOTER ── -->
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
@@ -598,31 +542,23 @@
 </footer>
 
 <script>
-  // Logo image check
   (function() {
     var img = document.getElementById('logo-img');
-    img.onerror = function() { img.style.display = 'none'; };
+    if (img) img.onerror = function() { img.style.display = 'none'; };
   })();
 
-  // Hamburger menu
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
   var hamburger = document.getElementById('hamburger');
   var mobileMenu = document.getElementById('mobile-menu');
-  function openMenu() {
-    hamburger.classList.add('open');
-    mobileMenu.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  hamburger.addEventListener('click', function() {
-    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
+  function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', function() { mobileMenu.classList.contains('open') ? closeMenu() : openMenu(); });
   document.querySelectorAll('.mob-link').forEach(function(l) { l.addEventListener('click', closeMenu); });
 
-  // Scroll fade-in
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
