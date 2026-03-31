@@ -400,9 +400,8 @@
     }
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
-      .hero-ctas { justify-content: center; }
+      .hero-ctas { justify-content: center; flex-direction: column; align-items: center; }
       .hero-badge { justify-content: center; display: none; }
-      .hero-rp-fig { display: none; }
       .hero-visual { order: -1; }
       .hero-circle { width: 200px; height: 200px; }
     }
@@ -726,6 +725,35 @@
       margin-top: 6px;
     }
 
+    /* ── HERO BUTTONS + FIGURES ── */
+    .hero-btns-wrap {
+      position: relative;
+      width: max-content;
+    }
+    .hero-rp-fig {
+      position: absolute;
+      bottom: 0;
+      width: clamp(75px, 7vw, 95px);
+      height: auto;
+      pointer-events: none;
+      display: block;
+    }
+    .hero-rp-fig:first-child { left: clamp(-110px, -8vw, -80px); }
+    .hero-rp-fig:last-child  { right: -105px; }
+    @media (max-width: 768px) {
+      .hero-btns-wrap {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 12px;
+      }
+      .hero-rp-fig {
+        position: static;
+        width: 55px;
+      }
+    }
+
     /* ── GALLERY rpiz ── */
     .rpiz-hero { width: clamp(160px, 22vw, 260px); height: auto; display: block; }
     @media (max-width: 768px) {
@@ -807,13 +835,13 @@
       <p class="hero-sub">Pizza · Kebab · Snacks · Burgare · Falafel</p>
       <p class="hero-tagline">Vi är öppna när alla andra stänger.<br/>Kom in — dag eller natt.</p>
       <div class="hero-badge">🌙 Öppet till 04:00 på helger!</div>
-      <div style="position:relative;width:max-content;">
-        <img src="assets/rpleft.png" alt="" aria-hidden="true" class="hero-rp-fig" style="position:absolute;left:clamp(-110px,-8vw,-80px);bottom:0;width:clamp(75px,7vw,95px);height:auto;pointer-events:none;">
+      <div class="hero-btns-wrap">
+        <img src="assets/rpleft.png" alt="" aria-hidden="true" class="hero-rp-fig">
         <div class="hero-ctas" style="flex-wrap:nowrap;">
           <a href="bestall.html" class="btn btn-pink">🍕 Beställ</a>
           <a href="meny.html" class="btn btn-ghost">Se Menyn</a>
         </div>
-        <img src="assets/rpright.png" alt="" aria-hidden="true" class="hero-rp-fig" style="position:absolute;right:-105px;bottom:0;width:clamp(75px,7vw,95px);height:auto;pointer-events:none;">
+        <img src="assets/rpright.png" alt="" aria-hidden="true" class="hero-rp-fig">
       </div>
     </div>
     <div class="hero-visual">
